@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Megan Colyer Corp — Available Deals</title>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<style>
+  :root {
+    --bg: #f5f2ee;
+    --surface: #ffffff;
+    --surface2: #f0ece6;
+    --border: #e0d9d0;
+    --charcoal: #303636;
+    --salmon: #D4967D;
+    --salmon-light: #e8b89f;
+    --text: #303636;
+    --muted: #7a8080;
+    --green: #4a8c6f;
+    --red: #b55a42;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'PT Serif', Georgia, serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  header { background: var(--charcoal); padding: 20px 40px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; }
+  .header-center { display:flex; flex-direction:column; align-items:center; gap:4px; flex:1; text-align:center; }
+  .header-center h1 { font-family:'Marcellus', serif; font-size:20px; font-weight:400; color:white; letter-spacing:0.08em; text-transform:uppercase; white-space:nowrap; }
+  .header-phone { font-family:'Marcellus', serif; font-size:20px; font-weight:400; color:rgba(212,150,125,1); letter-spacing:0.06em; white-space:nowrap; }
+  .header-tagline { font-size:11px; color:rgba(255,255,255,0.45); letter-spacing:0.12em; text-transform:uppercase; font-family:'PT Serif', serif; }
+  .header-side { flex:0 0 180px; }
+  .logo-icon { display:none; }
+  .header-cta { background: var(--salmon); color:white; border:none; padding:10px 26px; border-radius:30px; font-size:13px; font-family:'PT Serif', serif; letter-spacing:0.05em; cursor:pointer; transition:background .2s; }
+  .header-cta:hover { background: var(--salmon-light); }
+  @media (max-width: 640px) {
+    header { padding: 14px 16px; }
+    .header-side:first-child { display:none; }
+    .header-side:last-child { flex:0 0 auto; margin-left:12px; }
+    .header-center h1 { font-size:16px; }
+    .header-phone { font-size:15px; }
+    .header-tagline { display:none; }
+    .header-cta { padding:8px 16px; font-size:12px; }
+  }
+
+  .buyers-banner { background: var(--salmon); text-align:center; padding:10px 20px; }
+  .buyers-banner a { color:white; font-family:'Marcellus', serif; font-size:14px; letter-spacing:0.08em; text-decoration:none; display:inline-flex; align-items:center; gap:8px; }
+  .buyers-banner a:hover { text-decoration:underline; }
+
+  .controls { max-width:1400px; margin:0 auto; padding:28px 40px 20px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+  .search-wrap { position:relative; flex:1; min-width:200px; }
+  .search-wrap input { width:100%; background:white; border:1px solid var(--border); color:var(--text); padding:10px 14px 10px 38px; border-radius:4px; font-size:14px; font-family:'PT Serif', serif; outline:none; }
+  .search-wrap input:focus { border-color:var(--salmon); }
+  .search-wrap input::placeholder { color:var(--muted); }
+  .search-icon { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--muted); pointer-events:none; }
+  .filter-chips { display:flex; gap:8px; flex-wrap:wrap; }
+  .chip { padding:8px 20px; border-radius:30px; border:1px solid var(--border); background:white; color:var(--muted); font-size:13px; font-family:'PT Serif', serif; cursor:pointer; transition:all .2s; white-space:nowrap; }
+  .chip:hover { border-color:var(--salmon); color:var(--charcoal); }
+  .chip.active { background:var(--salmon); border-color:var(--salmon); color:white; }
+  .sort-select { background:white; border:1px solid var(--border); color:var(--text); padding:8px 14px; border-radius:4px; font-size:13px; font-family:'PT Serif', serif; cursor:pointer; outline:none; }
+  .sort-select:focus { border-color:var(--salmon); }
+  .count-badge { padding:7px 14px; background:var(--charcoal); border-radius:30px; font-size:13px; color:white; white-space:nowrap; font-family:'PT Serif', serif; letter-spacing:0.04em; }
+
+  .grid { max-width:1400px; margin:0 auto; padding:0 40px 60px; display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:24px; }
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:4px; overflow:hidden; transition:transform .25s, box-shadow .25s; }
+  .card:hover { transform:translateY(-4px); box-shadow:0 16px 48px rgba(48,54,54,.12); }
+
+  .card-photo { position:relative; height:200px; background:var(--surface2); overflow:hidden; text-decoration:none; display:block; }
+  .card-photo img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s; }
+  .card:hover .card-photo img { transform:scale(1.05); }
+  a.card-photo::after { content:'📷 View Photos'; position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.55); color:white; font-size:11px; font-family:'PT Serif',serif; padding:4px 8px; border-radius:12px; opacity:0; transition:opacity .2s; pointer-events:none; }
+  a.card-photo:hover::after { opacity:1; }
+  .card-photo .photo-fallback {
+    width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    color:rgba(255,255,255,.85); font-size:13px; gap:6px; padding:16px; text-align:center;
+    position:relative; overflow:hidden;
+  }
+  .card-photo .photo-fallback::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse at 30% 30%,rgba(255,255,255,.06) 0%,transparent 70%);
+  }
+  .card-photo .photo-fallback .house-icon { font-size:38px; line-height:1; filter:drop-shadow(0 2px 6px rgba(0,0,0,.3)); position:relative; z-index:1; }
+  .card-photo .photo-fallback .fb-addr { font-size:12px; font-weight:600; color:rgba(255,255,255,.9); position:relative; z-index:1; max-width:200px; line-height:1.4; }
+  .card-photo .photo-fallback .fb-city { font-size:11px; color:rgba(255,255,255,.6); position:relative; z-index:1; }
+  .card-photo.flip-card .photo-fallback { background:linear-gradient(135deg,#4a3820,#7a5c38,#2e2010); }
+  .card-photo.rental-card .photo-fallback { background:linear-gradient(135deg,#2a3d38,#4a6e60,#1a2820); }
+  .card-photo.coliving-card .photo-fallback { background:linear-gradient(135deg,#4a3020,#8a6040,#2e1e10); }
+  .card-photo.pending-card .photo-fallback { background:linear-gradient(135deg,#303636,#4a5454,#1e2424); }
+.photo-links { position:absolute; bottom:8px; right:8px; display:flex; gap:5px; }
+  .photo-link { padding:4px 10px; border-radius:4px; font-size:11px; font-weight:600; text-decoration:none; cursor:pointer; transition:opacity .2s; backdrop-filter:blur(6px); font-family:'PT Serif', serif; }
+  .photo-link:hover { opacity:.85; }
+  .photo-link.zillow { background:rgba(0,86,214,.85); color:white; }
+  .photo-link.redfin { background:rgba(196,40,0,.85); color:white; }
+  .photo-link.realtor { background:rgba(180,0,0,.85); color:white; }
+  .strategy-badge-photo { position:absolute; top:10px; left:10px; padding:4px 12px; border-radius:3px; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.8px; font-family:'PT Serif', serif; backdrop-filter:blur(6px); }
+  .strategy-badge-photo.flip { background:rgba(212,150,125,.9); color:white; }
+  .strategy-badge-photo.rental { background:rgba(74,140,111,.9); color:white; }
+  .strategy-badge-photo.pending { background:rgba(48,54,54,.8); color:rgba(212,150,125,1); }
+
+  .card-body { padding:18px 20px; }
+  .card-address { font-family:'PT Serif', serif; font-size:15px; font-weight:400; margin-bottom:1px; color:var(--charcoal); }
+  .card-city { font-size:14px; color:var(--charcoal); margin-bottom:14px; letter-spacing:0.01em; }
+  .price-row { display:flex; align-items:baseline; gap:8px; margin-bottom:14px; }
+  .asking-price { font-family:'Marcellus', serif; font-size:26px; font-weight:400; color:var(--charcoal); }
+  .price-label { font-size:12px; color:var(--muted); }
+
+  .metrics { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:14px; }
+  .metric { border-top:2px solid var(--border); padding-top:8px; }
+  .metric .m-label { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.7px; margin-bottom:3px; }
+  .metric .m-value { font-size:14px; font-weight:700; color:var(--charcoal); }
+  .metric .m-value.na { color:var(--muted); font-style:italic; font-weight:400; font-size:12px; }
+
+  .prop-row { display:flex; align-items:center; gap:10px; padding-top:12px; border-top:1px solid var(--border); font-size:12px; color:var(--muted); flex-wrap:wrap; }
+  .prop-pill { background:var(--surface2); padding:2px 8px; border-radius:3px; font-size:11px; letter-spacing:0.03em; }
+
+  .card-footer { padding:12px 20px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:8px; background:var(--surface2); flex-wrap:wrap; }
+  .date-badge { font-size:11px; color:var(--muted); letter-spacing:0.04em; }
+  .footer-btns { display:flex; gap:8px; align-items:center; }
+  .interest-btn { background:var(--salmon); color:white; border:none; padding:8px 18px; border-radius:30px; font-size:12px; font-family:'PT Serif', serif; letter-spacing:0.04em; cursor:pointer; transition:background .2s; }
+  .interest-btn:hover { background:var(--salmon-light); }
+  .photos-btn { background:white; color:var(--charcoal); border:1px solid var(--border); padding:8px 14px; border-radius:30px; font-size:12px; font-family:'PT Serif', serif; letter-spacing:0.04em; cursor:pointer; text-decoration:none; transition:border-color .2s; display:inline-block; }
+  .photos-btn:hover { border-color:var(--salmon); color:var(--salmon); }
+
+  .no-results { grid-column:1/-1; text-align:center; padding:80px 20px; color:var(--muted); }
+  .no-results .icon { font-size:48px; margin-bottom:16px; }
+  .no-results h3 { font-family:'Marcellus', serif; font-size:22px; font-weight:400; margin-bottom:8px; color:var(--charcoal); }
+
+  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(48,54,54,.6); backdrop-filter:blur(4px); z-index:1000; align-items:center; justify-content:center; padding:20px; }
+  .modal-overlay.open { display:flex; }
+  .modal { background:white; border:1px solid var(--border); border-radius:4px; padding:34px; width:100%; max-width:480px; position:relative; animation:slideUp .25s ease; max-height:90vh; overflow-y:auto; }
+  @keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  .modal h2 { font-family:'Marcellus', serif; font-size:22px; font-weight:400; margin-bottom:4px; color:var(--charcoal); }
+  .modal-address { font-size:13px; color:var(--muted); margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+  .modal-close { position:absolute; top:18px; right:18px; background:var(--surface2); border:1px solid var(--border); color:var(--muted); width:30px; height:30px; border-radius:50%; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center; }
+  .modal-links { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+  .modal-link { display:flex; align-items:center; gap:6px; padding:8px 14px; border-radius:4px; text-decoration:none; font-size:13px; font-family:'PT Serif', serif; transition:opacity .2s; }
+  .modal-link:hover { opacity:.85; }
+  .modal-link.zillow { background:#0056d6; color:white; }
+  .modal-link.redfin { background:#c42800; color:white; }
+  .modal-link.realtor { background:#d00000; color:white; }
+  .form-group { margin-bottom:14px; }
+  .form-group label { display:block; font-size:11px; font-weight:400; color:var(--muted); margin-bottom:5px; text-transform:uppercase; letter-spacing:0.08em; }
+  .form-group input, .form-group textarea { width:100%; background:white; border:1px solid var(--border); color:var(--text); padding:10px 12px; border-radius:4px; font-size:14px; outline:none; font-family:'PT Serif', serif; }
+  .form-group input:focus, .form-group textarea:focus { border-color:var(--salmon); }
+  .form-group textarea { min-height:70px; resize:vertical; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .submit-btn { width:100%; background:var(--salmon); color:white; border:none; padding:13px; border-radius:30px; font-size:14px; font-family:'PT Serif', serif; letter-spacing:0.06em; cursor:pointer; margin-top:6px; transition:background .2s; }
+  .submit-btn:hover { background:var(--salmon-light); }
+  .success-msg { text-align:center; padding:16px 0; }
+  .success-msg .checkmark { font-size:44px; margin-bottom:10px; }
+  .success-msg h3 { font-family:'Marcellus', serif; font-size:20px; font-weight:400; margin-bottom:6px; color:var(--charcoal); }
+  .success-msg p { color:var(--muted); font-size:13px; }
+
+  .map-section { background: var(--surface); border-bottom: 1px solid var(--border); }
+  .map-header { max-width:1400px; margin:0 auto; padding:16px 40px 10px; display:flex; align-items:center; justify-content:space-between; }
+  .map-title { font-family:'Marcellus', serif; font-size:14px; color:var(--charcoal); letter-spacing:0.08em; text-transform:uppercase; }
+  .map-stats { font-size:12px; color:var(--muted); font-style:italic; }
+  #dealMap { height:360px; width:100%; }
+  .map-loading { height:360px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:13px; font-style:italic; background:var(--surface2); }
+  .leaflet-popup-content-wrapper { font-family:'PT Serif',Georgia,serif; font-size:13px; border-radius:4px; box-shadow:0 4px 16px rgba(0,0,0,0.12); }
+  .leaflet-popup-content strong { font-size:13px; color:var(--charcoal); }
+  .map-pin-price { color:var(--salmon); font-size:12px; margin-top:2px; }
+  .map-pin-type { color:var(--muted); font-size:11px; margin-top:1px; }
+
+  @media(max-width:768px){
+    header{padding:16px 20px;}
+    .controls,.grid{padding-left:20px;padding-right:20px;}
+    .grid{grid-template-columns:1fr;}
+    .map-header{padding:12px 20px 8px;}
+    #dealMap{height:280px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-side"></div>
+  <div class="header-center">
+    <h1>Megan Colyer Corp</h1>
+    <div class="header-phone">Call/Text 636-698-1412</div>
+    <div class="header-tagline">Off-Market Investment Deals</div>
+  </div>
+  <div class="header-side" style="display:flex;justify-content:flex-end">
+    <span></span>
+  </div>
+</header>
+
+<div class="buyers-banner">
+  <a href="buyers.html">✉ Join Our Buyers List Today!</a>
+</div>
+
+<div class="map-section">
+  <div class="map-header">
+    <span class="map-title">📍 Properties by Area</span>
+    <span class="map-stats" id="mapStats">Loading map…</span>
+  </div>
+  <div id="dealMap"><div class="map-loading">Loading map…</div></div>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Search address, city, state..." oninput="render()">
+  </div>
+  <div class="filter-chips">
+    <div class="chip active" onclick="setFilter('all',this)">All</div>
+    <div class="chip" onclick="setFilter('sfh',this)">Single Family</div>
+    <div class="chip" onclick="setFilter('mfh',this)">Multi Family</div>
+  </div>
+  <select class="sort-select" id="zipSelect" onchange="render()">
+    <option value="">All Zip Codes</option>
+  </select>
+  <select class="sort-select" id="sortSelect" onchange="render()">
+    <option value="newest">Newest First</option>
+    <option value="zip">Zip Code</option>
+    <option value="price_asc">Price: Low to High</option>
+    <option value="price_desc">Price: High to Low</option>
+    <option value="arv">Best ARV</option>
+    <option value="spread">Best Spread</option>
+  </select>
+  <div class="count-badge" id="countBadge">— deals</div>
+</div>
+
+<div class="grid" id="dealGrid"></div>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2>Express Interest</h2>
+    <div class="modal-address" id="modalAddress">Let us know you're interested and we'll be in touch.</div>
+    <div id="modalLinks" class="modal-links"></div>
+    <div id="modalNotes" style="display:none;background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:12px 16px;margin-bottom:18px;font-size:13px;line-height:1.6;color:var(--charcoal)"></div>
+    <div id="modalForm">
+      <div class="form-row">
+        <div class="form-group"><label>First Name *</label><input type="text" id="fname" placeholder="Jane"></div>
+        <div class="form-group"><label>Last Name *</label><input type="text" id="lname" placeholder="Smith"></div>
+      </div>
+      <div class="form-group"><label>Email *</label><input type="email" id="email" placeholder="jane@example.com"></div>
+      <div class="form-group"><label>Phone</label><input type="tel" id="phone" placeholder="(314) 555-0100"></div>
+      <div class="form-group"><label>Notes / Questions</label><textarea id="notes" placeholder="Tell us what you're looking for..."></textarea></div>
+      <button class="submit-btn" onclick="submitForm()">Submit Interest →</button>
+    </div>
+    <div id="modalSuccess" class="success-msg" style="display:none">
+      <div class="checkmark">✅</div><h3>Got it!</h3>
+      <p>We'll reach out within 24 hours to discuss this deal.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbwg0FwrXkeFpCBEEH9EJM_83hy39iomeLwRBJvQtHx_epQ62UmIpsELUOodzzShk0xAEQ/exec';
+let DEALS = [];
+
+let activeFilter = 'all';
+
+function populateZips() {
+  const zips = [...new Set(DEALS.map(d => {
+    const m = d.address.match(/\b(\d{5})\b/);
+    return m ? m[1] : null;
+  }).filter(Boolean))].sort();
+  const sel = document.getElementById('zipSelect');
+  sel.innerHTML = '<option value="">All Zip Codes</option>';
+  zips.forEach(z => {
+    const opt = document.createElement('option');
+    opt.value = z; opt.textContent = z;
+    sel.appendChild(opt);
+  });
+}
+
+function setFilter(f, el) {
+  activeFilter = f;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  render();
+}
+
+function getFiltered() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  const sort = document.getElementById('sortSelect').value;
+  const zip = document.getElementById('zipSelect').value;
+  let list = DEALS.filter(d => {
+    if (d.status === 'archived') return false;
+    if (q && !d.address.toLowerCase().includes(q) && !(d.city||'').toLowerCase().includes(q) && !(d.state||'').toLowerCase().includes(q)) return false;
+    if (activeFilter === 'sfh') { if (!/single.?family/i.test(d.propertyType||'')) return false; }
+    if (activeFilter === 'mfh') { if (!/multi.?family/i.test(d.propertyType||'')) return false; }
+    if (zip) { const m = d.address.match(/\b(\d{5})\b/); if (!m || m[1] !== zip) return false; }
+    return true;
+  });
+  if (sort === 'newest' || !sort) list.sort((a,b) => new Date(b.date) - new Date(a.date));
+  else if (sort === 'zip') list.sort((a,b) => { const za=(a.address.match(/\b(\d{5})\b/)||['',''])[1]; const zb=(b.address.match(/\b(\d{5})\b/)||['',''])[1]; return za.localeCompare(zb); });
+  else if (sort === 'price_asc') list.sort((a,b) => (a.askingPrice||Infinity)-(b.askingPrice||Infinity));
+  else if (sort === 'price_desc') list.sort((a,b) => (b.askingPrice||0)-(a.askingPrice||0));
+  else if (sort === 'arv') list.sort((a,b) => (b.arv||0)-(a.arv||0));
+  else if (sort === 'spread') list.sort((a,b) => (b.spread||0)-(a.spread||0));
+  return list;
+}
+
+function fmt(n) { return n!=null ? '$'+Math.round(n).toLocaleString() : '—'; }
+
+function render() {
+  const deals = getFiltered();
+  document.getElementById('countBadge').textContent = deals.length + ' deal' + (deals.length!==1?'s':'');
+  const grid = document.getElementById('dealGrid');
+  if (!deals.length) {
+    grid.innerHTML = '<div class="no-results"><div class="icon">🔍</div><h3>No deals match</h3><p>Try adjusting your filters or search.</p></div>';
+    return;
+  }
+  grid.innerHTML = deals.map((d, i) => {
+
+    const parts=[d.beds?d.beds+' bd':'',d.baths?d.baths+' ba':'',d.sqft?d.sqft.toLocaleString()+' sqft':''].filter(Boolean);
+    const statusDot = d.status==='new'?'🟢':d.status==='sent'?'🔵':'👁';
+    const addr0 = d.address.split(',')[0];
+    const propIcon = d.propertyType && d.propertyType.toLowerCase().includes('multi') ? '🏘️'
+      : d.propertyType && d.propertyType.toLowerCase().includes('condo') ? '🏢'
+      : '🏠';
+    const photoClass = d.strategy==='flip'?'flip-card':d.strategy==='coLiving'?'coliving-card':d.strategy==='longTermRental'?'rental-card':'pending-card';
+    const addr0short = d.address.split(',')[0];
+    const zip = d.zip || (d.address.match(/(\d{5})(?:-\d{4})?\s*$/) || [])[1] || '';
+    const photoHtml = d.photo ? `
+      <img src="${d.photo}" alt="${addr0short}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="photo-fallback" style="display:none">
+        <div class="house-icon">${propIcon}</div>
+        <div class="fb-addr">${addr0short}</div>
+        <div class="fb-city">${d.city||''}, ${d.state||''}</div>
+      </div>` : `
+      <div class="photo-fallback">
+        <div class="house-icon">${propIcon}</div>
+        <div class="fb-addr">${addr0short}</div>
+        <div class="fb-city">${d.city||''}, ${d.state||''}</div>
+      </div>`;
+    return `<div class="card" onclick="if(!event.target.closest('.card-photo-link'))openModal(${i})">
+      <${d.driveUrl ? `a class="card-photo ${photoClass} card-photo-link" href="${d.driveUrl}" target="_blank" rel="noopener"` : `div class="card-photo ${photoClass}"`}>${photoHtml}</${d.driveUrl ? 'a' : 'div'}>
+      <div class="card-body">
+        <div class="card-address">${addr0}</div>
+        <div class="card-city">${d.city}, ${d.state}${zip ? ' ' + zip : ''} ${statusDot}</div>
+        <div class="price-row">
+          <div class="asking-price">${fmt(d.askingPrice)}</div>
+          <div class="price-label">asking</div>
+        </div>
+        <div class="metrics">
+          <div class="metric"><div class="m-label">ARV</div><div class="m-value ${!d.arv?'na':''}">${d.arv?fmt(d.arv):'Unknown'}</div></div>
+          <div class="metric"><div class="m-label">Repairs</div><div class="m-value ${!d.repairCost?'na':''}">${d.repairCost?fmt(d.repairCost):'Unknown'}</div></div>
+        </div>
+        <div class="prop-row">
+          <span>${parts.join(' · ')||'Details TBD'}</span>
+          <span class="prop-pill">${d.propertyType||'Single Family'}</span>
+          ${d.yearBuilt?`<span>Built ${d.yearBuilt}</span>`:''}
+        </div>
+        ${d.notes ? `<div style="margin-top:10px;padding:10px 12px;background:var(--surface2);border-left:3px solid var(--salmon);border-radius:0 4px 4px 0;font-size:12px;color:var(--charcoal);line-height:1.5">${d.notes.length>120?d.notes.slice(0,120)+'…':d.notes}</div>` : ''}
+      </div>
+      <div class="card-footer">
+        <span class="date-badge">Added ${d.date}</span>
+        <div class="footer-btns">
+          <button class="interest-btn" onclick="event.stopPropagation();openModal(${i})">I'm Interested →</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openModal(idx) {
+  const deals = getFiltered();
+  const d = idx !== null ? deals[idx] : null;
+  document.getElementById('modalAddress').textContent = d ? '📍 '+d.address : "Let us know you're interested and we'll be in touch.";
+  document.getElementById('modalLinks').style.display = 'none';
+  document.getElementById('modalForm').style.display = 'block';
+  document.getElementById('modalSuccess').style.display = 'none';
+  ['fname','lname','email','phone','notes'].forEach(id => document.getElementById(id).value = '');
+  // Show property notes if available
+  const notesEl = document.getElementById('modalNotes');
+  if (d && d.notes) {
+    notesEl.textContent = d.notes;
+    notesEl.style.display = 'block';
+  } else {
+    notesEl.style.display = 'none';
+  }
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal(e) {
+  if (!e || e.target===document.getElementById('modalOverlay')) document.getElementById('modalOverlay').classList.remove('open');
+}
+
+function submitForm() {
+  const fname = document.getElementById('fname').value.trim();
+  const lname = document.getElementById('lname').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const notes = document.getElementById('notes').value.trim();
+  if (!fname||!lname||!email) { alert('Please fill in your name and email.'); return; }
+
+  // Get the property this person is interested in
+  const addrEl = document.getElementById('modalAddress');
+  const property = addrEl ? addrEl.textContent.replace('📍 ','').trim() : '';
+
+  // Show success immediately so the form feels fast
+  document.getElementById('modalForm').style.display = 'none';
+  document.getElementById('modalSuccess').style.display = 'block';
+
+  // POST to FormSubmit → emails deals@megancolyer.com
+  fetch('https://formsubmit.co/ajax/deals@megancolyer.com', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json', 'Accept':'application/json'},
+    body: JSON.stringify({
+      _subject: '🏠 New Interest: ' + (property || 'Buyer Portal'),
+      _template: 'table',
+      Name: fname + ' ' + lname,
+      Email: email,
+      Phone: phone || '—',
+      Property: property || '—',
+      Notes: notes || '—'
+    })
+  }).catch(() => {});
+}
+
+document.addEventListener('keydown', e => { if(e.key==='Escape') document.getElementById('modalOverlay').classList.remove('open'); });
+
+// ── MAP ──────────────────────────────────────────────────────────────────────
+let _dealMap = null;
+
+// Hardcoded city → [lat, lng] lookup — no geocoding API needed, instant load
+const CITY_COORDS = {
+  'saint louis':      [38.6270, -90.1994],
+  'st louis':         [38.6270, -90.1994],
+  'st. louis':        [38.6270, -90.1994],
+  'arnold':           [38.4320, -90.3651],
+  'chesterfield':     [38.6634, -90.5771],
+  'crystal city':     [38.2214, -90.3817],
+  'de soto':          [38.1375, -90.5590],
+  'desoto':           [38.1375, -90.5590],
+  'new haven':        [38.6078, -91.2218],
+  'potosi':           [37.9373, -90.7848],
+  'hazelwood':        [38.7717, -90.3651],
+  'florissant':       [38.7895, -90.3224],
+  'kirkwood':         [38.5834, -90.4068],
+  'webster groves':   [38.5931, -90.3537],
+  'ballwin':          [38.5950, -90.5468],
+  'manchester':       [38.5981, -90.5085],
+  'fenton':           [38.5131, -90.4429],
+  'festus':           [38.2175, -90.3993],
+  'imperial':         [38.3653, -90.3790],
+  'eureka':           [38.5028, -90.6293],
+  'pacific':          [38.4814, -90.7382],
+  'sullivan':         [38.2083, -91.1568],
+  'rolla':            [37.9514, -91.7715],
+  'columbia':         [38.9517, -92.3341],
+  'jefferson city':   [38.5767, -92.1735],
+  'kansas city':      [39.0997, -94.5786],
+  'springfield':      [37.2090, -93.2923],
+  'joplin':           [37.0842, -94.5133],
+  'cape girardeau':   [37.3059, -89.5181],
+  'st. charles':      [38.7881, -90.4974],
+  'saint charles':    [38.7881, -90.4974],
+  'st charles':       [38.7881, -90.4974],
+  'wentzville':       [38.8114, -90.8529],
+  'o\'fallon':        [38.8106, -90.6998],
+  'ofallon':          [38.8106, -90.6998],
+  'longmont':         [40.1672, -105.1019],
+  'belleville':       [38.5200, -89.9840],
+  'east saint louis': [38.6242, -90.1562],
+  'east st. louis':   [38.6242, -90.1562],
+  'east st louis':    [38.6242, -90.1562],
+  'rocky mount':      [37.9906, -92.2827],
+};
+
+function getCityCoords(deal) {
+  const city = (deal.city || '').toLowerCase().trim();
+  if (city && CITY_COORDS[city]) return CITY_COORDS[city];
+  // Fallback: try to extract city from address string
+  const parts = (deal.address || '').split(',');
+  if (parts.length >= 2) {
+    const c = parts[1].trim().toLowerCase();
+    if (CITY_COORDS[c]) return CITY_COORDS[c];
+  }
+  return null;
+}
+
+async function initMap(deals) {
+  const mapEl = document.getElementById('dealMap');
+  if (!mapEl || _dealMap) return;
+
+  // Lazy-load Leaflet JS
+  await new Promise((res, rej) => {
+    if (window.L) return res();
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+    s.onload = res; s.onerror = rej;
+    document.head.appendChild(s);
+  });
+
+  const activeDeals = deals.filter(d => d.status !== 'archived');
+
+  // Init map centered on Missouri
+  mapEl.innerHTML = '';
+  _dealMap = L.map(mapEl, { scrollWheelZoom: false, zoomControl: true });
+  _dealMap.setView([38.57, -92.46], 7);
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>',
+    maxZoom: 19
+  }).addTo(_dealMap);
+
+  if (!activeDeals.length) {
+    document.getElementById('mapStats').textContent = 'No active deals';
+    return;
+  }
+
+  const salmon = '#D4967D';
+
+  function makePin() {
+    return L.divIcon({
+      className: '',
+      html: `<div style="width:24px;height:24px;border-radius:50% 50% 50% 0;background:${salmon};border:2.5px solid white;box-shadow:0 2px 6px rgba(0,0,0,.4);transform:rotate(-45deg)"></div>`,
+      iconSize: [24, 24], iconAnchor: [12, 24], popupAnchor: [0, -26]
+    });
+  }
+
+  // Place a pin for each active deal — instant, no geocoding API
+  let placed = 0;
+  const allPts = [];
+  // Track offsets per city so stacked pins spread slightly
+  const cityOffset = {};
+
+  activeDeals.forEach(deal => {
+    const center = getCityCoords(deal);
+    if (!center) return;
+
+    const cityKey = (deal.city || deal.address || '').toLowerCase();
+    cityOffset[cityKey] = (cityOffset[cityKey] || 0) + 1;
+    const idx = cityOffset[cityKey];
+    // Spiral offset so multiple pins in same city don't overlap
+    const angle = idx * 2.4; // golden angle spread
+    const radius = Math.min(idx * 0.004, 0.04);
+    const lat = center[0] + radius * Math.cos(angle);
+    const lng = center[1] + radius * Math.sin(angle);
+    allPts.push([lat, lng]);
+
+    const price = deal.askingPrice ? '$' + Number(deal.askingPrice).toLocaleString() : null;
+    const type  = deal.propertyType || null;
+    const popup = `<strong style="font-size:13px">${deal.address}</strong>`
+      + (price ? `<div class="map-pin-price">${price}</div>` : '')
+      + (type  ? `<div class="map-pin-type">${type}</div>`  : '');
+
+    L.marker([lat, lng], { icon: makePin() })
+      .addTo(_dealMap)
+      .bindPopup(popup, { maxWidth: 220 });
+    placed++;
+  });
+
+  // Fit to pins if we have them, otherwise keep Missouri view
+  if (allPts.length) {
+    _dealMap.fitBounds(L.latLngBounds(allPts).pad(0.15));
+  }
+
+  document.getElementById('mapStats').textContent =
+    `${placed} active ${placed === 1 ? 'deal' : 'deals'} plotted`;
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Load deals dynamically from Google Sheet
+(function initPortal() {
+  document.getElementById('dealGrid').innerHTML = '<div class="no-results"><div class="icon">⏳</div><h3>Loading deals…</h3><p>Fetching the latest properties.</p></div>';
+  document.getElementById('countBadge').textContent = 'Loading…';
+  fetch(GAS_URL + '?action=getDeals')
+    .then(r => r.json())
+    .then(async data => {
+      DEALS = Array.isArray(data) ? data : (data.deals || []);
+      populateZips();
+      render();
+      initMap(DEALS); // ← renders map from same data, no extra fetch
+      // Auto-fill missing photos from Drive folders
+      const missing = DEALS.filter(d => !d.photo && d.driveUrl);
+      if (missing.length) {
+        await Promise.all(missing.map(async d => {
+          const m = d.driveUrl.match(/folders\/([^?&/]+)/);
+          if (!m) return;
+          try {
+            const res = await fetch(GAS_URL + '?action=getFolderPhotos&folderId=' + m[1]);
+            const info = await res.json();
+            if (info.success && info.photos && info.photos.length) {
+              d.photo = 'https://lh3.googleusercontent.com/d/' + info.photos[0].id;
+            }
+          } catch(e) {}
+        }));
+        render();
+      }
+    })
+    .catch(err => {
+      console.error('Failed to load deals:', err);
+      document.getElementById('dealGrid').innerHTML = '<div class="no-results"><div class="icon">⚠️</div><h3>Couldn\'t load deals</h3><p>Please refresh the page to try again.</p></div>';
+      document.getElementById('countBadge').textContent = '0 deals';
+    });
+})();
+</script>
+
+<footer style="background:#f0ece6;border-top:1px solid #e0d9d0;padding:28px 24px;margin-top:32px">
+  <div style="max-width:1400px;margin:0 auto">
+
+    <details style="margin-bottom:14px">
+      <summary style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7a8080;cursor:pointer;user-select:none;list-style:none;display:flex;align-items:center;gap:6px">
+        <span style="font-size:9px;color:#b0b8b8">▶</span>
+        Wholesale Property &amp; Assignment Disclosure
+      </summary>
+      <div style="margin-top:10px;font-size:12px;color:#5a6060;line-height:1.6">
+        <p style="font-weight:600;color:#303636;margin-bottom:4px">Licensed Real Estate Agent Disclosure</p>
+        <p style="margin-bottom:10px">I am a licensed real estate agent in the State of Missouri. The properties advertised are not my real estate listings and are not being marketed for sale through my brokerage. These opportunities represent assignments of equitable interest in purchase contracts or other legally permissible contractual interests.</p>
+        <p>As required by Missouri law and brokerage policy, any buyer wishing to access, tour, or receive property-specific information must first execute a Non-Exclusive Buyer Agency Agreement applicable to that specific transaction.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7a8080;cursor:pointer;user-select:none;list-style:none;display:flex;align-items:center;gap:6px">
+        <span style="font-size:9px;color:#b0b8b8">▶</span>
+        Terms &amp; Conditions
+      </summary>
+      <div style="margin-top:10px;font-size:12px;color:#5a6060;line-height:1.6">
+        <ul style="padding-left:16px;display:flex;flex-direction:column;gap:5px">
+          <li>All properties are offered AS-IS, WHERE-IS, with no repairs or concessions.</li>
+          <li>Cash or hard money financing only, unless otherwise expressly stated.</li>
+          <li>Buyers are solely responsible for conducting their own due diligence, including but not limited to verifying the property's condition, value, title, square footage, zoning, occupancy status, estimated repair costs, and investment potential.</li>
+          <li>A property shall not be considered under contract until a fully executed purchase agreement has been received, the required earnest money has been deposited, and all contingencies have been satisfied, waived, or removed.</li>
+          <li>All offers are subject to prior sale, assignment, modification, withdrawal, errors, omissions, or changes without notice.</li>
+          <li>Seller reserves the right to accept, reject, or negotiate any offer at its sole discretion.</li>
+          <li>No guarantees, warranties, representations, or disclosures are made or implied regarding the property, including but not limited to condition, habitability, value, repair estimates, or future profitability. Any verbal statements are for informational purposes only and shall not be relied upon.</li>
+          <li>By requesting access to a property or submitting an offer, Buyer acknowledges and agrees to these terms and understands that the transaction involves the assignment of contractual rights rather than the purchase of a brokerage listing.</li>
+        </ul>
+      </div>
+    </details>
+
+  </div>
+</footer>
+</body>
+</html>

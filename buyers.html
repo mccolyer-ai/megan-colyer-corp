@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Join Our Buyers List — Megan Colyer Corp</title>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f2ee;
+    --surface: #ffffff;
+    --surface2: #f0ece6;
+    --border: #e0d9d0;
+    --charcoal: #303636;
+    --salmon: #D4967D;
+    --salmon-light: #e8b89f;
+    --text: #303636;
+    --muted: #7a8080;
+    --green: #4a8c6f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'PT Serif', Georgia, serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  header { background: var(--charcoal); padding: 20px 40px; display:flex; align-items:center; justify-content:space-between; }
+  .logo-text h1 { font-family:'Marcellus', serif; font-size:20px; font-weight:400; color:white; letter-spacing:0.08em; text-transform:uppercase; }
+  .logo-text p { font-size:11px; color:rgba(255,255,255,0.45); letter-spacing:0.12em; text-transform:uppercase; margin-top:3px; }
+  .back-link { color:rgba(255,255,255,0.6); font-size:13px; text-decoration:none; letter-spacing:0.04em; }
+  .back-link:hover { color:white; }
+
+  .page { max-width:780px; margin:0 auto; padding:48px 40px 80px; }
+
+  .form-hero { margin-bottom:40px; }
+  .form-hero h2 { font-family:'Marcellus', serif; font-size:30px; font-weight:400; letter-spacing:0.04em; margin-bottom:10px; }
+  .form-hero p { color:var(--muted); font-size:15px; line-height:1.6; }
+  .company-tag { font-size:12px; color:var(--muted); margin-top:6px; font-style:italic; }
+
+  .form-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:36px; margin-bottom:24px; }
+  .section-title { font-family:'Marcellus', serif; font-size:14px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+
+  .field-row { display:grid; gap:16px; margin-bottom:20px; }
+  .field-row.two { grid-template-columns:1fr 1fr; }
+  .field-row.one { grid-template-columns:1fr; }
+  .field { display:flex; flex-direction:column; gap:6px; }
+  label { font-size:13px; font-weight:700; letter-spacing:0.03em; color:var(--text); }
+  label .req { color:var(--salmon); margin-left:2px; }
+  input[type=text], input[type=email], input[type=tel], input[type=number] {
+    border:1px solid var(--border); border-radius:4px; padding:10px 14px;
+    font-size:14px; font-family:'PT Serif', serif; color:var(--text); background:white;
+    outline:none; transition:border-color .15s;
+  }
+  input:focus { border-color:var(--salmon); }
+  .hint { font-size:12px; color:var(--muted); margin-top:-10px; margin-bottom:4px; }
+
+  .checkbox-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap:10px; }
+  .checkbox-item { display:flex; align-items:center; gap:8px; font-size:14px; cursor:pointer; }
+  .checkbox-item input[type=checkbox] { width:16px; height:16px; accent-color:var(--salmon); cursor:pointer; flex-shrink:0; }
+
+  .states-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(56px,1fr)); gap:8px; }
+  .state-item { display:flex; align-items:center; gap:6px; font-size:13px; cursor:pointer; }
+  .state-item input[type=checkbox] { accent-color:var(--salmon); cursor:pointer; }
+
+  .price-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .price-field { display:flex; align-items:center; gap:8px; border:1px solid var(--border); border-radius:4px; padding:10px 14px; background:white; }
+  .price-field span { color:var(--muted); font-size:14px; }
+  .price-field input { border:none; outline:none; font-size:14px; font-family:'PT Serif',serif; color:var(--text); width:100%; background:transparent; }
+
+  .toggle-row { display:flex; align-items:center; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--border); }
+  .toggle-row:last-child { border-bottom:none; }
+  .toggle-label { font-size:14px; }
+  .toggle { position:relative; width:42px; height:24px; flex-shrink:0; }
+  .toggle input { opacity:0; width:0; height:0; }
+  .toggle-slider { position:absolute; inset:0; background:#d0ccc8; border-radius:24px; cursor:pointer; transition:.2s; }
+  .toggle-slider:before { content:''; position:absolute; width:18px; height:18px; left:3px; top:3px; background:white; border-radius:50%; transition:.2s; }
+  .toggle input:checked + .toggle-slider { background:var(--salmon); }
+  .toggle input:checked + .toggle-slider:before { transform:translateX(18px); }
+
+  .zip-input-row { display:flex; gap:10px; margin-top:10px; }
+  .zip-input-row input { flex:1; }
+  .zip-add-btn { background:var(--charcoal); color:white; border:none; padding:10px 18px; border-radius:4px; font-family:'PT Serif',serif; font-size:13px; cursor:pointer; white-space:nowrap; }
+  .zip-add-btn:hover { background:#404848; }
+  .zip-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+  .zip-tag { background:var(--surface2); border:1px solid var(--border); border-radius:20px; padding:4px 12px; font-size:13px; display:flex; align-items:center; gap:6px; }
+  .zip-tag button { background:none; border:none; cursor:pointer; color:var(--muted); font-size:14px; line-height:1; padding:0; }
+  .zip-tag button:hover { color:var(--red, #b55a42); }
+
+  .consent-block { background: var(--surface2); border:1px solid var(--border); border-radius:6px; padding:20px; margin-bottom:28px; }
+  .consent-check { display:flex; gap:12px; align-items:flex-start; margin-bottom:12px; cursor:pointer; }
+  .consent-check input { margin-top:3px; accent-color:var(--salmon); width:16px; height:16px; flex-shrink:0; }
+  .consent-check span { font-size:13px; line-height:1.5; }
+  .legal-text { font-size:11px; color:var(--muted); line-height:1.6; }
+
+  .submit-btn { width:100%; background:var(--salmon); color:white; border:none; padding:16px; border-radius:6px; font-size:16px; font-family:'Marcellus',serif; letter-spacing:0.08em; cursor:pointer; transition:background .2s; }
+  .submit-btn:hover { background:var(--salmon-light); }
+  .submit-btn:disabled { background:#c8b8b0; cursor:not-allowed; }
+
+  .success-msg { display:none; text-align:center; padding:48px 32px; }
+  .success-msg .checkmark { font-size:48px; margin-bottom:16px; }
+  .success-msg h3 { font-family:'Marcellus',serif; font-size:24px; margin-bottom:10px; }
+  .success-msg p { color:var(--muted); font-size:14px; line-height:1.6; }
+  .success-msg a { color:var(--salmon); }
+
+  @media (max-width:640px) {
+    header { padding:14px 20px; }
+    .page { padding:32px 20px 60px; }
+    .form-card { padding:24px 20px; }
+    .field-row.two { grid-template-columns:1fr; }
+    .price-row { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-text">
+    <h1>Megan Colyer Corp</h1>
+    <p>Off-Market Investment Deals</p>
+  </div>
+  <a class="back-link" href="index.html">← Back to Deals</a>
+</header>
+
+<div class="page">
+
+  <div class="form-hero">
+    <h2>Join Our Buyers List</h2>
+    <p>Tell us what you're looking for and we'll send you deals that match.</p>
+    <p class="company-tag">Megan Colyer Corp</p>
+  </div>
+
+  <div id="formWrap">
+
+    <!-- Contact Information -->
+    <div class="form-card">
+      <div class="section-title">Contact Information</div>
+      <div class="field-row one">
+        <div class="field">
+          <label for="name">Name <span class="req">*</span></label>
+          <input type="text" id="name" placeholder="Your name" required>
+        </div>
+      </div>
+      <div class="field-row two">
+        <div class="field">
+          <label for="email">Email <span class="req">*</span></label>
+          <input type="email" id="email" placeholder="Email address" required>
+        </div>
+        <div class="field">
+          <label for="phone">Phone <span class="req">*</span></label>
+          <input type="tel" id="phone" placeholder="Phone number" required>
+        </div>
+      </div>
+      <p class="hint" id="contactError" style="color:var(--salmon);display:none">Please fill in all contact fields.</p>
+    </div>
+
+    <!-- Role -->
+    <div class="form-card">
+      <div class="section-title">Role(s) <span style="color:var(--salmon)">*</span></div>
+      <p id="roleError" style="font-size:12px;color:var(--salmon);margin-bottom:10px;display:none">Please select at least one role.</p>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="checkbox" name="role" value="Agent"> Agent</label>
+        <label class="checkbox-item"><input type="checkbox" name="role" value="Wholesaler"> Wholesaler</label>
+        <label class="checkbox-item"><input type="checkbox" name="role" value="Bird Dog"> Bird Dog</label>
+        <label class="checkbox-item"><input type="checkbox" name="role" value="Seller"> Seller</label>
+        <label class="checkbox-item"><input type="checkbox" name="role" value="Buyer"> Buyer</label>
+        <label class="checkbox-item"><input type="checkbox" name="role" value="Commercial Buyer"> Commercial Buyer</label>
+      </div>
+    </div>
+
+    <!-- Where Are You Buying -->
+    <div class="form-card">
+      <div class="section-title">Where Are You Buying? <span style="color:var(--salmon)">*</span></div>
+      <p id="locationError" style="font-size:12px;color:var(--salmon);margin-bottom:10px;display:none">Please select at least one state or add a ZIP code.</p>
+      <label style="font-size:13px; font-weight:700; display:block; margin-bottom:12px;">States</label>
+      <div class="states-grid">
+        <label class="state-item"><input type="checkbox" name="state" value="AL"> AL</label>
+        <label class="state-item"><input type="checkbox" name="state" value="AK"> AK</label>
+        <label class="state-item"><input type="checkbox" name="state" value="AZ"> AZ</label>
+        <label class="state-item"><input type="checkbox" name="state" value="AR"> AR</label>
+        <label class="state-item"><input type="checkbox" name="state" value="CA"> CA</label>
+        <label class="state-item"><input type="checkbox" name="state" value="CO"> CO</label>
+        <label class="state-item"><input type="checkbox" name="state" value="CT"> CT</label>
+        <label class="state-item"><input type="checkbox" name="state" value="DE"> DE</label>
+        <label class="state-item"><input type="checkbox" name="state" value="FL"> FL</label>
+        <label class="state-item"><input type="checkbox" name="state" value="GA"> GA</label>
+        <label class="state-item"><input type="checkbox" name="state" value="HI"> HI</label>
+        <label class="state-item"><input type="checkbox" name="state" value="ID"> ID</label>
+        <label class="state-item"><input type="checkbox" name="state" value="IL"> IL</label>
+        <label class="state-item"><input type="checkbox" name="state" value="IN"> IN</label>
+        <label class="state-item"><input type="checkbox" name="state" value="IA"> IA</label>
+        <label class="state-item"><input type="checkbox" name="state" value="KS"> KS</label>
+        <label class="state-item"><input type="checkbox" name="state" value="KY"> KY</label>
+        <label class="state-item"><input type="checkbox" name="state" value="LA"> LA</label>
+        <label class="state-item"><input type="checkbox" name="state" value="ME"> ME</label>
+        <label class="state-item"><input type="checkbox" name="state" value="MD"> MD</label>
+        <label class="state-item"><input type="checkbox" name="state" value="MA"> MA</label>
+        <label class="state-item"><input type="checkbox" name="state" value="MI"> MI</label>
+        <label class="state-item"><input type="checkbox" name="state" value="MN"> MN</label>
+        <label class="state-item"><input type="checkbox" name="state" value="MS"> MS</label>
+        <label class="state-item"><input type="checkbox" name="state" value="MO"> MO</label>
+        <label class="state-item"><input type="checkbox" name="state" value="MT"> MT</label>
+        <label class="state-item"><input type="checkbox" name="state" value="NE"> NE</label>
+        <label class="state-item"><input type="checkbox" name="state" value="NV"> NV</label>
+        <label class="state-item"><input type="checkbox" name="state" value="NH"> NH</label>
+        <label class="state-item"><input type="checkbox" name="state" value="NJ"> NJ</label>
+        <label class="state-item"><input type="checkbox" name="state" value="NM"> NM</label>
+        <label class="state-item"><input type="checkbox" name="state" value="NY"> NY</label>
+        <label class="state-item"><input type="checkbox" name="state" value="NC"> NC</label>
+        <label class="state-item"><input type="checkbox" name="state" value="ND"> ND</label>
+        <label class="state-item"><input type="checkbox" name="state" value="OH"> OH</label>
+        <label class="state-item"><input type="checkbox" name="state" value="OK"> OK</label>
+        <label class="state-item"><input type="checkbox" name="state" value="OR"> OR</label>
+        <label class="state-item"><input type="checkbox" name="state" value="PA"> PA</label>
+        <label class="state-item"><input type="checkbox" name="state" value="RI"> RI</label>
+        <label class="state-item"><input type="checkbox" name="state" value="SC"> SC</label>
+        <label class="state-item"><input type="checkbox" name="state" value="SD"> SD</label>
+        <label class="state-item"><input type="checkbox" name="state" value="TN"> TN</label>
+        <label class="state-item"><input type="checkbox" name="state" value="TX"> TX</label>
+        <label class="state-item"><input type="checkbox" name="state" value="UT"> UT</label>
+        <label class="state-item"><input type="checkbox" name="state" value="VT"> VT</label>
+        <label class="state-item"><input type="checkbox" name="state" value="VA"> VA</label>
+        <label class="state-item"><input type="checkbox" name="state" value="WA"> WA</label>
+        <label class="state-item"><input type="checkbox" name="state" value="WV"> WV</label>
+        <label class="state-item"><input type="checkbox" name="state" value="WI"> WI</label>
+        <label class="state-item"><input type="checkbox" name="state" value="WY"> WY</label>
+        <label class="state-item"><input type="checkbox" name="state" value="DC"> DC</label>
+      </div>
+
+      <label style="font-size:13px; font-weight:700; display:block; margin-top:24px; margin-bottom:6px;">ZIP Codes</label>
+      <div class="zip-input-row">
+        <input type="text" id="zipInput" placeholder="Enter a 5-digit ZIP code" maxlength="5" pattern="[0-9]{5}">
+        <button class="zip-add-btn" onclick="addZip()">Add</button>
+      </div>
+      <div class="zip-tags" id="zipTags"></div>
+    </div>
+
+    <!-- Price Range -->
+    <div class="form-card">
+      <div class="section-title">Price Range <span style="color:var(--salmon)">*</span></div>
+      <p id="priceError" style="font-size:12px;color:var(--salmon);margin-bottom:10px;display:none">Please enter at least a max price.</p>
+      <div class="price-row">
+        <div class="field">
+          <label>Min Price</label>
+          <div class="price-field"><span>$</span><input type="number" id="minPrice" placeholder="0" min="0"></div>
+        </div>
+        <div class="field">
+          <label>Max Price</label>
+          <div class="price-field"><span>$</span><input type="number" id="maxPrice" placeholder="No max" min="0"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Property Types -->
+    <div class="form-card">
+      <div class="section-title">Property Types <span style="color:var(--salmon)">*</span></div>
+      <p id="propTypeError" style="font-size:12px;color:var(--salmon);margin-bottom:10px;display:none">Please select at least one property type.</p>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="checkbox" name="propType" value="Single Family"> Single Family</label>
+        <label class="checkbox-item"><input type="checkbox" name="propType" value="Multi-Family"> Multi-Family</label>
+        <label class="checkbox-item"><input type="checkbox" name="propType" value="Townhouse"> Townhouse</label>
+        <label class="checkbox-item"><input type="checkbox" name="propType" value="Condo"> Condo</label>
+        <label class="checkbox-item"><input type="checkbox" name="propType" value="Mobile"> Mobile</label>
+        <label class="checkbox-item"><input type="checkbox" name="propType" value="Land"> Land</label>
+        <label class="checkbox-item"><input type="checkbox" name="propType" value="Portfolio"> Portfolio</label>
+      </div>
+    </div>
+
+    <!-- Rehab Levels -->
+    <div class="form-card">
+      <div class="section-title">Rehab Levels <span style="color:var(--salmon)">*</span></div>
+      <p id="rehabError" style="font-size:12px;color:var(--salmon);margin-bottom:10px;display:none">Please select at least one rehab level.</p>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="checkbox" name="rehab" value="Turnkey"> Turnkey</label>
+        <label class="checkbox-item"><input type="checkbox" name="rehab" value="Cosmetic"> Cosmetic</label>
+        <label class="checkbox-item"><input type="checkbox" name="rehab" value="Light Rehab"> Light Rehab</label>
+        <label class="checkbox-item"><input type="checkbox" name="rehab" value="Heavy Rehab"> Heavy Rehab</label>
+        <label class="checkbox-item"><input type="checkbox" name="rehab" value="Gut Rehab"> Gut Rehab</label>
+        <label class="checkbox-item"><input type="checkbox" name="rehab" value="Fire-Damaged"> Fire-Damaged</label>
+      </div>
+    </div>
+
+    <!-- Occupancy Preference -->
+    <div class="form-card">
+      <div class="section-title">Occupancy Preference <span style="color:var(--salmon)">*</span></div>
+      <p id="occupancyError" style="font-size:12px;color:var(--salmon);margin-bottom:10px;display:none">Please select at least one occupancy preference.</p>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="checkbox" name="occupancy" value="Vacant"> Vacant</label>
+        <label class="checkbox-item"><input type="checkbox" name="occupancy" value="Occupied"> Occupied</label>
+        <label class="checkbox-item"><input type="checkbox" name="occupancy" value="Section 8"> Section 8</label>
+      </div>
+    </div>
+
+    <!-- Property Preferences -->
+    <div class="form-card">
+      <div class="section-title">Property Preferences</div>
+      <div class="toggle-row">
+        <span class="toggle-label">Will you buy houses in a flood zone?</span>
+        <label class="toggle"><input type="checkbox" id="floodZone"><span class="toggle-slider"></span></label>
+      </div>
+      <div class="toggle-row">
+        <span class="toggle-label">Will you buy slab houses?</span>
+        <label class="toggle"><input type="checkbox" id="slabHouses"><span class="toggle-slider"></span></label>
+      </div>
+      <div class="toggle-row">
+        <span class="toggle-label">Will you buy houses in a war zone?</span>
+        <label class="toggle"><input type="checkbox" id="warZone"><span class="toggle-slider"></span></label>
+      </div>
+    </div>
+
+    <!-- Deal Structure -->
+    <div class="form-card">
+      <div class="section-title">Deal Structure</div>
+      <div class="toggle-row">
+        <span class="toggle-label">Accepts Seller Financing</span>
+        <label class="toggle"><input type="checkbox" id="sellerFinancing"><span class="toggle-slider"></span></label>
+      </div>
+      <div class="toggle-row">
+        <span class="toggle-label">Accepts Sub-To</span>
+        <label class="toggle"><input type="checkbox" id="subTo"><span class="toggle-slider"></span></label>
+      </div>
+    </div>
+
+    <!-- Consent & Submit -->
+    <div class="consent-block">
+      <label class="consent-check">
+        <input type="checkbox" id="consentEmail">
+        <span>I agree to receive email communications about real estate opportunities.</span>
+      </label>
+      <p class="legal-text">You may receive automated calls, text messages, and pre-recorded messages from Megan Colyer Corp regarding real estate opportunities, property alerts, and related services. Message and data rates may apply. Message frequency varies. Reply STOP to opt out or HELP for assistance. Consent is not a condition of purchase or service.</p>
+    </div>
+
+    <button class="submit-btn" id="submitBtn" onclick="submitForm()">Join the Buyers List</button>
+
+  </div><!-- end formWrap -->
+
+  <div class="success-msg" id="successMsg">
+    <div class="checkmark">✅</div>
+    <h3>You're on the list!</h3>
+    <p>Thanks for signing up. We'll be in touch when deals that match your criteria become available.<br><br>
+    <a href="index.html">← Back to available deals</a></p>
+  </div>
+
+</div><!-- end page -->
+
+<script>
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbyPNmhQbWT9BNk4_q-oES0stSB96TpGu0YTb2lHen0WJFStQnsiomThrusq_ZN-NCmOkQ/exec';
+
+const zips = [];
+
+function addZip() {
+  const input = document.getElementById('zipInput');
+  const val = input.value.trim();
+  if (!/^\d{5}$/.test(val)) { input.style.borderColor='var(--salmon)'; return; }
+  if (zips.includes(val)) { input.value=''; return; }
+  zips.push(val);
+  renderZips();
+  input.value = '';
+  input.style.borderColor = '';
+}
+
+function removeZip(zip) {
+  const i = zips.indexOf(zip);
+  if (i > -1) zips.splice(i, 1);
+  renderZips();
+}
+
+function renderZips() {
+  const container = document.getElementById('zipTags');
+  container.innerHTML = zips.map(z =>
+    `<div class="zip-tag">${z} <button onclick="removeZip('${z}')" title="Remove">×</button></div>`
+  ).join('');
+}
+
+document.getElementById('zipInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') { e.preventDefault(); addZip(); }
+});
+
+function getChecked(name) {
+  return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(el => el.value);
+}
+
+function showError(id, show) {
+  document.getElementById(id).style.display = show ? 'block' : 'none';
+}
+
+async function submitForm() {
+  const name  = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const roles = getChecked('role');
+  const states = getChecked('state');
+  const maxPrice = document.getElementById('maxPrice').value;
+  const minPrice = document.getElementById('minPrice').value;
+  const propTypes = getChecked('propType');
+  const rehab = getChecked('rehab');
+  const occupancy = getChecked('occupancy');
+
+  // Validate all required fields
+  let valid = true;
+
+  const contactMissing = !name || !email || !phone;
+  showError('contactError', contactMissing);
+  if (contactMissing) { valid = false; if (!name) document.getElementById('name').focus(); else if (!email) document.getElementById('email').focus(); else document.getElementById('phone').focus(); }
+
+  const locationMissing = !states.length && !zips.length;
+  showError('locationError', locationMissing);
+  if (locationMissing) valid = false;
+
+  const priceMissing = !minPrice && !maxPrice;
+  showError('priceError', priceMissing);
+  if (priceMissing) valid = false;
+
+  const propTypeMissing = !propTypes.length;
+  showError('propTypeError', propTypeMissing);
+  if (propTypeMissing) valid = false;
+
+  const rehabMissing = !rehab.length;
+  showError('rehabError', rehabMissing);
+  if (rehabMissing) valid = false;
+
+  const occupancyMissing = !occupancy.length;
+  showError('occupancyError', occupancyMissing);
+  if (occupancyMissing) valid = false;
+
+  if (!roles.length) { showError('roleError', true); valid = false; }
+  else showError('roleError', false);
+
+  if (!valid) return;
+
+  const buyer = {
+    name,
+    email,
+    phone,
+    roles: roles.join(', '),
+    states: states.join(', '),
+    zips: zips.join(', '),
+    minPrice: minPrice || '',
+    maxPrice: maxPrice || '',
+    propertyTypes: propTypes.join(', '),
+    rehabLevels: rehab.join(', '),
+    occupancy: occupancy.join(', '),
+    floodZone: document.getElementById('floodZone').checked ? 'Yes' : 'No',
+    slabHouses: document.getElementById('slabHouses').checked ? 'Yes' : 'No',
+    warZone: document.getElementById('warZone').checked ? 'Yes' : 'No',
+    sellerFinancing: document.getElementById('sellerFinancing').checked ? 'Yes' : 'No',
+    subTo: document.getElementById('subTo').checked ? 'Yes' : 'No',
+    consentEmail: document.getElementById('consentEmail').checked ? 'Yes' : 'No',
+    submittedAt: new Date().toLocaleString()
+  };
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting…';
+
+  try {
+    await fetch(GAS_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action: 'addBuyer', buyer }),
+      redirect: 'follow'
+    });
+  } catch(e) {}
+
+  document.getElementById('formWrap').style.display = 'none';
+  document.getElementById('successMsg').style.display = 'block';
+}
+</script>
+
+<footer style="background:#f0ece6;border-top:1px solid #e0d9d0;padding:28px 24px;margin-top:0">
+  <div style="max-width:680px;margin:0 auto">
+
+    <details style="margin-bottom:14px">
+      <summary style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7a8080;cursor:pointer;user-select:none;list-style:none;display:flex;align-items:center;gap:6px">
+        <span style="font-size:9px;color:#b0b8b8">▶</span>
+        Wholesale Property &amp; Assignment Disclosure
+      </summary>
+      <div style="margin-top:10px;font-size:12px;color:#5a6060;line-height:1.6">
+        <p style="font-weight:600;color:#303636;margin-bottom:4px">Licensed Real Estate Agent Disclosure</p>
+        <p style="margin-bottom:10px">I am a licensed real estate agent in the State of Missouri. The properties advertised are not my real estate listings and are not being marketed for sale through my brokerage. These opportunities represent assignments of equitable interest in purchase contracts or other legally permissible contractual interests.</p>
+        <p>As required by Missouri law and brokerage policy, any buyer wishing to access, tour, or receive property-specific information must first execute a Non-Exclusive Buyer Agency Agreement applicable to that specific transaction.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7a8080;cursor:pointer;user-select:none;list-style:none;display:flex;align-items:center;gap:6px">
+        <span style="font-size:9px;color:#b0b8b8">▶</span>
+        Terms &amp; Conditions
+      </summary>
+      <div style="margin-top:10px;font-size:12px;color:#5a6060;line-height:1.6">
+        <ul style="padding-left:16px;display:flex;flex-direction:column;gap:5px">
+          <li>All properties are offered AS-IS, WHERE-IS, with no repairs or concessions.</li>
+          <li>Cash or hard money financing only, unless otherwise expressly stated.</li>
+          <li>Buyers are solely responsible for conducting their own due diligence, including but not limited to verifying the property's condition, value, title, square footage, zoning, occupancy status, estimated repair costs, and investment potential.</li>
+          <li>A property shall not be considered under contract until a fully executed purchase agreement has been received, the required earnest money has been deposited, and all contingencies have been satisfied, waived, or removed.</li>
+          <li>All offers are subject to prior sale, assignment, modification, withdrawal, errors, omissions, or changes without notice.</li>
+          <li>Seller reserves the right to accept, reject, or negotiate any offer at its sole discretion.</li>
+          <li>No guarantees, warranties, representations, or disclosures are made or implied regarding the property, including but not limited to condition, habitability, value, repair estimates, or future profitability. Any verbal statements are for informational purposes only and shall not be relied upon.</li>
+          <li>By requesting access to a property or submitting an offer, Buyer acknowledges and agrees to these terms and understands that the transaction involves the assignment of contractual rights rather than the purchase of a brokerage listing.</li>
+        </ul>
+      </div>
+    </details>
+
+  </div>
+</footer>
+</body>
+</html>

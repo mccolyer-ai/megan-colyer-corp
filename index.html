@@ -351,7 +351,7 @@ function render() {
         ${d.notes ? `<div style="margin-top:10px;padding:10px 12px;background:var(--surface2);border-left:3px solid var(--salmon);border-radius:0 4px 4px 0;font-size:12px;color:var(--charcoal);line-height:1.5">${d.notes.length>120?d.notes.slice(0,120)+'…':d.notes}</div>` : ''}
       </div>
       <div class="card-footer">
-        <span class="date-badge">Added ${d.date}</span>
+        <span class="date-badge">Added ${d.date ? new Date(d.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : ''}</span>
         <div class="footer-btns">
           <button class="interest-btn" onclick="event.stopPropagation();openModal(${i})">I'm Interested →</button>
         </div>
@@ -567,6 +567,8 @@ async function initMap(deals) {
     .then(r => r.json())
     .then(async data => {
       DEALS = Array.isArray(data) ? data : (data.deals || []);
+      // Normalize: GAS may return 'Notes' (capital N) — map to lowercase 'notes'
+      DEALS = DEALS.map(d => { if (d.Notes !== undefined) { d.notes = d.notes || d.Notes; } return d; });
       populateZips();
       render();
       initMap(DEALS); // ← renders map from same data, no extra fetch

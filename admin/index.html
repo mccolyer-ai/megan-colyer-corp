@@ -189,20 +189,8 @@
   </div>
   <div class="header-right">
     <a href="../owner.html" class="back-btn">← Back to Portal</a>
-    <button class="apply-all-btn" id="applyAllBtn" onclick="applyChanges()">Apply Changes</button>
   </div>
 </header>
-
-<div class="pending-bar" id="pendingBar">
-  <span class="pending-badge" id="pendingCount">0 pending</span>
-  <span class="pending-info">Photo selections saved. Click "Apply Changes" to push to the portal.</span>
-  <button class="copy-btn" onclick="applyChanges()">Apply Changes</button>
-</div>
-
-<div id="copyArea" style="display:none; margin:12px 40px; background:var(--charcoal); border-radius:6px; padding:20px;">
-  <h3 id="copyAreaTitle" style="font-family:'Marcellus',serif; font-size:15px; color:white; margin-bottom:10px; font-weight:400;"></h3>
-  <p id="copyAreaMsg" style="color:rgba(255,255,255,0.8); font-size:14px; line-height:1.6;"></p>
-</div>
 
 <div class="page">
   <!-- ═══════════════════════════════════════════════════════ -->
@@ -923,10 +911,14 @@ function clearPending(address) {
 }
 
 function updatePendingBar() {
-  const count = Object.keys(pendingChanges).length;
+  // Legacy Cover Photo Manager queue UI (pendingBar/applyAllBtn/copyArea) was
+  // removed from the page; this is now a no-op guarded against null elements
+  // in case stale localStorage from an old session still has photoChanges set.
   const bar = document.getElementById('pendingBar');
   const badge = document.getElementById('pendingCount');
   const btn = document.getElementById('applyAllBtn');
+  if (!bar || !badge || !btn) return;
+  const count = Object.keys(pendingChanges).length;
   if (count > 0) {
     bar.classList.add('visible');
     btn.classList.add('visible');

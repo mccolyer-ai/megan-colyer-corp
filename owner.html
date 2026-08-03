@@ -234,7 +234,7 @@ function initNoteHeights() {
   document.querySelectorAll('.notes-textarea').forEach(ta => { if (ta.value) autoResizeNotes(ta); });
 }
 
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbwg0FwrXkeFpCBEEH9EJM_83hy39iomeLwRBJvQtHx_epQ62UmIpsELUOodzzShk0xAEQ/exec';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbxATueK1LD5LFGL_KNCBXF6ijTeFyE5qcYsSFdcPucbsNQSD8SeDnBGT3O8ZBafqy2F7Q/exec';
 let DEALS = [];
 
 let activeFilter = 'all';
@@ -311,7 +311,7 @@ function render() {
       </div>` : `
       <div class="photo-fallback">
         <div class="house-icon">${propIcon}</div>
-        <div class="fb-addr">${addr0short}</div>
+        <div class="fb-addr">No Photos Available</div>
         <div class="fb-city">${d.city||''}, ${d.state||''}</div>
       </div>`;
     const adminLink = `admin/#${encodeURIComponent(d.address)}`;
@@ -335,7 +335,7 @@ function render() {
         </div>
       </div>
       <div class="card-footer">
-        <span class="date-badge">Added ${d.date}</span>
+        <span class="date-badge">Added ${d.date ? new Date(d.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : ''}</span>
         <div class="footer-btns">
           ${d.source ? `<span class="source-chip">${d.source}</span>` : ''}
           ${d.driveUrl ? `<a class="photos-btn" href="${d.driveUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()">📷 View More Photos</a>` : ''}

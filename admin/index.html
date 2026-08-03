@@ -199,6 +199,11 @@
   <button class="copy-btn" onclick="applyChanges()">Apply Changes</button>
 </div>
 
+<div id="copyArea" style="display:none; margin:12px 40px; background:var(--charcoal); border-radius:6px; padding:20px;">
+  <h3 id="copyAreaTitle" style="font-family:'Marcellus',serif; font-size:15px; color:white; margin-bottom:10px; font-weight:400;"></h3>
+  <p id="copyAreaMsg" style="color:rgba(255,255,255,0.8); font-size:14px; line-height:1.6;"></p>
+</div>
+
 <div class="page">
   <!-- ═══════════════════════════════════════════════════════ -->
   <!-- EDIT DEALS SECTION                                      -->
@@ -431,8 +436,8 @@ function shortAddr(address) {
 let ALL_DEALS_DATA = []; // full deal objects from GAS
 
 function renderEditDeals(deals) {
-  // Sort newest first
-  deals = [...deals].sort((a,b) => new Date(b.date||0) - new Date(a.date||0));
+  // Filter out archived deals and sort newest first
+  deals = [...deals].filter(d => d.status !== 'archived').sort((a,b) => new Date(b.date||0) - new Date(a.date||0));
   const container = document.getElementById('editDealList');
   if (!deals.length) {
     container.innerHTML = '<p style="color:var(--muted);font-size:14px;">No deals found.</p>';
@@ -929,7 +934,8 @@ function updatePendingBar() {
   } else {
     bar.classList.remove('visible');
     btn.classList.remove('visible');
-    document.getElementById('copyArea').style.display = 'none';
+    const copyAreaEl = document.getElementById('copyArea');
+    if (copyAreaEl) copyAreaEl.style.display = 'none';
   }
 }
 
@@ -963,7 +969,7 @@ document.getElementById('lightbox').addEventListener('click', function(e) {
 // ============================================================
 // AUTO-SUBMIT TO GOOGLE APPS SCRIPT
 // ============================================================
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbwg0FwrXkeFpCBEEH9EJM_83hy39iomeLwRBJvQtHx_epQ62UmIpsELUOodzzShk0xAEQ/exec';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbxATueK1LD5LFGL_KNCBXF6ijTeFyE5qcYsSFdcPucbsNQSD8SeDnBGT3O8ZBafqy2F7Q/exec';
 
 // Fetch live deal list from GAS to keep the folder-link dropdown current
 fetch(GAS_URL + '?action=getDeals')
@@ -1161,10 +1167,11 @@ function showFormStatus(msg, type) {
 // ============================================================
 // INIT
 // ============================================================
-renderDealsWithPhotos();
-updatePendingBar();
+try { renderDealsWithPhotos(); } catch(e) { console.warn('renderDealsWithPhotos failed:', e); }
+try { updatePendingBar(); } catch(e) { console.warn('updatePendingBar failed:', e); }
 
 // Load all deals for editing AND to populate Cover Photo Manager
+// Runs independently so any earlier error can't block this
 fetch(GAS_URL + '?action=getDeals')
   .then(r => r.json())
   .then(data => {
@@ -1180,10 +1187,11 @@ fetch(GAS_URL + '?action=getDeals')
         if (fid) liveFolders[d.address] = { folderId: fid, currentPhotoFile: null, photos: [] };
       }
     });
-    renderDealsWithPhotos();
+    try { renderDealsWithPhotos(); } catch(e) { console.warn('renderDealsWithPhotos (post-fetch) failed:', e); }
   })
-  .catch(() => {
-    document.getElementById('editDealList').innerHTML = '<p style="color:var(--muted)">Failed to load deals.</p>';
+  .catch(err => {
+    console.error('Failed to load deals from GAS:', err);
+    document.getElementById('editDealList').innerHTML = '<p style="color:var(--muted)">Failed to load deals. Check your connection and refresh.</p>';
   });
 
 // Auto-expand deal if URL has a hash (coming from portal's change-photo button)

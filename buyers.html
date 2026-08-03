@@ -24,11 +24,11 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'PT Serif', Georgia, serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
-  header { background: var(--charcoal); padding: 20px 40px; display:flex; align-items:center; justify-content:space-between; }
-  .logo-text h1 { font-family:'Marcellus', serif; font-size:20px; font-weight:400; color:white; letter-spacing:0.08em; text-transform:uppercase; }
-  .logo-text p { font-size:11px; color:rgba(255,255,255,0.45); letter-spacing:0.12em; text-transform:uppercase; margin-top:3px; }
-  .back-link { color:rgba(255,255,255,0.6); font-size:13px; text-decoration:none; letter-spacing:0.04em; }
-  .back-link:hover { color:white; }
+  header { background: var(--charcoal); padding: 32px 40px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+  .logo-text h1 { font-family:'Marcellus', serif; font-size:22px; font-weight:400; color:white; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:6px; }
+  .logo-text .phone { font-family:'Marcellus', serif; font-size:20px; color:var(--salmon); letter-spacing:0.06em; margin-bottom:6px; }
+  .logo-text p { font-size:11px; color:rgba(255,255,255,0.45); letter-spacing:0.16em; text-transform:uppercase; }
+  .back-link { display:none; }
 
   .page { max-width:780px; margin:0 auto; padding:48px 40px 80px; }
 
@@ -116,9 +116,9 @@
 <header>
   <div class="logo-text">
     <h1>Megan Colyer Corp</h1>
+    <div class="phone">Call/Text 636-698-1412</div>
     <p>Off-Market Investment Deals</p>
   </div>
-  <a class="back-link" href="index.html">← Back to Deals</a>
 </header>
 
 <div class="page">
@@ -343,7 +343,7 @@
 </div><!-- end page -->
 
 <script>
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbyPNmhQbWT9BNk4_q-oES0stSB96TpGu0YTb2lHen0WJFStQnsiomThrusq_ZN-NCmOkQ/exec';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbxATueK1LD5LFGL_KNCBXF6ijTeFyE5qcYsSFdcPucbsNQSD8SeDnBGT3O8ZBafqy2F7Q/exec';
 
 const zips = [];
 

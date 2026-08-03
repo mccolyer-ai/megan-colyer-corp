@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Submit an Offer — Megan Colyer Corp</title>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f2ee;
+    --surface: #ffffff;
+    --surface2: #f0ece6;
+    --border: #e0d9d0;
+    --charcoal: #303636;
+    --salmon: #D4967D;
+    --salmon-light: #e8b89f;
+    --text: #303636;
+    --muted: #7a8080;
+    --green: #4a8c6f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'PT Serif', Georgia, serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  header { background: var(--charcoal); padding: 32px 40px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+  .logo-text h1 { font-family:'Marcellus', serif; font-size:22px; font-weight:400; color:white; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:6px; }
+  .logo-text .phone { font-family:'Marcellus', serif; font-size:20px; color:var(--salmon); letter-spacing:0.06em; margin-bottom:6px; }
+  .logo-text p { font-size:11px; color:rgba(255,255,255,0.45); letter-spacing:0.16em; text-transform:uppercase; }
+
+  .page { max-width:780px; margin:0 auto; padding:48px 40px 80px; }
+
+  .form-hero { margin-bottom:40px; text-align:center; }
+  .form-hero h2 { font-family:'Marcellus', serif; font-size:30px; font-weight:400; letter-spacing:0.04em; margin-bottom:10px; }
+  .form-hero p { color:var(--muted); font-size:15px; line-height:1.6; }
+  .company-tag { font-size:12px; color:var(--muted); margin-top:6px; font-style:italic; }
+
+  .notice-block { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:24px; }
+  .notice { display:flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:10px 16px; font-size:13px; flex:1; min-width:240px; }
+  .notice .badge { font-family:'Marcellus',serif; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; padding:3px 9px; border-radius:20px; flex-shrink:0; }
+  .notice.required .badge { background:#edf5f1; color:var(--green); }
+  .notice.important .badge { background:#fff5f0; color:var(--salmon); }
+
+  .form-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:36px; margin-bottom:24px; }
+  .section-title { font-family:'Marcellus', serif; font-size:14px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+
+  .field-row { display:grid; gap:16px; margin-bottom:20px; }
+  .field-row.two { grid-template-columns:1fr 1fr; }
+  .field-row.one { grid-template-columns:1fr; }
+  .field-row:last-child { margin-bottom:0; }
+  .field { display:flex; flex-direction:column; gap:6px; }
+  label { font-size:13px; font-weight:700; letter-spacing:0.03em; color:var(--text); }
+  label .req { color:var(--salmon); margin-left:2px; }
+  input[type=text], input[type=email], input[type=tel], input[type=number], input[type=date], select, textarea {
+    border:1px solid var(--border); border-radius:4px; padding:10px 14px;
+    font-size:14px; font-family:'PT Serif', serif; color:var(--text); background:white;
+    outline:none; transition:border-color .15s; width:100%;
+  }
+  select { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a8080' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; padding-right:36px; }
+  textarea { resize:vertical; min-height:90px; font-family:'PT Serif',serif; }
+  input:focus, select:focus, textarea:focus { border-color:var(--salmon); }
+  .hint { font-size:12px; color:var(--muted); margin-top:-10px; margin-bottom:4px; }
+  .error-text { font-size:12px; color:var(--salmon); margin-bottom:10px; display:none; }
+
+  .price-field { display:flex; align-items:center; gap:8px; border:1px solid var(--border); border-radius:4px; padding:10px 14px; background:white; }
+  .price-field span { color:var(--muted); font-size:14px; }
+  .price-field input { border:none; outline:none; font-size:14px; font-family:'PT Serif',serif; color:var(--text); width:100%; background:transparent; padding:0; }
+
+  .toggle-choice { display:flex; gap:10px; }
+  .toggle-choice button { flex:1; border:1px solid var(--border); background:white; border-radius:4px; padding:10px; font-family:'PT Serif',serif; font-size:14px; cursor:pointer; transition:all .15s; }
+  .toggle-choice button.active { background:var(--salmon); border-color:var(--salmon); color:white; }
+
+  .file-drop { border:2px dashed var(--border); border-radius:6px; padding:24px; text-align:center; cursor:pointer; transition:border-color .15s; background:white; }
+  .file-drop:hover, .file-drop.dragover { border-color:var(--salmon); }
+  .file-drop input { display:none; }
+  .file-drop .file-label { font-size:14px; color:var(--muted); }
+  .file-drop .file-label strong { color:var(--salmon); }
+  .file-name { margin-top:10px; font-size:13px; color:var(--green); font-weight:700; }
+
+  .consent-block { background: var(--surface2); border:1px solid var(--border); border-radius:6px; padding:20px; margin-bottom:28px; }
+  .legal-text { font-size:11px; color:var(--muted); line-height:1.6; }
+
+  .submit-btn { width:100%; background:var(--salmon); color:white; border:none; padding:16px; border-radius:6px; font-size:16px; font-family:'Marcellus',serif; letter-spacing:0.08em; cursor:pointer; transition:background .2s; }
+  .submit-btn:hover { background:var(--salmon-light); }
+  .submit-btn:disabled { background:#c8b8b0; cursor:not-allowed; }
+
+  .success-msg { display:none; text-align:center; padding:48px 32px; }
+  .success-msg .checkmark { font-size:48px; margin-bottom:16px; }
+  .success-msg h3 { font-family:'Marcellus',serif; font-size:24px; margin-bottom:10px; }
+  .success-msg p { color:var(--muted); font-size:14px; line-height:1.6; }
+  .success-msg a { color:var(--salmon); }
+
+  @media (max-width:640px) {
+    header { padding:14px 20px; }
+    .page { padding:32px 20px 60px; }
+    .form-card { padding:24px 20px; }
+    .field-row.two { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-text">
+    <h1>Megan Colyer Corp</h1>
+    <div class="phone">Call/Text 636-698-1412</div>
+    <p>Off-Market Investment Deals</p>
+  </div>
+</header>
+
+<div class="page">
+
+  <div class="form-hero">
+    <h2>Submit an Offer</h2>
+    <p>Ready to move forward? Fill out the details below and we'll be in touch to walk through next steps. All properties sent by Megan Colyer are subject to a wholesaling fee.</p>
+    <p class="company-tag">Megan Colyer Corp</p>
+  </div>
+
+  <div id="formWrap">
+
+    <div class="notice-block">
+      <div class="notice required"><span class="badge">Required</span> Offer amount and proof of funds / pre-approval must be included.</div>
+      <div class="notice important"><span class="badge">Important</span> If using a lender, provide lender name and loan type in the notes.</div>
+    </div>
+
+    <!-- Property -->
+    <div class="form-card">
+      <div class="section-title">Property</div>
+      <div class="field-row one">
+        <div class="field">
+          <label for="propertyAddress">Property Address <span class="req">*</span></label>
+          <input type="text" id="propertyAddress" placeholder="123 Main St, Saint Louis, MO 63101" required>
+        </div>
+      </div>
+      <p class="error-text" id="propertyError">Please enter the property address.</p>
+    </div>
+
+    <!-- Buyer Info -->
+    <div class="form-card">
+      <div class="section-title">Your Information</div>
+      <div class="field-row one">
+        <div class="field">
+          <label for="buyerName">Name/LLC Name <span class="req">*</span></label>
+          <input type="text" id="buyerName" placeholder="Your name or LLC name" required>
+        </div>
+      </div>
+      <div class="field-row two">
+        <div class="field">
+          <label for="buyerEmail">Email <span class="req">*</span></label>
+          <input type="email" id="buyerEmail" placeholder="Email address" required>
+        </div>
+        <div class="field">
+          <label for="buyerPhone">Phone <span class="req">*</span></label>
+          <input type="tel" id="buyerPhone" placeholder="Phone number" required>
+        </div>
+      </div>
+      <p class="error-text" id="buyerError">Please fill in all contact fields.</p>
+    </div>
+
+    <!-- Offer Details -->
+    <div class="form-card">
+      <div class="section-title">Offer Details</div>
+
+      <div class="field-row two">
+        <div class="field">
+          <label for="offerAmount">Offer Amount <span class="req">*</span></label>
+          <div class="price-field"><span>$</span><input type="number" id="offerAmount" placeholder="0" min="0"></div>
+        </div>
+        <div class="field">
+          <label for="earnestMoney">Earnest Money Deposit <span class="req">*</span></label>
+          <div class="price-field"><span>$</span><input type="number" id="earnestMoney" placeholder="0" min="0"></div>
+        </div>
+      </div>
+
+      <div class="field-row two">
+        <div class="field">
+          <label for="closingDate">Proposed Closing Date <span class="req">*</span></label>
+          <input type="date" id="closingDate">
+        </div>
+        <div class="field">
+          <label for="titleCompany">Title Company</label>
+          <input type="text" id="titleCompany" placeholder="Title company name (if known)">
+        </div>
+      </div>
+
+      <div class="field-row two">
+        <div class="field">
+          <label for="purchaseType">Type of Purchase <span class="req">*</span></label>
+          <select id="purchaseType">
+            <option value="">Select one…</option>
+            <option value="Cash">Cash</option>
+            <option value="Hard Money / Private Lender">Hard Money / Private Lender</option>
+            <option value="Conventional Financing">Conventional Financing</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Realtor or Wholesaler Involved? <span class="req">*</span></label>
+          <div class="toggle-choice">
+            <button type="button" id="realtorYes" onclick="setRealtor(true)">Yes</button>
+            <button type="button" id="realtorNo" onclick="setRealtor(false)">No</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-row one" id="realtorNameRow" style="display:none">
+        <div class="field">
+          <label for="realtorName">Realtor / Wholesaler Name & Contact</label>
+          <input type="text" id="realtorName" placeholder="Name, brokerage, phone or email">
+        </div>
+      </div>
+
+      <div class="field-row one">
+        <div class="field">
+          <label for="requests">Buyer Requests / Special Requests / Contingencies</label>
+          <textarea id="requests" placeholder="Anything you'd like us to know — financing contingencies, inspection requests, timeline needs, lender name and loan type, etc."></textarea>
+        </div>
+      </div>
+
+      <p class="error-text" id="offerError">Please fill in all required offer details.</p>
+    </div>
+
+    <!-- Proof of Funds -->
+    <div class="form-card">
+      <div class="section-title">Proof of Funds / Pre-Approval <span style="color:var(--salmon)">*</span></div>
+      <div class="file-drop" id="fileDrop" onclick="document.getElementById('pofFile').click()">
+        <input type="file" id="pofFile" accept=".pdf,.png,.jpg,.jpeg" onchange="handleFile(this.files[0])">
+        <div class="file-label"><strong>Click to upload</strong> or drag a file here — PDF, JPG, or PNG</div>
+        <div class="file-name" id="fileName"></div>
+      </div>
+      <p class="error-text" id="pofError">Please attach proof of funds or a pre-approval letter.</p>
+    </div>
+
+    <div class="consent-block">
+      <p class="legal-text">Submitting an offer does not guarantee acceptance, our team will follow up with you to confirm your offer. All properties are offered AS-IS, WHERE-IS. Buyers are solely responsible for their own due diligence.</p>
+    </div>
+
+    <button class="submit-btn" id="submitBtn" onclick="submitOffer()">Submit Offer</button>
+
+  </div><!-- end formWrap -->
+
+  <div class="success-msg" id="successMsg">
+    <div class="checkmark">✅</div>
+    <h3>Offer Submitted!</h3>
+    <p>Thanks — we've received your offer and will follow up shortly.<br><br>
+    <a href="index.html">← Back to available deals</a></p>
+  </div>
+
+</div><!-- end page -->
+
+<script>
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbxATueK1LD5LFGL_KNCBXF6ijTeFyE5qcYsSFdcPucbsNQSD8SeDnBGT3O8ZBafqy2F7Q/exec';
+
+let realtorInvolved = null;
+let pofFileData = null;
+let pofFileName = null;
+
+function setRealtor(val) {
+  realtorInvolved = val;
+  document.getElementById('realtorYes').classList.toggle('active', val === true);
+  document.getElementById('realtorNo').classList.toggle('active', val === false);
+  document.getElementById('realtorNameRow').style.display = val ? 'grid' : 'none';
+}
+
+function handleFile(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    pofFileData = e.target.result;
+    pofFileName = file.name;
+    document.getElementById('fileName').textContent = '✓ ' + file.name;
+  };
+  reader.readAsDataURL(file);
+}
+
+const dropZone = document.getElementById('fileDrop');
+['dragover','dragleave','drop'].forEach(evt => {
+  dropZone.addEventListener(evt, e => {
+    e.preventDefault();
+    dropZone.classList.toggle('dragover', evt === 'dragover');
+    if (evt === 'drop' && e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+  });
+});
+
+function showError(id, show) {
+  document.getElementById(id).style.display = show ? 'block' : 'none';
+}
+
+async function submitOffer() {
+  const propertyAddress = document.getElementById('propertyAddress').value.trim();
+  const buyerName = document.getElementById('buyerName').value.trim();
+  const buyerEmail = document.getElementById('buyerEmail').value.trim();
+  const buyerPhone = document.getElementById('buyerPhone').value.trim();
+  const offerAmount = document.getElementById('offerAmount').value;
+  const earnestMoney = document.getElementById('earnestMoney').value;
+  const closingDate = document.getElementById('closingDate').value;
+  const titleCompany = document.getElementById('titleCompany').value.trim();
+  const purchaseType = document.getElementById('purchaseType').value;
+  const realtorName = document.getElementById('realtorName').value.trim();
+  const requests = document.getElementById('requests').value.trim();
+
+  let valid = true;
+
+  const propertyMissing = !propertyAddress;
+  showError('propertyError', propertyMissing);
+  if (propertyMissing) valid = false;
+
+  const buyerMissing = !buyerName || !buyerEmail || !buyerPhone;
+  showError('buyerError', buyerMissing);
+  if (buyerMissing) valid = false;
+
+  const offerMissing = !offerAmount || !earnestMoney || !closingDate || !purchaseType || realtorInvolved === null;
+  showError('offerError', offerMissing);
+  if (offerMissing) valid = false;
+
+  const pofMissing = !pofFileData;
+  showError('pofError', pofMissing);
+  if (pofMissing) valid = false;
+
+  if (!valid) return;
+
+  const offer = {
+    propertyAddress,
+    buyerName,
+    buyerEmail,
+    buyerPhone,
+    offerAmount,
+    earnestMoney,
+    closingDate,
+    titleCompany,
+    purchaseType,
+    realtorInvolved: realtorInvolved ? 'Yes' : 'No',
+    realtorName,
+    requests,
+    pofFileData,
+    pofFileName
+  };
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting…';
+
+  try {
+    await fetch(GAS_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action: 'addOffer', offer }),
+      redirect: 'follow'
+    });
+  } catch(e) {}
+
+  document.getElementById('formWrap').style.display = 'none';
+  document.getElementById('successMsg').style.display = 'block';
+}
+</script>
+
+</body>
+</html>

@@ -1168,6 +1168,9 @@ fetch(GAS_URL + '?action=getDeals')
   .then(r => r.json())
   .then(data => {
     ALL_DEALS_DATA = Array.isArray(data) ? data : (data.deals || []);
+    // Normalize: GAS may return 'Notes' (capital N) — map to lowercase 'notes'
+    // so the edit form actually shows notes that are already live on the portal.
+    ALL_DEALS_DATA = ALL_DEALS_DATA.map(d => { if (!d.notes && d.Notes) d.notes = d.Notes; return d; });
     renderEditDeals(ALL_DEALS_DATA);
 
     // Build liveFolders from any deal that has a driveUrl but isn't already

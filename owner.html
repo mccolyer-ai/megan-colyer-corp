@@ -371,11 +371,35 @@ function closeModal(e) {
 
 function submitForm() {
   const fname = document.getElementById('fname').value.trim();
-  const lname = document.getElementById('lname').value.trim();
-  const email = document.getElementById('email').value.trim();
-  if (!fname||!lname||!email) { alert('Please fill in your name and email.'); return; }
-  document.getElementById('modalForm').style.display = 'none';
-  document.getElementById('modalSuccess').style.display = 'block';
+    const lname = document.getElementById('lname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phoneEl = document.getElementById('phone');
+    const notesEl = document.getElementById('notes');
+    const phone = phoneEl ? phoneEl.value.trim() : '';
+    const notes = notesEl ? notesEl.value.trim() : '';
+    if (!fname||!lname||!email) { alert('Please fill in your name and email.'); return; }
+
+    // Get the property this person is interested in
+    const addrEl = document.getElementById('modalAddress');
+    const property = addrEl ? addrEl.textContent.replace('📍 ','').trim() : '';
+
+    document.getElementById('modalForm').style.display = 'none';
+    document.getElementById('modalSuccess').style.display = 'block';
+
+    // POST to our own backend so submissions are logged and emailed reliably
+    fetch(GAS_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+                  action: 'addInterest',
+                  interest: {
+                            name: fname + ' ' + lname,
+                            email: email,
+                            phone: phone || '',
+                            property: property || '',
+                            notes: notes || ''
+                  }
+          })
+    }).catch(() => {});
 }
 
 document.addEventListener('keydown', e => { if(e.key==='Escape') document.getElementById('modalOverlay').classList.remove('open'); });

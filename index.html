@@ -399,20 +399,20 @@ function submitForm() {
   document.getElementById('modalForm').style.display = 'none';
   document.getElementById('modalSuccess').style.display = 'block';
 
-  // POST to FormSubmit → emails deals@megancolyer.com
-  fetch('https://formsubmit.co/ajax/deals@megancolyer.com', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json', 'Accept':'application/json'},
-    body: JSON.stringify({
-      _subject: '🏠 New Interest: ' + (property || 'Buyer Portal'),
-      _template: 'table',
-      Name: fname + ' ' + lname,
-      Email: email,
-      Phone: phone || '—',
-      Property: property || '—',
-      Notes: notes || '—'
-    })
-  }).catch(() => {});
+  // POST to our own backend so submissions are logged and emailed reliably
+    fetch(GAS_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+                  action: 'addInterest',
+                  interest: {
+                            name: fname + ' ' + lname,
+                            email: email,
+                            phone: phone || '',
+                            property: property || '',
+                            notes: notes || ''
+                  }
+          })
+    }).catch(() => {});
 }
 
 document.addEventListener('keydown', e => { if(e.key==='Escape') document.getElementById('modalOverlay').classList.remove('open'); });

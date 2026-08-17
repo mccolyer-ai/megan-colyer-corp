@@ -29,6 +29,7 @@
   header { background: var(--charcoal); padding: 20px 40px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; }
   .header-center { display:flex; flex-direction:column; align-items:center; gap:4px; flex:1; text-align:center; }
   .header-center h1 { font-family:'Marcellus', serif; font-size:20px; font-weight:400; color:white; letter-spacing:0.08em; text-transform:uppercase; white-space:nowrap; }
+  .header-logo { height:60px; width:auto; display:block; }
   .header-phone { font-family:'Marcellus', serif; font-size:20px; font-weight:400; color:rgba(212,150,125,1); letter-spacing:0.06em; white-space:nowrap; }
   .header-tagline { font-size:11px; color:rgba(255,255,255,0.45); letter-spacing:0.12em; text-transform:uppercase; font-family:'PT Serif', serif; }
   .header-side { flex:0 0 180px; }
@@ -40,6 +41,7 @@
     .header-side:first-child { display:none; }
     .header-side:last-child { flex:0 0 auto; margin-left:12px; }
     .header-center h1 { font-size:16px; }
+    .header-logo { height:42px; }
     .header-phone { font-size:15px; }
     .header-tagline { display:none; }
     .header-cta { padding:8px 16px; font-size:12px; }
@@ -208,7 +210,7 @@
 <header>
   <div class="header-side"></div>
   <div class="header-center">
-    <h1>Megan Colyer Corp</h1>
+    <img src="logo.png" alt="Megan Colyer Corp" class="header-logo">
     <div class="header-phone">Call/Text 636-698-1412</div>
     <div class="header-tagline">Off-Market Investment Deals</div>
   </div>

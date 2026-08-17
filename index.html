@@ -72,7 +72,7 @@
   .card-photo { position:relative; height:200px; background:var(--surface2); overflow:hidden; text-decoration:none; display:block; }
   .card-photo img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s; }
   .card:hover .card-photo img { transform:scale(1.05); }
-  a.card-photo::after { content:'📷 View Photos'; position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.55); color:white; font-size:11px; font-family:'PT Serif',serif; padding:4px 8px; border-radius:12px; opacity:0; transition:opacity .2s; pointer-events:none; }
+  a.card-photo::after { content:'📷 View Property'; position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.55); color:white; font-size:11px; font-family:'PT Serif',serif; padding:4px 8px; border-radius:12px; opacity:0; transition:opacity .2s; pointer-events:none; }
   a.card-photo:hover::after { opacity:1; }
   .card-photo .photo-fallback {
     width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center;
@@ -382,7 +382,7 @@ function render() {
         <div class="fb-city">${d.city||''}, ${d.state||''}</div>
       </div>`;
     return `<div class="card" onclick="if(!event.target.closest('.card-photo-link'))openModal(${i})">
-      <${d.driveUrl ? `a class="card-photo ${photoClass} card-photo-link" href="${d.driveUrl}" target="_blank" rel="noopener"` : `div class="card-photo ${photoClass}"`}>${photoHtml}</${d.driveUrl ? 'a' : 'div'}>
+      <a class="card-photo ${photoClass} card-photo-link" href="${dealUrl(d)}" onclick="event.preventDefault();event.stopPropagation();navigateToPropertyId('${d.leadId}')">${photoHtml}</a>
       <div class="card-body">
         <div class="card-address">${addr0}</div>
         <div class="card-city">${d.city}, ${d.state}${zip ? ' ' + zip : ''} ${statusDot}</div>
@@ -449,6 +449,17 @@ function dealUrl(d, opts) {
   return window.location.pathname + (qs ? '?' + qs : '');
 }
 
+function navigateToProperty(d) {
+  if (!d) return;
+  history.pushState({}, '', dealUrl(d));
+  showPropertyDetail(d);
+  window.scrollTo(0, 0);
+}
+
+function navigateToPropertyId(leadId) {
+  navigateToProperty(DEALS.find(d => d.leadId === leadId) || null);
+}
+
 function showPropertyDetail(d, opts) {
   opts = opts || {};
   _currentDetailDeal = d;
@@ -493,7 +504,7 @@ function showPropertyDetail(d, opts) {
         ${d.notes ? `<div class="detail-notes">${d.notes}</div>` : ''}
         <div class="detail-actions">
           <button class="interest-btn" onclick="openModalForDeal(_currentDetailDeal)">I'm Interested →</button>
-          ${d.driveUrl ? `<a class="photos-btn" href="${d.driveUrl}" target="_blank" rel="noopener">📷 View Photos</a>` : ''}
+          ${d.driveUrl ? `<a class="photos-btn" href="${d.driveUrl}" target="_blank" rel="noopener">📷 More Photos</a>` : ''}
         </div>
       </div>
     </div>`;

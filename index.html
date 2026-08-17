@@ -171,6 +171,36 @@
     .map-header{padding:12px 20px 8px;}
     #dealMap{height:280px;}
   }
+
+  /* Single-property detail view (for personalized per-deal links) */
+  .detail-wrap { max-width:900px; margin:0 auto; padding:24px 40px 60px; }
+  .back-link { display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--muted); text-decoration:none; margin-bottom:18px; cursor:pointer; font-family:'PT Serif', serif; }
+  .back-link:hover { color:var(--salmon); }
+  .detail-card { background:var(--surface); border:1px solid var(--border); border-radius:4px; overflow:hidden; }
+  .detail-photo { position:relative; height:380px; background:var(--surface2); overflow:hidden; }
+  .detail-photo img { width:100%; height:100%; object-fit:cover; display:block; }
+  .detail-body { padding:28px 32px; }
+  .detail-address { font-family:'Marcellus', serif; font-size:26px; font-weight:400; color:var(--charcoal); margin-bottom:4px; }
+  .detail-city { font-size:15px; color:var(--muted); margin-bottom:20px; }
+  .detail-price-row { display:flex; align-items:baseline; gap:10px; margin-bottom:22px; padding-bottom:22px; border-bottom:1px solid var(--border); }
+  .detail-price { font-family:'Marcellus', serif; font-size:36px; font-weight:400; color:var(--charcoal); }
+  .detail-metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:16px; margin-bottom:22px; }
+  .detail-metric { border-top:2px solid var(--border); padding-top:10px; }
+  .detail-metric .m-label { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.7px; margin-bottom:4px; }
+  .detail-metric .m-value { font-size:17px; font-weight:700; color:var(--charcoal); }
+  .detail-metric .m-value.na { color:var(--muted); font-style:italic; font-weight:400; font-size:14px; }
+  .detail-notes { background:var(--surface2); border-left:3px solid var(--salmon); border-radius:0 4px 4px 0; padding:14px 18px; margin-bottom:24px; font-size:14px; color:var(--charcoal); line-height:1.6; }
+  .detail-actions { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+  .detail-actions .interest-btn { padding:12px 28px; font-size:14px; }
+  .detail-not-found { text-align:center; padding:80px 20px; color:var(--muted); }
+  .detail-not-found .icon { font-size:48px; margin-bottom:16px; }
+  @media(max-width:768px){
+    .detail-wrap{padding:20px 20px 40px;}
+    .detail-photo{height:240px;}
+    .detail-body{padding:20px;}
+    .detail-address{font-size:20px;}
+    .detail-price{font-size:28px;}
+  }
 </style>
 </head>
 <body>
@@ -225,6 +255,8 @@
 
 <div class="grid" id="dealGrid"></div>
 
+<div class="detail-wrap" id="propertyDetailView" style="display:none"></div>
+
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">✕</button>
@@ -252,6 +284,7 @@
 <script>
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxATueK1LD5LFGL_KNCBXF6ijTeFyE5qcYsSFdcPucbsNQSD8SeDnBGT3O8ZBafqy2F7Q/exec';
 let DEALS = [];
+
 // Log a portal visit if this link was personalized for a specific buyer (?b=<contactId>&n=<name>)
 (function(){
   try {
@@ -268,6 +301,7 @@ let DEALS = [];
     }
   } catch (e) {}
 })();
+
 let activeFilter = 'all';
 
 function populateZips() {
@@ -378,6 +412,10 @@ function render() {
 function openModal(idx) {
   const deals = getFiltered();
   const d = idx !== null ? deals[idx] : null;
+  openModalForDeal(d);
+}
+
+function openModalForDeal(d) {
   document.getElementById('modalAddress').textContent = d ? '📍 '+d.address : "Let us know you're interested and we'll be in touch.";
   document.getElementById('modalLinks').style.display = 'none';
   document.getElementById('modalForm').style.display = 'block';
@@ -393,6 +431,84 @@ function openModal(idx) {
   }
   document.getElementById('modalOverlay').classList.add('open');
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Single-property detail view — shown when the URL has ?deal=<leadId>, e.g. the
+// personalized link sent for a specific property. Lets a buyer land straight on
+// that property's own page, with a way back to the full deal list.
+let _currentDetailDeal = null;
+
+function dealUrl(d, opts) {
+  opts = opts || {};
+  const params = new URLSearchParams(window.location.search);
+  if (d) params.set('deal', d.leadId); else params.delete('deal');
+  if (opts.keepBuyer === false) { params.delete('b'); params.delete('n'); }
+  const qs = params.toString();
+  return window.location.pathname + (qs ? '?' + qs : '');
+}
+
+function showPropertyDetail(d, opts) {
+  opts = opts || {};
+  _currentDetailDeal = d;
+  document.querySelector('.map-section').style.display = 'none';
+  document.querySelector('.controls').style.display = 'none';
+  document.getElementById('dealGrid').style.display = 'none';
+  const view = document.getElementById('propertyDetailView');
+  view.style.display = 'block';
+
+  if (!d) {
+    view.innerHTML = '<div class="detail-not-found"><div class="icon">🔍</div><h3>Property not found</h3><p>It may have sold or been taken off the market.</p><br><a class="back-link" onclick="backToAllDeals()">← Back to All Deals</a></div>';
+    document.title = 'Megan Colyer Corp — Available Deals';
+    return;
+  }
+
+  const parts=[d.beds?d.beds+' bd':'',d.baths?d.baths+' ba':'',d.sqft?d.sqft.toLocaleString()+' sqft':''].filter(Boolean);
+  const addr0 = d.address.split(',')[0];
+  const propIcon = d.propertyType && d.propertyType.toLowerCase().includes('multi') ? '🏘️'
+    : d.propertyType && d.propertyType.toLowerCase().includes('condo') ? '🏢' : '🏠';
+  const photoHtml = d.photo
+    ? `<img src="${d.photo}" alt="${addr0}">`
+    : `<div class="photo-fallback" style="display:flex"><div class="house-icon">${propIcon}</div><div class="fb-addr">No Photos Available</div><div class="fb-city">${d.city||''}, ${d.state||''}</div></div>`;
+
+  view.innerHTML = `
+    <a class="back-link" onclick="backToAllDeals()">← Back to All Deals</a>
+    <div class="detail-card">
+      <div class="detail-photo">${photoHtml}</div>
+      <div class="detail-body">
+        <div class="detail-address">${addr0}</div>
+        <div class="detail-city">${d.city||''}, ${d.state||''}${d.zip?' '+d.zip:''}</div>
+        <div class="detail-price-row">
+          <div class="detail-price">${fmt(d.askingPrice)}</div>
+          <div class="price-label">asking</div>
+        </div>
+        <div class="detail-metrics">
+          <div class="detail-metric"><div class="m-label">ARV</div><div class="m-value ${!d.arv?'na':''}">${d.arv?fmt(d.arv):'Unknown'}</div></div>
+          <div class="detail-metric"><div class="m-label">Est. Repairs</div><div class="m-value ${!d.repairCost?'na':''}">${d.repairCost?fmt(d.repairCost):'Unknown'}</div></div>
+          <div class="detail-metric"><div class="m-label">Property Type</div><div class="m-value">${d.propertyType||'Single Family'}</div></div>
+          ${d.yearBuilt?`<div class="detail-metric"><div class="m-label">Year Built</div><div class="m-value">${d.yearBuilt}</div></div>`:''}
+          ${parts.length?`<div class="detail-metric"><div class="m-label">Details</div><div class="m-value">${parts.join(' · ')}</div></div>`:''}
+        </div>
+        ${d.notes ? `<div class="detail-notes">${d.notes}</div>` : ''}
+        <div class="detail-actions">
+          <button class="interest-btn" onclick="openModalForDeal(_currentDetailDeal)">I'm Interested →</button>
+          ${d.driveUrl ? `<a class="photos-btn" href="${d.driveUrl}" target="_blank" rel="noopener">📷 View Photos</a>` : ''}
+        </div>
+      </div>
+    </div>`;
+
+  document.title = addr0 + ' — Megan Colyer Corp';
+}
+
+function backToAllDeals() {
+  _currentDetailDeal = null;
+  document.querySelector('.map-section').style.display = '';
+  document.querySelector('.controls').style.display = '';
+  document.getElementById('dealGrid').style.display = '';
+  document.getElementById('propertyDetailView').style.display = 'none';
+  document.title = 'Megan Colyer Corp — Available Deals';
+  history.pushState({}, '', dealUrl(null));
+}
+// ─────────────────────────────────────────────────────────────────────────────
 
 function closeModal(e) {
   if (!e || e.target===document.getElementById('modalOverlay')) document.getElementById('modalOverlay').classList.remove('open');
@@ -415,22 +531,31 @@ function submitForm() {
   document.getElementById('modalSuccess').style.display = 'block';
 
   // POST to our own backend so submissions are logged and emailed reliably
-    fetch(GAS_URL, {
-          method: 'POST',
-          body: JSON.stringify({
-                  action: 'addInterest',
-                  interest: {
-                            name: fname + ' ' + lname,
-                            email: email,
-                            phone: phone || '',
-                            property: property || '',
-                            notes: notes || ''
-                  }
-          })
-    }).catch(() => {});
+  fetch(GAS_URL, {
+    method: 'POST',
+    body: JSON.stringify({
+      action: 'addInterest',
+      interest: {
+        name: fname + ' ' + lname,
+        email: email,
+        phone: phone || '',
+        property: property || '',
+        notes: notes || ''
+      }
+    })
+  }).catch(() => {});
 }
 
 document.addEventListener('keydown', e => { if(e.key==='Escape') document.getElementById('modalOverlay').classList.remove('open'); });
+
+window.addEventListener('popstate', () => {
+  const dealParam = new URLSearchParams(window.location.search).get('deal');
+  if (dealParam && DEALS.length) {
+    showPropertyDetail(DEALS.find(d => d.leadId === dealParam) || null);
+  } else if (!dealParam && _currentDetailDeal !== null) {
+    backToAllDeals();
+  }
+});
 
 // ── MAP ──────────────────────────────────────────────────────────────────────
 let _dealMap = null;
@@ -587,6 +712,15 @@ async function initMap(deals) {
       populateZips();
       render();
       initMap(DEALS); // ← renders map from same data, no extra fetch
+
+      // If this is a personalized per-property link (?deal=<leadId>), show that
+      // property's own page instead of the full grid, with a way back to all deals.
+      const dealParam = new URLSearchParams(window.location.search).get('deal');
+      if (dealParam) {
+        const match = DEALS.find(d => d.leadId === dealParam);
+        showPropertyDetail(match || null);
+      }
+
       // Auto-fill missing photos from Drive folders
       const missing = DEALS.filter(d => !d.photo && d.driveUrl);
       if (missing.length) {
@@ -602,6 +736,8 @@ async function initMap(deals) {
           } catch(e) {}
         }));
         render();
+        // Re-render the detail view too in case its photo just arrived
+        if (_currentDetailDeal) showPropertyDetail(_currentDetailDeal);
       }
     })
     .catch(err => {

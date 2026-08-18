@@ -519,6 +519,13 @@ function backToAllDeals() {
   document.getElementById('dealGrid').style.display = '';
   document.getElementById('propertyDetailView').style.display = 'none';
   document.title = 'Megan Colyer Corp — Available Deals';
+  // The map may have been initialized (or is still loading) while its container
+  // was hidden behind the property detail view — Leaflet doesn't auto-detect
+  // becoming visible again, so it renders tiny/half-loaded until told to
+  // re-measure itself. Force that recalculation now that it's shown again.
+  if (_dealMap) {
+    setTimeout(() => _dealMap.invalidateSize(), 0);
+  }
   history.pushState({}, '', dealUrl(null));
 }
 // ─────────────────────────────────────────────────────────────────────────────

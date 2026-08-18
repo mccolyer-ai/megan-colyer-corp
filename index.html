@@ -521,10 +521,14 @@ function backToAllDeals() {
   document.title = 'Megan Colyer Corp — Available Deals';
   // The map may have been initialized (or is still loading) while its container
   // was hidden behind the property detail view — Leaflet doesn't auto-detect
-  // becoming visible again, so it renders tiny/half-loaded until told to
-  // re-measure itself. Force that recalculation now that it's shown again.
+  // becoming visible again, so it measured itself at 0x0 and both its size AND
+  // its zoom/pan (from fitBounds, computed against that 0x0 size) are wrong
+  // until we redo both now that the container is actually visible.
   if (_dealMap) {
-    setTimeout(() => _dealMap.invalidateSize(), 0);
+    setTimeout(() => {
+      _dealMap.invalidateSize();
+      if (_dealMapBounds) _dealMap.fitBounds(_dealMapBounds);
+    }, 0);
   }
   history.pushState({}, '', dealUrl(null));
 }
@@ -579,6 +583,7 @@ window.addEventListener('popstate', () => {
 
 // ── MAP ──────────────────────────────────────────────────────────────────────
 let _dealMap = null;
+let _dealMapBounds = null;
 
 // Hardcoded city → [lat, lng] lookup — no geocoding API needed, instant load
 const CITY_COORDS = {
@@ -711,7 +716,8 @@ async function initMap(deals) {
 
   // Fit to pins if we have them, otherwise keep Missouri view
   if (allPts.length) {
-    _dealMap.fitBounds(L.latLngBounds(allPts).pad(0.15));
+    _dealMapBounds = L.latLngBounds(allPts).pad(0.15);
+    _dealMap.fitBounds(_dealMapBounds);
   }
 
   document.getElementById('mapStats').textContent =

@@ -19,6 +19,12 @@
 <meta name="twitter:title" content="Join Our Buyers List — Megan Colyer Corp">
 <meta name="twitter:description" content="Join our cash buyers list for off-market investment deals in the St. Louis area.">
 <meta name="twitter:image" content="https://megancolyersbuyerportal.netlify.app/og-preview.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#303636">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MC Buyer Portal">
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -351,7 +357,7 @@
     <div class="checkmark">✅</div>
     <h3>You're on the list!</h3>
     <p>Thanks for signing up. We'll be in touch when deals that match your criteria become available.<br><br>
-    <a href="index.html">← Back to available deals</a></p>
+    <a href='/'>← Back to available deals</a></p>
   </div>
 
 </div><!-- end page -->
@@ -515,5 +521,12 @@ async function submitForm() {
 
   </div>
 </footer>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
+}
+</script>
 </body>
 </html>

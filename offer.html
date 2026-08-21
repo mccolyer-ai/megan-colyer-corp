@@ -19,6 +19,12 @@
 <meta name="twitter:title" content="Submit an Offer — Megan Colyer Corp">
 <meta name="twitter:description" content="Submit an offer on an off-market investment property with Megan Colyer Corp.">
 <meta name="twitter:image" content="https://megancolyersbuyerportal.netlify.app/og-preview.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#303636">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MC Buyer Portal">
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -258,7 +264,7 @@
     <div class="checkmark">✅</div>
     <h3>Offer Submitted!</h3>
     <p>Thanks — we've received your offer and will follow up shortly.<br><br>
-    <a href="index.html">← Back to available deals</a></p>
+    <a href='/'>← Back to available deals</a></p>
   </div>
 
 </div><!-- end page -->
@@ -368,5 +374,12 @@ async function submitOffer() {
 }
 </script>
 
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch(() => {});
+  });
+}
+</script>
 </body>
 </html>

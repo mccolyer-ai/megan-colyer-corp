@@ -138,6 +138,11 @@
   /* Edit Deals */
   .edit-deals-section { margin-top:48px; border-top:2px solid var(--border); padding-top:32px; }
   .edit-deals-section .section-label { margin-bottom:24px; }
+  .deal-search-row { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+  .deal-search-input { flex:1; padding:11px 16px; border:1px solid var(--border); border-radius:30px; font-family:'PT Serif',Georgia,serif; font-size:14px; color:var(--text); background:white; outline:none; transition:border-color .15s; }
+  .deal-search-input:focus { border-color: var(--salmon-light); }
+  .deal-search-input::placeholder { color:#bbb; }
+  .deal-search-count { font-size:12px; color:var(--muted); white-space:nowrap; }
   .edit-deal-list { display:flex; flex-direction:column; gap:10px; }
   .edit-deal-row { background:white; border:1px solid var(--border); border-radius:4px; overflow:hidden; }
   .edit-deal-header { display:flex; align-items:center; justify-content:space-between; padding:14px 18px; cursor:pointer; user-select:none; }
@@ -189,7 +194,7 @@
     <img src="../logo.png" alt="Megan Colyer Corp" class="header-logo-sm">
   </div>
   <div class="header-right">
-    <a href="../owner.html" class="back-btn">← Back to Portal</a>
+    <a class='back-btn' href='/owner'>← Back to Portal</a>
   </div>
 </header>
 
@@ -199,6 +204,10 @@
   <!-- ═══════════════════════════════════════════════════════ -->
   <div class="edit-deals-section">
     <div class="section-label">Edit Existing Deals</div>
+    <div class="deal-search-row">
+      <input type="text" id="dealSearchInput" class="deal-search-input" placeholder="Search by address, city, source, status…" oninput="onDealSearchInput(this.value)" />
+      <span class="deal-search-count" id="dealSearchCount"></span>
+    </div>
     <div class="edit-deal-list" id="editDealList">
       <p style="color:var(--muted);font-size:14px;">Loading deals…</p>
     </div>
@@ -423,13 +432,39 @@ function shortAddr(address) {
 // EDIT DEALS
 // ============================================================
 let ALL_DEALS_DATA = []; // full deal objects from GAS
+let dealSearchQuery = '';
+
+function onDealSearchInput(val) {
+  dealSearchQuery = (val || '').trim();
+  renderEditDeals(ALL_DEALS_DATA);
+}
+
+function matchesDealSearch(d, q) {
+  if (!q) return true;
+  const haystack = [d.address, d.city, d.state, d.zip, d.source, d.status, d.propertyType, d.notes]
+    .map(v => (v == null ? '' : String(v)).toLowerCase())
+    .join(' | ');
+  return haystack.includes(q);
+}
 
 function renderEditDeals(deals) {
   // Filter out archived deals and sort newest first
   deals = [...deals].filter(d => d.status !== 'archived').sort((a,b) => new Date(b.date||0) - new Date(a.date||0));
+
+  const q = dealSearchQuery.toLowerCase();
+  const totalActive = deals.length;
+  deals = deals.filter(d => matchesDealSearch(d, q));
+
+  const countEl = document.getElementById('dealSearchCount');
+  if (countEl) {
+    countEl.textContent = q ? `${deals.length} of ${totalActive} match` : '';
+  }
+
   const container = document.getElementById('editDealList');
   if (!deals.length) {
-    container.innerHTML = '<p style="color:var(--muted);font-size:14px;">No deals found.</p>';
+    container.innerHTML = q
+      ? `<p style="color:var(--muted);font-size:14px;">No deals match "${escHtml(dealSearchQuery)}".</p>`
+      : '<p style="color:var(--muted);font-size:14px;">No deals found.</p>';
     return;
   }
   container.innerHTML = '';

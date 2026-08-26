@@ -272,6 +272,13 @@
 <script>
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxATueK1LD5LFGL_KNCBXF6ijTeFyE5qcYsSFdcPucbsNQSD8SeDnBGT3O8ZBafqy2F7Q/exec';
 
+// Pre-fill the property address when arriving from a property page's
+// "Submit an Offer" button (e.g. offer.html?address=123%20Main%20St...).
+(function prefillAddress() {
+  const addr = new URLSearchParams(window.location.search).get('address');
+  if (addr) document.getElementById('propertyAddress').value = addr;
+})();
+
 let realtorInvolved = null;
 let pofFileData = null;
 let pofFileName = null;

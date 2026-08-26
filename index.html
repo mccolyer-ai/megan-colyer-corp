@@ -138,8 +138,10 @@
   .card-footer { padding:12px 20px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:8px; background:var(--surface2); flex-wrap:wrap; }
   .date-badge { font-size:11px; color:var(--muted); letter-spacing:0.04em; }
   .footer-btns { display:flex; gap:8px; align-items:center; }
-  .interest-btn { background:var(--salmon); color:white; border:none; padding:8px 18px; border-radius:30px; font-size:12px; font-family:'PT Serif', serif; letter-spacing:0.04em; cursor:pointer; transition:background .2s; }
+  .interest-btn { background:var(--salmon); color:white; border:none; padding:8px 18px; border-radius:30px; font-size:12px; font-family:'PT Serif', serif; letter-spacing:0.04em; cursor:pointer; transition:background .2s; text-decoration:none; display:inline-block; }
   .interest-btn:hover { background:var(--salmon-light); }
+  .interest-btn.secondary-btn { background:white; color:var(--charcoal); border:1px solid var(--border); }
+  .interest-btn.secondary-btn:hover { background:white; border-color:var(--salmon); color:var(--salmon); }
   .photos-btn { background:white; color:var(--charcoal); border:1px solid var(--border); padding:8px 14px; border-radius:30px; font-size:12px; font-family:'PT Serif', serif; letter-spacing:0.04em; cursor:pointer; text-decoration:none; transition:border-color .2s; display:inline-block; }
   .photos-btn:hover { border-color:var(--salmon); color:var(--salmon); }
 
@@ -555,7 +557,8 @@ function showPropertyDetail(d, opts) {
         </div>
         ${d.notes ? `<div class="detail-notes">${d.notes}</div>` : ''}
         <div class="detail-actions">
-          <button class="interest-btn" onclick="openModalForDeal(_currentDetailDeal)">I'm Interested →</button>
+          <a class="interest-btn" href="offer.html?address=${encodeURIComponent(d.address)}">Submit an Offer →</a>
+          <button class="interest-btn secondary-btn" onclick="openModalForDeal(_currentDetailDeal)">I'm Interested</button>
           ${d.driveUrl ? `<a class="photos-btn" href="${d.driveUrl}" target="_blank" rel="noopener">📷 View All Photos</a>` : ''}
         </div>
 

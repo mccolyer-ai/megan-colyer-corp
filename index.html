@@ -183,8 +183,12 @@
   .map-loading { height:360px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:13px; font-style:italic; background:var(--surface2); }
   .leaflet-popup-content-wrapper { font-family:'PT Serif',Georgia,serif; font-size:13px; border-radius:4px; box-shadow:0 4px 16px rgba(0,0,0,0.12); }
   .leaflet-popup-content strong { font-size:13px; color:var(--charcoal); }
+  .leaflet-tooltip { font-family:'PT Serif',Georgia,serif; font-size:13px; border-radius:4px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,0.12); padding:8px 10px; }
+  .leaflet-tooltip strong { color:var(--charcoal); }
   .map-pin-price { color:var(--salmon); font-size:12px; margin-top:2px; }
   .map-pin-type { color:var(--muted); font-size:11px; margin-top:1px; }
+  .map-pin-link { display:inline-block; margin-top:6px; color:var(--salmon); font-weight:700; font-size:12px; text-decoration:none; }
+  .map-pin-link:hover { text-decoration:underline; }
 
   @media(max-width:768px){
     header{padding:16px 20px;}
@@ -456,6 +460,11 @@ function render() {
       </div>
     </div>`;
   }).join('');
+
+  // Keep the map in sync with whatever's currently filtered/searched —
+  // this is what makes searching a zip code (or address/city) "pull it up"
+  // on the map instead of just filtering the card list below it.
+  updateMapMarkers(deals);
 }
 
 function openModal(idx) {
@@ -784,7 +793,12 @@ function getCityCoords(deal) {
   return null;
 }
 
-async function initMap(deals) {
+let _dealMarkersLayer = null;
+
+// One-time map setup: creates the Leaflet map + tile layer, then does the
+// first marker render. After this, filtering/search calls updateMapMarkers()
+// directly — the map itself is only ever created once.
+async function createMap() {
   const mapEl = document.getElementById('dealMap');
   if (!mapEl || _dealMap) return;
 
@@ -797,9 +811,6 @@ async function initMap(deals) {
     document.head.appendChild(s);
   });
 
-  const activeDeals = deals.filter(d => d.status !== 'archived');
-
-  // Init map centered on Missouri
   mapEl.innerHTML = '';
   _dealMap = L.map(mapEl, { scrollWheelZoom: false, zoomControl: true });
   _dealMap.setView([38.57, -92.46], 7);
@@ -809,8 +820,23 @@ async function initMap(deals) {
     maxZoom: 19
   }).addTo(_dealMap);
 
+  _dealMarkersLayer = L.layerGroup().addTo(_dealMap);
+  updateMapMarkers(getFiltered());
+}
+
+// Re-plots pins for whatever deal list is passed in (already filtered by
+// search/zip/type — see render()) and zooms the map to fit just those pins.
+// This is what makes searching an address, city, or zip code "pull it up"
+// on the map: render() calls this every time the filters change.
+function updateMapMarkers(deals) {
+  if (!_dealMap || !_dealMarkersLayer) return;
+  _dealMarkersLayer.clearLayers();
+
+  const activeDeals = deals.filter(d => d.status !== 'archived');
+  const mapStats = document.getElementById('mapStats');
+
   if (!activeDeals.length) {
-    document.getElementById('mapStats').textContent = 'No active deals';
+    if (mapStats) mapStats.textContent = 'No matching deals';
     return;
   }
 
@@ -819,7 +845,7 @@ async function initMap(deals) {
   function makePin() {
     return L.divIcon({
       className: '',
-      html: `<div style="width:24px;height:24px;border-radius:50% 50% 50% 0;background:${salmon};border:2.5px solid white;box-shadow:0 2px 6px rgba(0,0,0,.4);transform:rotate(-45deg)"></div>`,
+      html: `<div style="width:24px;height:24px;border-radius:50% 50% 50% 0;background:${salmon};border:2.5px solid white;box-shadow:0 2px 6px rgba(0,0,0,.4);transform:rotate(-45deg);cursor:pointer;"></div>`,
       iconSize: [24, 24], iconAnchor: [12, 24], popupAnchor: [0, -26]
     });
   }
@@ -846,24 +872,26 @@ async function initMap(deals) {
 
     const price = deal.askingPrice ? '$' + Number(deal.askingPrice).toLocaleString() : null;
     const type  = deal.propertyType || null;
-    const popup = `<strong style="font-size:13px">${deal.address}</strong>`
+    // Hover preview (not click) — click is reserved for jumping straight to
+    // the property page, so the two interactions don't fight each other.
+    const tooltip = `<strong style="font-size:13px">${deal.address}</strong>`
       + (price ? `<div class="map-pin-price">${price}</div>` : '')
       + (type  ? `<div class="map-pin-type">${type}</div>`  : '');
 
     L.marker([lat, lng], { icon: makePin() })
-      .addTo(_dealMap)
-      .bindPopup(popup, { maxWidth: 220 });
+      .addTo(_dealMarkersLayer)
+      .bindTooltip(tooltip, { direction: 'top', offset: [0, -26], opacity: 0.97 })
+      .on('click', () => navigateToPropertyId(deal.leadId));
     placed++;
   });
 
   // Fit to pins if we have them, otherwise keep Missouri view
   if (allPts.length) {
     _dealMapBounds = L.latLngBounds(allPts).pad(0.15);
-    _dealMap.fitBounds(_dealMapBounds);
+    _dealMap.fitBounds(_dealMapBounds, { maxZoom: 14 });
   }
 
-  document.getElementById('mapStats').textContent =
-    `${placed} active ${placed === 1 ? 'deal' : 'deals'} plotted`;
+  if (mapStats) mapStats.textContent = `${placed} active ${placed === 1 ? 'deal' : 'deals'} plotted`;
 }
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -879,7 +907,7 @@ async function initMap(deals) {
       DEALS = DEALS.map(d => { if (d.Notes !== undefined) { d.notes = d.notes || d.Notes; } return d; });
       populateZips();
       render();
-      initMap(DEALS); // ← renders map from same data, no extra fetch
+      createMap(); // ← creates the map once, then plots whatever render() just filtered
 
       // If this is a personalized per-property link (?deal=<leadId>), show that
       // property's own page instead of the full grid, with a way back to all deals.

@@ -638,8 +638,8 @@ async function initDetailMap(d, center) {
   mapEl.innerHTML = '';
   _detailMap = L.map(mapEl, { scrollWheelZoom: false, zoomControl: true });
   _detailMap.setView(center, 13);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>',
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     maxZoom: 19
   }).addTo(_detailMap);
   L.marker(center, {
@@ -804,8 +804,8 @@ async function initMap(deals) {
   _dealMap = L.map(mapEl, { scrollWheelZoom: false, zoomControl: true });
   _dealMap.setView([38.57, -92.46], 7);
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>',
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     maxZoom: 19
   }).addTo(_dealMap);
 

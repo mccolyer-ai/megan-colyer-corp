@@ -384,7 +384,16 @@ function getFiltered() {
   const zip = document.getElementById('zipSelect').value;
   let list = DEALS.filter(d => {
     if (d.status === 'archived') return false;
-    if (q && !d.address.toLowerCase().includes(q) && !(d.city||'').toLowerCase().includes(q) && !(d.state||'').toLowerCase().includes(q)) return false;
+    if (q) {
+      // Zip may live in its own field, or only be embedded in the address
+      // string — check both so searching a zip code always works.
+      const dealZip = String(d.zip || (d.address.match(/\b(\d{5})\b/) || [])[1] || '');
+      const matches = d.address.toLowerCase().includes(q)
+        || (d.city||'').toLowerCase().includes(q)
+        || (d.state||'').toLowerCase().includes(q)
+        || dealZip.includes(q);
+      if (!matches) return false;
+    }
     if (activeFilter === 'sfh') { if (!/single.?family/i.test(d.propertyType||'')) return false; }
     if (activeFilter === 'mfh') { if (!/multi.?family/i.test(d.propertyType||'')) return false; }
     if (zip) { const m = d.address.match(/\b(\d{5})\b/); if (!m || m[1] !== zip) return false; }
@@ -405,6 +414,10 @@ function render() {
   const deals = getFiltered();
   document.getElementById('countBadge').textContent = deals.length + ' deal' + (deals.length!==1?'s':'');
   const grid = document.getElementById('dealGrid');
+  // Keep the map in sync with whatever's currently filtered/searched — this
+  // runs even on a zero-match search, so the map clears its pins instead of
+  // showing stale ones from before the search.
+  updateMapMarkers(deals);
   if (!deals.length) {
     grid.innerHTML = '<div class="no-results"><div class="icon">🔍</div><h3>No deals match</h3><p>Try adjusting your filters or search.</p></div>';
     return;
@@ -460,11 +473,6 @@ function render() {
       </div>
     </div>`;
   }).join('');
-
-  // Keep the map in sync with whatever's currently filtered/searched —
-  // this is what makes searching a zip code (or address/city) "pull it up"
-  // on the map instead of just filtering the card list below it.
-  updateMapMarkers(deals);
 }
 
 function openModal(idx) {

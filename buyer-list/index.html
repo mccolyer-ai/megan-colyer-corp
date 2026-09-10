@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="robots" content="noindex, nofollow">
+<title>Buyers List — Megan Colyer Corp</title>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#303636">
+<style>
+  :root {
+    --bg: #f5f2ee;
+    --surface: #ffffff;
+    --surface2: #f0ece6;
+    --border: #e0d9d0;
+    --charcoal: #303636;
+    --salmon: #D4967D;
+    --salmon-light: #e8b89f;
+    --text: #303636;
+    --muted: #7a8080;
+    --green: #4a8c6f;
+    --red: #b55a42;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'PT Serif', Georgia, serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  header { background: var(--charcoal); padding: 18px 40px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+  header h1 { font-family:'Marcellus', serif; font-size:20px; font-weight:400; color:white; letter-spacing:0.12em; text-transform:uppercase; }
+  .header-logo-sm { height:34px; width:auto; display:block; }
+  .logo-text { display:flex; align-items:center; gap:14px; }
+  .header-right { display:flex; align-items:center; gap:18px; }
+  .back-btn { color: rgba(255,255,255,0.7); font-size:13px; text-decoration:none; letter-spacing:0.04em; background:none; border:none; font-family:'PT Serif',serif; cursor:pointer; }
+  .back-btn:hover { color:white; }
+
+  .page { max-width:1080px; margin:0 auto; padding:40px 40px 80px; }
+
+  /* ── Passcode gate ─────────────────────────────────────── */
+  .gate { max-width:420px; margin:60px auto 0; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:36px; text-align:center; }
+  .gate h2 { font-family:'Marcellus',serif; font-size:24px; font-weight:400; letter-spacing:0.04em; margin-bottom:8px; }
+  .gate p { color:var(--muted); font-size:14px; line-height:1.6; margin-bottom:24px; }
+  .gate input { width:100%; border:1px solid var(--border); border-radius:4px; padding:12px 14px; font-size:16px; font-family:'PT Serif',serif; color:var(--text); background:white; outline:none; text-align:center; letter-spacing:0.04em; transition:border-color .15s; }
+  .gate input:focus { border-color:var(--salmon); }
+  .gate button { width:100%; margin-top:16px; background:var(--salmon); color:white; border:none; padding:14px; border-radius:6px; font-size:15px; font-family:'Marcellus',serif; letter-spacing:0.08em; cursor:pointer; transition:background .2s; }
+  .gate button:hover { background:var(--salmon-light); }
+  .gate button:disabled { background:#c8b8b0; cursor:not-allowed; }
+
+  .notice { display:none; margin-top:16px; font-size:13px; line-height:1.5; padding:12px 14px; border-radius:4px; text-align:left; }
+  .notice.error { display:block; background:#f8ebe6; border:1px solid #e6c3b7; color:var(--red); }
+  .notice.info  { display:block; background:var(--surface2); border:1px solid var(--border); color:var(--muted); }
+
+  /* ── Toolbar ───────────────────────────────────────────── */
+  .list-head { margin-bottom:22px; }
+  .list-head h2 { font-family:'Marcellus',serif; font-size:28px; font-weight:400; letter-spacing:0.04em; margin-bottom:6px; }
+  .list-head .sub { color:var(--muted); font-size:13px; }
+
+  .toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:18px; }
+  .toolbar input[type=search], .toolbar select {
+    border:1px solid var(--border); border-radius:4px; padding:10px 14px;
+    font-size:14px; font-family:'PT Serif',serif; color:var(--text); background:white; outline:none;
+  }
+  .toolbar input[type=search] { flex:1; min-width:220px; }
+  .toolbar input[type=search]:focus, .toolbar select:focus { border-color:var(--salmon); }
+  .ghost-btn { background:var(--charcoal); color:white; border:none; padding:10px 16px; border-radius:4px; font-family:'PT Serif',serif; font-size:13px; cursor:pointer; white-space:nowrap; }
+  .ghost-btn:hover { background:#404848; }
+  .ghost-btn:disabled { background:#a8adad; cursor:not-allowed; }
+  .count { font-size:13px; color:var(--muted); white-space:nowrap; }
+
+  /* ── Table ─────────────────────────────────────────────── */
+  .table-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+  table { width:100%; border-collapse:collapse; }
+  thead th { text-align:left; font-family:'Marcellus',serif; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); font-weight:400; padding:14px 18px; border-bottom:1px solid var(--border); background:var(--surface2); white-space:nowrap; }
+  tbody td { padding:14px 18px; font-size:14px; border-bottom:1px solid var(--border); vertical-align:top; }
+  tbody tr:last-child td { border-bottom:none; }
+  tbody tr:hover { background:#fbf9f7; }
+  td .name { font-weight:700; }
+  td a { color:var(--salmon); text-decoration:none; }
+  td a:hover { text-decoration:underline; }
+  .muted { color:var(--muted); }
+  .tag { display:inline-block; background:var(--surface2); border:1px solid var(--border); border-radius:20px; padding:2px 10px; font-size:12px; margin:0 4px 4px 0; }
+  .empty { padding:48px 24px; text-align:center; color:var(--muted); font-size:14px; }
+  .row-label { display:none; }
+
+  @media (max-width:760px) {
+    header { padding:14px 20px; }
+    .page { padding:28px 16px 60px; }
+    thead { display:none; }
+    tbody td, tbody tr { display:block; }
+    tbody tr { border-bottom:1px solid var(--border); padding:14px 16px; }
+    tbody tr:last-child { border-bottom:none; }
+    tbody td { border:none; padding:3px 0; }
+    .row-label { display:inline-block; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); min-width:74px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-text">
+    <h1>Buyers List</h1>
+    <img src="../logo.png" alt="Megan Colyer Corp" class="header-logo-sm">
+  </div>
+  <div class="header-right">
+    <button type="button" class="back-btn" id="signOutBtn" style="display:none">Sign out</button>
+    <a class="back-btn" href="/owner">← Back to Portal</a>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- Passcode gate -->
+  <section class="gate" id="gate" style="display:none">
+    <h2>Team Access</h2>
+    <p>Enter the team passcode to view the buyers list.</p>
+    <form id="gateForm" autocomplete="off">
+      <input type="password" id="passcode" placeholder="Passcode" autocomplete="current-password" required>
+      <button type="submit" id="gateBtn">Unlock</button>
+    </form>
+    <div class="notice" id="gateNotice"></div>
+  </section>
+
+  <!-- Buyers list -->
+  <section id="listView" style="display:none">
+    <div class="list-head">
+      <h2>Buyers</h2>
+      <div class="sub" id="listSub">Contacts from REI Lead Pros.</div>
+    </div>
+
+    <div class="toolbar">
+      <input type="search" id="search" placeholder="Search name, email, phone, city, tag…" autocomplete="off">
+      <select id="tagFilter"><option value="">All tags</option></select>
+      <button type="button" class="ghost-btn" id="refreshBtn">Refresh</button>
+      <button type="button" class="ghost-btn" id="exportBtn">Export CSV</button>
+      <span class="count" id="count"></span>
+    </div>
+
+    <div class="notice" id="listNotice"></div>
+
+    <div class="table-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th><th>Email</th><th>Phone</th><th>Location</th><th>Tags</th><th>Added</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div class="empty" id="empty" style="display:none">No buyers match this search.</div>
+    </div>
+  </section>
+
+  <!-- First paint before we know whether a session exists -->
+  <section id="loading">
+    <p class="muted" style="text-align:center;padding:60px 0;font-size:14px">Loading…</p>
+  </section>
+
+</div>
+
+<script>
+const SESSION_URL  = '/api/buyer-list/session';
+const CONTACTS_URL = '/api/buyer-list/contacts';
+
+let allContacts = [];
+
+const el = (id) => document.getElementById(id);
+
+function esc(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function show(section) {
+  ['gate', 'listView', 'loading'].forEach((id) => { el(id).style.display = id === section ? '' : 'none'; });
+  el('signOutBtn').style.display = section === 'listView' ? '' : 'none';
+}
+
+function notify(id, message, kind) {
+  const node = el(id);
+  node.className = 'notice' + (message ? ' ' + kind : '');
+  node.textContent = message || '';
+}
+
+function formatDate(value) {
+  if (!value) return '';
+  const date = new Date(value);
+  if (isNaN(date.getTime())) return '';
+  return date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+function telHref(phone) {
+  return phone.replace(/[^0-9+]/g, '');
+}
+
+// ── Data ───────────────────────────────────────────────────
+async function loadContacts() {
+  el('refreshBtn').disabled = true;
+  try {
+    const res = await fetch(CONTACTS_URL, { headers: { Accept: 'application/json' } });
+
+    if (res.status === 401) { show('gate'); return; }
+
+    const data = await res.json().catch(() => ({}));
+
+    if (!res.ok) {
+      show('listView');
+      notify('listNotice', data.message || 'Could not load the buyers list.', 'error');
+      allContacts = [];
+      render();
+      return;
+    }
+
+    allContacts = Array.isArray(data.contacts) ? data.contacts : [];
+    show('listView');
+    notify('listNotice', data.truncated
+      ? 'Showing the ' + allContacts.length + ' most recent of ' + data.total + ' contacts.'
+      : '', 'info');
+    el('listSub').textContent = 'Contacts from REI Lead Pros — updated ' + formatDate(data.fetchedAt) + '.';
+    buildTagFilter();
+    render();
+  } catch (err) {
+    show('listView');
+    notify('listNotice', 'Network error while loading the buyers list.', 'error');
+  } finally {
+    el('refreshBtn').disabled = false;
+  }
+}
+
+function buildTagFilter() {
+  const tags = [...new Set(allContacts.flatMap((c) => c.tags || []))].sort((a, b) => a.localeCompare(b));
+  const select = el('tagFilter');
+  const current = select.value;
+  select.innerHTML = '<option value="">All tags</option>' +
+    tags.map((t) => '<option value="' + esc(t) + '">' + esc(t) + '</option>').join('');
+  if (tags.includes(current)) select.value = current;
+}
+
+function visibleContacts() {
+  const term = el('search').value.trim().toLowerCase();
+  const tag = el('tagFilter').value;
+  return allContacts.filter((c) => {
+    if (tag && !(c.tags || []).includes(tag)) return false;
+    if (!term) return true;
+    const haystack = [c.name, c.email, c.phone, c.city, c.state, c.source, (c.tags || []).join(' ')]
+      .join(' ').toLowerCase();
+    return haystack.includes(term);
+  });
+}
+
+function render() {
+  const rows = visibleContacts();
+  el('count').textContent = rows.length === allContacts.length
+    ? allContacts.length + (allContacts.length === 1 ? ' buyer' : ' buyers')
+    : rows.length + ' of ' + allContacts.length;
+
+  el('empty').style.display = rows.length ? 'none' : '';
+  el('rows').innerHTML = rows.map((c) => {
+    const location = [c.city, c.state].filter(Boolean).join(', ');
+    return '<tr>'
+      + '<td><span class="row-label">Name</span><span class="name">' + (esc(c.name) || '<span class="muted">—</span>') + '</span></td>'
+      + '<td><span class="row-label">Email</span>' + (c.email ? '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a>' : '<span class="muted">—</span>') + '</td>'
+      + '<td><span class="row-label">Phone</span>' + (c.phone ? '<a href="tel:' + esc(telHref(c.phone)) + '">' + esc(c.phone) + '</a>' : '<span class="muted">—</span>') + '</td>'
+      + '<td><span class="row-label">Location</span>' + (location ? esc(location) : '<span class="muted">—</span>') + '</td>'
+      + '<td><span class="row-label">Tags</span>' + ((c.tags || []).length ? c.tags.map((t) => '<span class="tag">' + esc(t) + '</span>').join('') : '<span class="muted">—</span>') + '</td>'
+      + '<td><span class="row-label">Added</span><span class="muted">' + esc(formatDate(c.dateAdded)) + '</span></td>'
+      + '</tr>';
+  }).join('');
+}
+
+function exportCsv() {
+  const rows = visibleContacts();
+  if (!rows.length) return;
+  const header = ['Name', 'Email', 'Phone', 'City', 'State', 'Tags', 'Source', 'Added'];
+  const cell = (value) => '"' + String(value == null ? '' : value).replace(/"/g, '""') + '"';
+  const body = rows.map((c) => [c.name, c.email, c.phone, c.city, c.state, (c.tags || []).join('; '), c.source, formatDate(c.dateAdded)].map(cell).join(','));
+  const blob = new Blob([[header.map(cell).join(',')].concat(body).join('\r\n')], { type: 'text/csv;charset=utf-8' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'buyers-' + new Date().toISOString().slice(0, 10) + '.csv';
+  link.click();
+  URL.revokeObjectURL(link.href);
+}
+
+// ── Session ────────────────────────────────────────────────
+el('gateForm').addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const passcode = el('passcode').value;
+  if (!passcode) return;
+
+  el('gateBtn').disabled = true;
+  el('gateBtn').textContent = 'Checking…';
+  notify('gateNotice', '', 'info');
+
+  try {
+    const res = await fetch(SESSION_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ passcode }),
+    });
+    const data = await res.json().catch(() => ({}));
+
+    if (res.ok) {
+      el('passcode').value = '';
+      await loadContacts();
+    } else {
+      notify('gateNotice', data.message || 'That passcode is not correct.', 'error');
+      el('passcode').select();
+    }
+  } catch (err) {
+    notify('gateNotice', 'Network error. Try again.', 'error');
+  } finally {
+    el('gateBtn').disabled = false;
+    el('gateBtn').textContent = 'Unlock';
+  }
+});
+
+el('signOutBtn').addEventListener('click', async () => {
+  await fetch(SESSION_URL, { method: 'DELETE' }).catch(() => {});
+  allContacts = [];
+  el('rows').innerHTML = '';
+  show('gate');
+});
+
+el('search').addEventListener('input', render);
+el('tagFilter').addEventListener('change', render);
+el('refreshBtn').addEventListener('click', loadContacts);
+el('exportBtn').addEventListener('click', exportCsv);
+
+loadContacts();
+</script>
+
+</body>
+</html>

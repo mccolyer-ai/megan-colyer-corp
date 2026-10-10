@@ -25,7 +25,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MC Buyer Portal">
-<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f5f2ee;
@@ -33,36 +33,36 @@
     --surface2: #f0ece6;
     --border: #e0d9d0;
     --charcoal: #303636;
-    --salmon: #D4967D;
+    --salmon: #b89a5e;
     --salmon-light: #e8b89f;
     --text: #303636;
     --muted: #7a8080;
     --green: #4a8c6f;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'PT Serif', Georgia, serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  body { font-family: 'Montserrat',Helvetica,sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
   header { background: var(--charcoal); padding: 32px 40px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
-  .logo-text h1 { font-family:'Marcellus', serif; font-size:22px; font-weight:400; color:white; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:6px; }
+  .logo-text h1 { font-family:'Montserrat',sans-serif; font-size:22px; font-weight:400; color:white; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:6px; }
   .header-logo { height:127.5px; width:auto; display:block; margin:0 auto 6px; }
-  .logo-text .phone { font-family:'Marcellus', serif; font-size:20px; color:var(--salmon); letter-spacing:0.06em; margin-bottom:6px; }
+  .logo-text .phone { font-family:'Montserrat',sans-serif; font-size:20px; color:var(--salmon); letter-spacing:0.06em; margin-bottom:6px; }
   .logo-text p { font-size:11px; color:rgba(255,255,255,0.45); letter-spacing:0.16em; text-transform:uppercase; }
 
   .page { max-width:780px; margin:0 auto; padding:48px 40px 80px; }
 
   .form-hero { margin-bottom:40px; text-align:center; }
-  .form-hero h2 { font-family:'Marcellus', serif; font-size:30px; font-weight:400; letter-spacing:0.04em; margin-bottom:10px; }
+  .form-hero h2 { font-family:'Montserrat',sans-serif; font-size:30px; font-weight:400; letter-spacing:0.04em; margin-bottom:10px; }
   .form-hero p { color:var(--muted); font-size:15px; line-height:1.6; }
   .company-tag { font-size:12px; color:var(--muted); margin-top:6px; font-style:italic; }
 
   .notice-block { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:24px; }
   .notice { display:flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:10px 16px; font-size:13px; flex:1; min-width:240px; }
-  .notice .badge { font-family:'Marcellus',serif; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; padding:3px 9px; border-radius:20px; flex-shrink:0; }
+  .notice .badge { font-family:'Montserrat',sans-serif; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; padding:3px 9px; border-radius:20px; flex-shrink:0; }
   .notice.required .badge { background:#edf5f1; color:var(--green); }
   .notice.important .badge { background:#fff5f0; color:var(--salmon); }
 
   .form-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:36px; margin-bottom:24px; }
-  .section-title { font-family:'Marcellus', serif; font-size:14px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+  .section-title { font-family:'Montserrat',sans-serif; font-size:14px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--border); }
 
   .field-row { display:grid; gap:16px; margin-bottom:20px; }
   .field-row.two { grid-template-columns:1fr 1fr; }
@@ -73,21 +73,21 @@
   label .req { color:var(--salmon); margin-left:2px; }
   input[type=text], input[type=email], input[type=tel], input[type=number], input[type=date], select, textarea {
     border:1px solid var(--border); border-radius:4px; padding:10px 14px;
-    font-size:14px; font-family:'PT Serif', serif; color:var(--text); background:white;
+    font-size:14px; font-family:'Montserrat',sans-serif; color:var(--text); background:white;
     outline:none; transition:border-color .15s; width:100%;
   }
   select { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a8080' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; padding-right:36px; }
-  textarea { resize:vertical; min-height:90px; font-family:'PT Serif',serif; }
+  textarea { resize:vertical; min-height:90px; font-family:'Montserrat',sans-serif; }
   input:focus, select:focus, textarea:focus { border-color:var(--salmon); }
   .hint { font-size:12px; color:var(--muted); margin-top:-10px; margin-bottom:4px; }
   .error-text { font-size:12px; color:var(--salmon); margin-bottom:10px; display:none; }
 
   .price-field { display:flex; align-items:center; gap:8px; border:1px solid var(--border); border-radius:4px; padding:10px 14px; background:white; }
   .price-field span { color:var(--muted); font-size:14px; }
-  .price-field input { border:none; outline:none; font-size:14px; font-family:'PT Serif',serif; color:var(--text); width:100%; background:transparent; padding:0; }
+  .price-field input { border:none; outline:none; font-size:14px; font-family:'Montserrat',sans-serif; color:var(--text); width:100%; background:transparent; padding:0; }
 
   .toggle-choice { display:flex; gap:10px; }
-  .toggle-choice button { flex:1; border:1px solid var(--border); background:white; border-radius:4px; padding:10px; font-family:'PT Serif',serif; font-size:14px; cursor:pointer; transition:all .15s; }
+  .toggle-choice button { flex:1; border:1px solid var(--border); background:white; border-radius:4px; padding:10px; font-family:'Montserrat',sans-serif; font-size:14px; cursor:pointer; transition:all .15s; }
   .toggle-choice button.active { background:var(--salmon); border-color:var(--salmon); color:white; }
 
   .file-drop { border:2px dashed var(--border); border-radius:6px; padding:24px; text-align:center; cursor:pointer; transition:border-color .15s; background:white; }
@@ -100,13 +100,13 @@
   .consent-block { background: var(--surface2); border:1px solid var(--border); border-radius:6px; padding:20px; margin-bottom:28px; }
   .legal-text { font-size:11px; color:var(--muted); line-height:1.6; }
 
-  .submit-btn { width:100%; background:var(--salmon); color:white; border:none; padding:16px; border-radius:6px; font-size:16px; font-family:'Marcellus',serif; letter-spacing:0.08em; cursor:pointer; transition:background .2s; }
+  .submit-btn { width:100%; background:var(--salmon); color:white; border:none; padding:16px; border-radius:6px; font-size:16px; font-family:'Montserrat',sans-serif; letter-spacing:0.08em; cursor:pointer; transition:background .2s; }
   .submit-btn:hover { background:var(--salmon-light); }
   .submit-btn:disabled { background:#c8b8b0; cursor:not-allowed; }
 
   .success-msg { display:none; text-align:center; padding:48px 32px; }
   .success-msg .checkmark { font-size:48px; margin-bottom:16px; }
-  .success-msg h3 { font-family:'Marcellus',serif; font-size:24px; margin-bottom:10px; }
+  .success-msg h3 { font-family:'Montserrat',sans-serif; font-size:24px; margin-bottom:10px; }
   .success-msg p { color:var(--muted); font-size:14px; line-height:1.6; }
   .success-msg a { color:var(--salmon); }
 
@@ -118,6 +118,7 @@
     .field-row.two { grid-template-columns:1fr; }
   }
 </style>
+<link rel="stylesheet" href="theme.css">
 </head>
 <body>
 

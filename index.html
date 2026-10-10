@@ -25,7 +25,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MC Buyer Portal">
-<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <style>
   :root {
@@ -34,7 +34,7 @@
     --surface2: #f0ece6;
     --border: #e0d9d0;
     --charcoal: #303636;
-    --salmon: #D4967D;
+    --salmon: #b89a5e;
     --salmon-light: #e8b89f;
     --text: #303636;
     --muted: #7a8080;
@@ -42,17 +42,17 @@
     --red: #b55a42;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'PT Serif', Georgia, serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  body { font-family: 'Montserrat',Helvetica,sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
   header { background: var(--charcoal); padding: 20px 40px; display:flex; align-items:center; justify-content:space-between; z-index:100; }
   .header-center { display:flex; flex-direction:column; align-items:center; gap:4px; flex:1; text-align:center; }
-  .header-center h1 { font-family:'Marcellus', serif; font-size:20px; font-weight:400; color:white; letter-spacing:0.08em; text-transform:uppercase; white-space:nowrap; }
+  .header-center h1 { font-family:'Montserrat',sans-serif; font-size:20px; font-weight:400; color:white; letter-spacing:0.08em; text-transform:uppercase; white-space:nowrap; }
   .header-logo { height:127.5px; width:auto; display:block; }
-  .header-phone { font-family:'Marcellus', serif; font-size:20px; font-weight:400; color:rgba(212,150,125,1); letter-spacing:0.06em; white-space:nowrap; }
-  .header-tagline { font-size:11px; color:rgba(255,255,255,0.45); letter-spacing:0.12em; text-transform:uppercase; font-family:'PT Serif', serif; }
+  .header-phone { font-family:'Montserrat',sans-serif; font-size:20px; font-weight:400; color:rgba(184,154,94,1); letter-spacing:0.06em; white-space:nowrap; }
+  .header-tagline { font-size:11px; color:rgba(255,255,255,0.45); letter-spacing:0.12em; text-transform:uppercase; font-family:'Montserrat',sans-serif; }
   .header-side { flex:0 0 180px; }
   .logo-icon { display:none; }
-  .header-cta { background: var(--salmon); color:white; border:none; padding:10px 26px; border-radius:30px; font-size:13px; font-family:'PT Serif', serif; letter-spacing:0.05em; cursor:pointer; transition:background .2s; }
+  .header-cta { background: var(--salmon); color:white; border:none; padding:10px 26px; border-radius:30px; font-size:13px; font-family:'Montserrat',sans-serif; letter-spacing:0.05em; cursor:pointer; transition:background .2s; }
   .header-cta:hover { background: var(--salmon-light); }
   @media (max-width: 640px) {
     header { padding: 14px 16px; }
@@ -66,22 +66,22 @@
   }
 
   .buyers-banner { background: var(--salmon); text-align:center; padding:10px 20px; }
-  .buyers-banner a { color:white; font-family:'Marcellus', serif; font-size:14px; letter-spacing:0.08em; text-decoration:none; display:inline-flex; align-items:center; gap:8px; }
+  .buyers-banner a { color:white; font-family:'Montserrat',sans-serif; font-size:14px; letter-spacing:0.08em; text-decoration:none; display:inline-flex; align-items:center; gap:8px; }
   .buyers-banner a:hover { text-decoration:underline; }
 
   .controls { max-width:1400px; margin:0 auto; padding:28px 40px 20px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
   .search-wrap { position:relative; flex:1; min-width:200px; }
-  .search-wrap input { width:100%; background:white; border:1px solid var(--border); color:var(--text); padding:10px 14px 10px 38px; border-radius:4px; font-size:14px; font-family:'PT Serif', serif; outline:none; }
+  .search-wrap input { width:100%; background:white; border:1px solid var(--border); color:var(--text); padding:10px 14px 10px 38px; border-radius:4px; font-size:14px; font-family:'Montserrat',sans-serif; outline:none; }
   .search-wrap input:focus { border-color:var(--salmon); }
   .search-wrap input::placeholder { color:var(--muted); }
   .search-icon { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--muted); pointer-events:none; }
   .filter-chips { display:flex; gap:8px; flex-wrap:wrap; }
-  .chip { padding:8px 20px; border-radius:30px; border:1px solid var(--border); background:white; color:var(--muted); font-size:13px; font-family:'PT Serif', serif; cursor:pointer; transition:all .2s; white-space:nowrap; }
+  .chip { padding:8px 20px; border-radius:30px; border:1px solid var(--border); background:white; color:var(--muted); font-size:13px; font-family:'Montserrat',sans-serif; cursor:pointer; transition:all .2s; white-space:nowrap; }
   .chip:hover { border-color:var(--salmon); color:var(--charcoal); }
   .chip.active { background:var(--salmon); border-color:var(--salmon); color:white; }
-  .sort-select { background:white; border:1px solid var(--border); color:var(--text); padding:8px 14px; border-radius:4px; font-size:13px; font-family:'PT Serif', serif; cursor:pointer; outline:none; }
+  .sort-select { background:white; border:1px solid var(--border); color:var(--text); padding:8px 14px; border-radius:4px; font-size:13px; font-family:'Montserrat',sans-serif; cursor:pointer; outline:none; }
   .sort-select:focus { border-color:var(--salmon); }
-  .count-badge { padding:7px 14px; background:var(--charcoal); border-radius:30px; font-size:13px; color:white; white-space:nowrap; font-family:'PT Serif', serif; letter-spacing:0.04em; }
+  .count-badge { padding:7px 14px; background:var(--charcoal); border-radius:30px; font-size:13px; color:white; white-space:nowrap; font-family:'Montserrat',sans-serif; letter-spacing:0.04em; }
 
   .grid { max-width:1400px; margin:0 auto; padding:0 40px 60px; display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:24px; }
   .card { background:var(--surface); border:1px solid var(--border); border-radius:4px; overflow:hidden; transition:transform .25s, box-shadow .25s; }
@@ -90,7 +90,7 @@
   .card-photo { position:relative; height:200px; background:var(--surface2); overflow:hidden; text-decoration:none; display:block; }
   .card-photo img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s; }
   .card:hover .card-photo img { transform:scale(1.05); }
-  a.card-photo::after { content:'📷 View Property'; position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.55); color:white; font-size:11px; font-family:'PT Serif',serif; padding:4px 8px; border-radius:12px; opacity:0; transition:opacity .2s; pointer-events:none; }
+  a.card-photo::after { content:'📷 View Property'; position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.55); color:white; font-size:11px; font-family:'Montserrat',sans-serif; padding:4px 8px; border-radius:12px; opacity:0; transition:opacity .2s; pointer-events:none; }
   a.card-photo:hover::after { opacity:1; }
   .card-photo .photo-fallback {
     width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center;
@@ -109,21 +109,21 @@
   .card-photo.coliving-card .photo-fallback { background:linear-gradient(135deg,#4a3020,#8a6040,#2e1e10); }
   .card-photo.pending-card .photo-fallback { background:linear-gradient(135deg,#303636,#4a5454,#1e2424); }
 .photo-links { position:absolute; bottom:8px; right:8px; display:flex; gap:5px; }
-  .photo-link { padding:4px 10px; border-radius:4px; font-size:11px; font-weight:600; text-decoration:none; cursor:pointer; transition:opacity .2s; backdrop-filter:blur(6px); font-family:'PT Serif', serif; }
+  .photo-link { padding:4px 10px; border-radius:4px; font-size:11px; font-weight:600; text-decoration:none; cursor:pointer; transition:opacity .2s; backdrop-filter:blur(6px); font-family:'Montserrat',sans-serif; }
   .photo-link:hover { opacity:.85; }
   .photo-link.zillow { background:rgba(0,86,214,.85); color:white; }
   .photo-link.redfin { background:rgba(196,40,0,.85); color:white; }
   .photo-link.realtor { background:rgba(180,0,0,.85); color:white; }
-  .strategy-badge-photo { position:absolute; top:10px; left:10px; padding:4px 12px; border-radius:3px; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.8px; font-family:'PT Serif', serif; backdrop-filter:blur(6px); }
-  .strategy-badge-photo.flip { background:rgba(212,150,125,.9); color:white; }
+  .strategy-badge-photo { position:absolute; top:10px; left:10px; padding:4px 12px; border-radius:3px; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.8px; font-family:'Montserrat',sans-serif; backdrop-filter:blur(6px); }
+  .strategy-badge-photo.flip { background:rgba(184,154,94,.9); color:white; }
   .strategy-badge-photo.rental { background:rgba(74,140,111,.9); color:white; }
-  .strategy-badge-photo.pending { background:rgba(48,54,54,.8); color:rgba(212,150,125,1); }
+  .strategy-badge-photo.pending { background:rgba(48,54,54,.8); color:rgba(184,154,94,1); }
 
   .card-body { padding:18px 20px; }
-  .card-address { font-family:'PT Serif', serif; font-size:15px; font-weight:400; margin-bottom:1px; color:var(--charcoal); }
+  .card-address { font-family:'Montserrat',sans-serif; font-size:15px; font-weight:400; margin-bottom:1px; color:var(--charcoal); }
   .card-city { font-size:14px; color:var(--charcoal); margin-bottom:14px; letter-spacing:0.01em; }
   .price-row { display:flex; align-items:baseline; gap:8px; margin-bottom:14px; }
-  .asking-price { font-family:'Marcellus', serif; font-size:26px; font-weight:400; color:var(--charcoal); }
+  .asking-price { font-family:'Montserrat',sans-serif; font-size:26px; font-weight:400; color:var(--charcoal); }
   .price-label { font-size:12px; color:var(--muted); }
 
   .metrics { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:14px; }
@@ -138,14 +138,14 @@
   .card-footer { padding:12px 20px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:8px; background:var(--surface2); flex-wrap:wrap; }
   .date-badge { font-size:11px; color:var(--muted); letter-spacing:0.04em; }
   .footer-btns { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
-  .interest-btn { background:var(--salmon); color:white; border:none; padding:8px 18px; border-radius:30px; font-size:12px; font-family:'PT Serif', serif; letter-spacing:0.04em; cursor:pointer; transition:background .2s; text-decoration:none; display:inline-block; }
+  .interest-btn { background:var(--salmon); color:white; border:none; padding:8px 18px; border-radius:30px; font-size:12px; font-family:'Montserrat',sans-serif; letter-spacing:0.04em; cursor:pointer; transition:background .2s; text-decoration:none; display:inline-block; }
   .interest-btn:hover { background:var(--salmon-light); }
   .interest-btn.secondary-btn { background:white; color:var(--charcoal); border:1px solid var(--border); }
   .interest-btn.secondary-btn:hover { background:white; border-color:var(--salmon); color:var(--salmon); }
-  .photos-btn { background:white; color:var(--charcoal); border:1px solid var(--border); padding:8px 14px; border-radius:30px; font-size:12px; font-family:'PT Serif', serif; letter-spacing:0.04em; cursor:pointer; text-decoration:none; transition:border-color .2s; display:inline-block; }
+  .photos-btn { background:white; color:var(--charcoal); border:1px solid var(--border); padding:8px 14px; border-radius:30px; font-size:12px; font-family:'Montserrat',sans-serif; letter-spacing:0.04em; cursor:pointer; text-decoration:none; transition:border-color .2s; display:inline-block; }
   .photos-btn:hover { border-color:var(--salmon); color:var(--salmon); }
 
-  .share-btn { background:white; color:var(--charcoal); border:1px solid var(--border); padding:8px 14px; border-radius:30px; font-size:12px; font-family:'PT Serif', serif; letter-spacing:0.04em; cursor:pointer; transition:border-color .2s,color .2s; display:inline-flex; align-items:center; gap:5px; }
+  .share-btn { background:white; color:var(--charcoal); border:1px solid var(--border); padding:8px 14px; border-radius:30px; font-size:12px; font-family:'Montserrat',sans-serif; letter-spacing:0.04em; cursor:pointer; transition:border-color .2s,color .2s; display:inline-flex; align-items:center; gap:5px; }
   .share-btn:hover { border-color:var(--salmon); color:var(--salmon); }
   .share-modal .share-addr { font-size:13px; color:var(--muted); margin-bottom:14px; }
   .share-modal .share-link { display:block; word-break:break-all; font-size:13px; color:var(--charcoal); background:var(--surface2); border:1px solid var(--border); border-radius:4px; padding:10px 12px; margin-bottom:14px; text-decoration:underline; }
@@ -155,43 +155,43 @@
 
   .no-results { grid-column:1/-1; text-align:center; padding:80px 20px; color:var(--muted); }
   .no-results .icon { font-size:48px; margin-bottom:16px; }
-  .no-results h3 { font-family:'Marcellus', serif; font-size:22px; font-weight:400; margin-bottom:8px; color:var(--charcoal); }
+  .no-results h3 { font-family:'Montserrat',sans-serif; font-size:22px; font-weight:400; margin-bottom:8px; color:var(--charcoal); }
 
   .modal-overlay { display:none; position:fixed; inset:0; background:rgba(48,54,54,.6); backdrop-filter:blur(4px); z-index:1000; align-items:center; justify-content:center; padding:20px; }
   .modal-overlay.open { display:flex; }
   .modal { background:white; border:1px solid var(--border); border-radius:4px; padding:34px; width:100%; max-width:480px; position:relative; animation:slideUp .25s ease; max-height:90vh; overflow-y:auto; }
   @keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-  .modal h2 { font-family:'Marcellus', serif; font-size:22px; font-weight:400; margin-bottom:4px; color:var(--charcoal); }
+  .modal h2 { font-family:'Montserrat',sans-serif; font-size:22px; font-weight:400; margin-bottom:4px; color:var(--charcoal); }
   .modal-address { font-size:13px; color:var(--muted); margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid var(--border); }
   .modal-close { position:absolute; top:18px; right:18px; background:var(--surface2); border:1px solid var(--border); color:var(--muted); width:30px; height:30px; border-radius:50%; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center; }
   .modal-links { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
-  .modal-link { display:flex; align-items:center; gap:6px; padding:8px 14px; border-radius:4px; text-decoration:none; font-size:13px; font-family:'PT Serif', serif; transition:opacity .2s; }
+  .modal-link { display:flex; align-items:center; gap:6px; padding:8px 14px; border-radius:4px; text-decoration:none; font-size:13px; font-family:'Montserrat',sans-serif; transition:opacity .2s; }
   .modal-link:hover { opacity:.85; }
   .modal-link.zillow { background:#0056d6; color:white; }
   .modal-link.redfin { background:#c42800; color:white; }
   .modal-link.realtor { background:#d00000; color:white; }
   .form-group { margin-bottom:14px; }
   .form-group label { display:block; font-size:11px; font-weight:400; color:var(--muted); margin-bottom:5px; text-transform:uppercase; letter-spacing:0.08em; }
-  .form-group input, .form-group textarea { width:100%; background:white; border:1px solid var(--border); color:var(--text); padding:10px 12px; border-radius:4px; font-size:14px; outline:none; font-family:'PT Serif', serif; }
+  .form-group input, .form-group textarea { width:100%; background:white; border:1px solid var(--border); color:var(--text); padding:10px 12px; border-radius:4px; font-size:14px; outline:none; font-family:'Montserrat',sans-serif; }
   .form-group input:focus, .form-group textarea:focus { border-color:var(--salmon); }
   .form-group textarea { min-height:70px; resize:vertical; }
   .form-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-  .submit-btn { width:100%; background:var(--salmon); color:white; border:none; padding:13px; border-radius:30px; font-size:14px; font-family:'PT Serif', serif; letter-spacing:0.06em; cursor:pointer; margin-top:6px; transition:background .2s; }
+  .submit-btn { width:100%; background:var(--salmon); color:white; border:none; padding:13px; border-radius:30px; font-size:14px; font-family:'Montserrat',sans-serif; letter-spacing:0.06em; cursor:pointer; margin-top:6px; transition:background .2s; }
   .submit-btn:hover { background:var(--salmon-light); }
   .success-msg { text-align:center; padding:16px 0; }
   .success-msg .checkmark { font-size:44px; margin-bottom:10px; }
-  .success-msg h3 { font-family:'Marcellus', serif; font-size:20px; font-weight:400; margin-bottom:6px; color:var(--charcoal); }
+  .success-msg h3 { font-family:'Montserrat',sans-serif; font-size:20px; font-weight:400; margin-bottom:6px; color:var(--charcoal); }
   .success-msg p { color:var(--muted); font-size:13px; }
 
   .map-section { background: var(--surface); border-bottom: 1px solid var(--border); }
   .map-header { max-width:1400px; margin:0 auto; padding:16px 40px 10px; display:flex; align-items:center; justify-content:space-between; }
-  .map-title { font-family:'Marcellus', serif; font-size:14px; color:var(--charcoal); letter-spacing:0.08em; text-transform:uppercase; }
+  .map-title { font-family:'Montserrat',sans-serif; font-size:14px; color:var(--charcoal); letter-spacing:0.08em; text-transform:uppercase; }
   .map-stats { font-size:12px; color:var(--muted); font-style:italic; }
   #dealMap { height:360px; width:100%; }
   .map-loading { height:360px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:13px; font-style:italic; background:var(--surface2); }
-  .leaflet-popup-content-wrapper { font-family:'PT Serif',Georgia,serif; font-size:13px; border-radius:4px; box-shadow:0 4px 16px rgba(0,0,0,0.12); }
+  .leaflet-popup-content-wrapper { font-family:'Montserrat',Helvetica,sans-serif; font-size:13px; border-radius:4px; box-shadow:0 4px 16px rgba(0,0,0,0.12); }
   .leaflet-popup-content strong { font-size:13px; color:var(--charcoal); }
-  .leaflet-tooltip { font-family:'PT Serif',Georgia,serif; font-size:13px; border-radius:4px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,0.12); padding:8px 10px; }
+  .leaflet-tooltip { font-family:'Montserrat',Helvetica,sans-serif; font-size:13px; border-radius:4px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,0.12); padding:8px 10px; }
   .leaflet-tooltip strong { color:var(--charcoal); }
   .map-pin-price { color:var(--salmon); font-size:12px; margin-top:2px; }
   .map-pin-type { color:var(--muted); font-size:11px; margin-top:1px; }
@@ -208,7 +208,7 @@
 
   /* Single-property detail view (for personalized per-deal links) */
   .detail-wrap { max-width:900px; margin:0 auto; padding:24px 40px 60px; }
-  .back-link { display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--muted); text-decoration:none; margin-bottom:18px; cursor:pointer; font-family:'PT Serif', serif; }
+  .back-link { display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--muted); text-decoration:none; margin-bottom:18px; cursor:pointer; font-family:'Montserrat',sans-serif; }
   .back-link:hover { color:var(--salmon); }
   .detail-card { background:var(--surface); border:1px solid var(--border); border-radius:4px; overflow:hidden; }
 
@@ -220,15 +220,15 @@
   .detail-thumbs img { width:84px; height:64px; object-fit:cover; border-radius:3px; cursor:pointer; opacity:.65; transition:opacity .15s, outline-color .15s; flex:0 0 auto; outline:2px solid transparent; outline-offset:-2px; }
   .detail-thumbs img:hover { opacity:.9; }
   .detail-thumbs img.active { opacity:1; outline-color:var(--salmon); }
-  .detail-photo-count { position:absolute; bottom:10px; right:10px; background:rgba(0,0,0,.6); color:white; font-size:12px; font-family:'PT Serif', serif; padding:4px 10px; border-radius:12px; }
+  .detail-photo-count { position:absolute; bottom:10px; right:10px; background:rgba(0,0,0,.6); color:white; font-size:12px; font-family:'Montserrat',sans-serif; padding:4px 10px; border-radius:12px; }
 
   .detail-body { padding:28px 32px; }
-  .detail-address { font-family:'Marcellus', serif; font-size:26px; font-weight:400; color:var(--charcoal); margin-bottom:4px; }
+  .detail-address { font-family:'Montserrat',sans-serif; font-size:26px; font-weight:400; color:var(--charcoal); margin-bottom:4px; }
   .detail-city { font-size:15px; color:var(--muted); margin-bottom:20px; }
 
   /* Prominent stats bar — asking price, beds, baths, sqft */
   .detail-stats-bar { display:flex; flex-wrap:wrap; gap:24px 40px; align-items:baseline; margin-bottom:22px; padding-bottom:22px; border-bottom:1px solid var(--border); }
-  .detail-stats-bar .stat-price .m-value { font-family:'Marcellus', serif; font-size:36px; font-weight:400; color:var(--charcoal); }
+  .detail-stats-bar .stat-price .m-value { font-family:'Montserrat',sans-serif; font-size:36px; font-weight:400; color:var(--charcoal); }
   .detail-stats-bar .m-label { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.7px; margin-bottom:4px; }
   .detail-stats-bar .m-value { font-size:20px; font-weight:700; color:var(--charcoal); }
 
@@ -244,7 +244,7 @@
   .detail-not-found .icon { font-size:48px; margin-bottom:16px; }
 
   /* Per-property location map */
-  .detail-section-title { font-family:'Marcellus', serif; font-size:15px; color:var(--charcoal); letter-spacing:0.08em; text-transform:uppercase; margin:32px 0 12px; }
+  .detail-section-title { font-family:'Montserrat',sans-serif; font-size:15px; color:var(--charcoal); letter-spacing:0.08em; text-transform:uppercase; margin:32px 0 12px; }
   .detail-map-wrap { border-radius:4px; overflow:hidden; border:1px solid var(--border); }
   #detailMap { height:260px; background:var(--surface2); }
   .detail-map-caption { font-size:12px; color:var(--muted); margin-top:8px; }
@@ -252,7 +252,7 @@
   /* Listed-by card */
   .listed-by-card { margin-top:24px; padding-top:20px; border-top:1px solid var(--border); }
   .listed-by-card .lb-label { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.7px; margin-bottom:6px; }
-  .listed-by-card .lb-name { font-family:'Marcellus', serif; font-size:18px; color:var(--charcoal); }
+  .listed-by-card .lb-name { font-family:'Montserrat',sans-serif; font-size:18px; color:var(--charcoal); }
   .listed-by-card .lb-sub { font-size:13px; color:var(--muted); margin-top:2px; }
 
   @media(max-width:768px){
@@ -263,6 +263,7 @@
     .detail-stats-bar .stat-price .m-value{font-size:28px;}
   }
 </style>
+<link rel="stylesheet" href="theme.css">
 </head>
 <body>
 
@@ -725,7 +726,7 @@ async function initDetailMap(d, center) {
   L.marker(center, {
     icon: L.divIcon({
       className: '',
-      html: `<div style="width:24px;height:24px;border-radius:50% 50% 50% 0;background:#D4967D;border:2.5px solid white;box-shadow:0 2px 6px rgba(0,0,0,.4);transform:rotate(-45deg)"></div>`,
+      html: `<div style="width:24px;height:24px;border-radius:50% 50% 50% 0;background:#b89a5e;border:2.5px solid white;box-shadow:0 2px 6px rgba(0,0,0,.4);transform:rotate(-45deg)"></div>`,
       iconSize: [24, 24], iconAnchor: [12, 24], popupAnchor: [0, -26]
     })
   }).addTo(_detailMap).bindPopup(`<strong>${d.address}</strong>`);
@@ -911,7 +912,7 @@ function updateMapMarkers(deals) {
     return;
   }
 
-  const salmon = '#D4967D';
+  const salmon = '#b89a5e';
 
   function makePin() {
     return L.divIcon({

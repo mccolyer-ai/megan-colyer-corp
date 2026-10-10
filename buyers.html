@@ -25,7 +25,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MC Buyer Portal">
-<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f5f2ee;
@@ -33,31 +33,31 @@
     --surface2: #f0ece6;
     --border: #e0d9d0;
     --charcoal: #303636;
-    --salmon: #D4967D;
+    --salmon: #b89a5e;
     --salmon-light: #e8b89f;
     --text: #303636;
     --muted: #7a8080;
     --green: #4a8c6f;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'PT Serif', Georgia, serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  body { font-family: 'Montserrat',Helvetica,sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
   header { background: var(--charcoal); padding: 32px 40px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
-  .logo-text h1 { font-family:'Marcellus', serif; font-size:22px; font-weight:400; color:white; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:6px; }
+  .logo-text h1 { font-family:'Montserrat',sans-serif; font-size:22px; font-weight:400; color:white; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:6px; }
   .header-logo { height:127.5px; width:auto; display:block; margin:0 auto 6px; }
-  .logo-text .phone { font-family:'Marcellus', serif; font-size:20px; color:var(--salmon); letter-spacing:0.06em; margin-bottom:6px; }
+  .logo-text .phone { font-family:'Montserrat',sans-serif; font-size:20px; color:var(--salmon); letter-spacing:0.06em; margin-bottom:6px; }
   .logo-text p { font-size:11px; color:rgba(255,255,255,0.45); letter-spacing:0.16em; text-transform:uppercase; }
   .back-link { display:none; }
 
   .page { max-width:780px; margin:0 auto; padding:48px 40px 80px; }
 
   .form-hero { margin-bottom:40px; }
-  .form-hero h2 { font-family:'Marcellus', serif; font-size:30px; font-weight:400; letter-spacing:0.04em; margin-bottom:10px; }
+  .form-hero h2 { font-family:'Montserrat',sans-serif; font-size:30px; font-weight:400; letter-spacing:0.04em; margin-bottom:10px; }
   .form-hero p { color:var(--muted); font-size:15px; line-height:1.6; }
   .company-tag { font-size:12px; color:var(--muted); margin-top:6px; font-style:italic; }
 
   .form-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:36px; margin-bottom:24px; }
-  .section-title { font-family:'Marcellus', serif; font-size:14px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+  .section-title { font-family:'Montserrat',sans-serif; font-size:14px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--border); }
 
   .field-row { display:grid; gap:16px; margin-bottom:20px; }
   .field-row.two { grid-template-columns:1fr 1fr; }
@@ -67,7 +67,7 @@
   label .req { color:var(--salmon); margin-left:2px; }
   input[type=text], input[type=email], input[type=tel], input[type=number] {
     border:1px solid var(--border); border-radius:4px; padding:10px 14px;
-    font-size:14px; font-family:'PT Serif', serif; color:var(--text); background:white;
+    font-size:14px; font-family:'Montserrat',sans-serif; color:var(--text); background:white;
     outline:none; transition:border-color .15s;
   }
   input:focus { border-color:var(--salmon); }
@@ -84,7 +84,7 @@
   .price-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
   .price-field { display:flex; align-items:center; gap:8px; border:1px solid var(--border); border-radius:4px; padding:10px 14px; background:white; }
   .price-field span { color:var(--muted); font-size:14px; }
-  .price-field input { border:none; outline:none; font-size:14px; font-family:'PT Serif',serif; color:var(--text); width:100%; background:transparent; }
+  .price-field input { border:none; outline:none; font-size:14px; font-family:'Montserrat',sans-serif; color:var(--text); width:100%; background:transparent; }
 
   .toggle-row { display:flex; align-items:center; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--border); }
   .toggle-row:last-child { border-bottom:none; }
@@ -98,7 +98,7 @@
 
   .zip-input-row { display:flex; gap:10px; margin-top:10px; }
   .zip-input-row input { flex:1; }
-  .zip-add-btn { background:var(--charcoal); color:white; border:none; padding:10px 18px; border-radius:4px; font-family:'PT Serif',serif; font-size:13px; cursor:pointer; white-space:nowrap; }
+  .zip-add-btn { background:var(--charcoal); color:white; border:none; padding:10px 18px; border-radius:4px; font-family:'Montserrat',sans-serif; font-size:13px; cursor:pointer; white-space:nowrap; }
   .zip-add-btn:hover { background:#404848; }
   .zip-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
   .zip-tag { background:var(--surface2); border:1px solid var(--border); border-radius:20px; padding:4px 12px; font-size:13px; display:flex; align-items:center; gap:6px; }
@@ -111,13 +111,13 @@
   .consent-check span { font-size:13px; line-height:1.5; }
   .legal-text { font-size:11px; color:var(--muted); line-height:1.6; }
 
-  .submit-btn { width:100%; background:var(--salmon); color:white; border:none; padding:16px; border-radius:6px; font-size:16px; font-family:'Marcellus',serif; letter-spacing:0.08em; cursor:pointer; transition:background .2s; }
+  .submit-btn { width:100%; background:var(--salmon); color:white; border:none; padding:16px; border-radius:6px; font-size:16px; font-family:'Montserrat',sans-serif; letter-spacing:0.08em; cursor:pointer; transition:background .2s; }
   .submit-btn:hover { background:var(--salmon-light); }
   .submit-btn:disabled { background:#c8b8b0; cursor:not-allowed; }
 
   .success-msg { display:none; text-align:center; padding:48px 32px; }
   .success-msg .checkmark { font-size:48px; margin-bottom:16px; }
-  .success-msg h3 { font-family:'Marcellus',serif; font-size:24px; margin-bottom:10px; }
+  .success-msg h3 { font-family:'Montserrat',sans-serif; font-size:24px; margin-bottom:10px; }
   .success-msg p { color:var(--muted); font-size:14px; line-height:1.6; }
   .success-msg a { color:var(--salmon); }
 
@@ -130,6 +130,7 @@
     .price-row { grid-template-columns:1fr; }
   }
 </style>
+<link rel="stylesheet" href="theme.css">
 </head>
 <body>
 

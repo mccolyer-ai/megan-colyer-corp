@@ -137,7 +137,7 @@
 
   .card-footer { padding:12px 20px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:8px; background:var(--surface2); flex-wrap:wrap; }
   .date-badge { font-size:11px; color:var(--muted); letter-spacing:0.04em; }
-  .footer-btns { display:flex; gap:8px; align-items:center; }
+  .footer-btns { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
   .interest-btn { background:var(--salmon); color:white; border:none; padding:8px 18px; border-radius:30px; font-size:12px; font-family:'PT Serif', serif; letter-spacing:0.04em; cursor:pointer; transition:background .2s; text-decoration:none; display:inline-block; }
   .interest-btn:hover { background:var(--salmon-light); }
   .interest-btn.secondary-btn { background:white; color:var(--charcoal); border:1px solid var(--border); }
@@ -527,7 +527,8 @@ function render() {
       <div class="card-footer">
         <span class="date-badge">Added ${d.date ? new Date(d.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : ''}</span>
         <div class="footer-btns">
-          <button class="interest-btn" onclick="event.stopPropagation();openModal(${i})">Schedule a Walk Through →</button>
+          ${d.driveUrl ? `<a class="photos-btn" href="${d.driveUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()">📷 View More Photos</a>` : ''}
+          <button class="interest-btn" onclick="event.stopPropagation();openModal(${i})">I'm Interested →</button>
           <button class="share-btn" onclick="event.stopPropagation();openShareById('${d.leadId}')">🔗 Share</button>
         </div>
       </div>

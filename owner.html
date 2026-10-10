@@ -274,6 +274,7 @@ function initNoteHeights() {
 }
 
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxATueK1LD5LFGL_KNCBXF6ijTeFyE5qcYsSFdcPucbsNQSD8SeDnBGT3O8ZBafqy2F7Q/exec';
+const DEALS_GET_URL = 'https://script.google.com/macros/s/AKfycbwg0FwrXkeFpCBEEH9EJM_83hy39iomeLwRBJvQtHx_epQ62UmIpsELUOodzzShk0xAEQ/exec'; // read-only deal/photo lookups
 let DEALS = [];
 
 // ── SHARE ────────────────────────────────────────────────────────────────────
@@ -486,7 +487,7 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') document.getEle
 (function initPortal() {
   document.getElementById('dealGrid').innerHTML = '<div class="no-results"><div class="icon">⏳</div><h3>Loading deals…</h3><p>Fetching the latest properties.</p></div>';
   document.getElementById('countBadge').textContent = 'Loading…';
-  fetch(GAS_URL + '?action=getDeals')
+  fetch(DEALS_GET_URL + '?action=getDeals')
     .then(r => r.json())
     .then(data => {
       DEALS = Array.isArray(data) ? data : (data.deals || []);

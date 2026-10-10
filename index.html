@@ -357,6 +357,7 @@
 
 <script>
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxATueK1LD5LFGL_KNCBXF6ijTeFyE5qcYsSFdcPucbsNQSD8SeDnBGT3O8ZBafqy2F7Q/exec';
+const DEALS_GET_URL = 'https://script.google.com/macros/s/AKfycbwg0FwrXkeFpCBEEH9EJM_83hy39iomeLwRBJvQtHx_epQ62UmIpsELUOodzzShk0xAEQ/exec'; // read-only deal/photo lookups
 let DEALS = [];
 
 // ── SHARE ────────────────────────────────────────────────────────────────────
@@ -667,7 +668,7 @@ async function loadDetailGallery(d) {
   const m = d.driveUrl.match(/folders\/([^?&/]+)/);
   if (!m) return;
   try {
-    const res = await fetch(GAS_URL + '?action=getFolderPhotos&folderId=' + m[1]);
+    const res = await fetch(DEALS_GET_URL + '?action=getFolderPhotos&folderId=' + m[1]);
     const info = await res.json();
     if (!info.success || !info.photos || info.photos.length < 2) return;
     // Only show if we're still looking at this same property (user may have navigated away)
@@ -969,7 +970,7 @@ function updateMapMarkers(deals) {
 (function initPortal() {
   document.getElementById('dealGrid').innerHTML = '<div class="no-results"><div class="icon">⏳</div><h3>Loading deals…</h3><p>Fetching the latest properties.</p></div>';
   document.getElementById('countBadge').textContent = 'Loading…';
-  fetch(GAS_URL + '?action=getDeals')
+  fetch(DEALS_GET_URL + '?action=getDeals')
     .then(r => r.json())
     .then(async data => {
       DEALS = Array.isArray(data) ? data : (data.deals || []);
@@ -994,7 +995,7 @@ function updateMapMarkers(deals) {
           const m = d.driveUrl.match(/folders\/([^?&/]+)/);
           if (!m) return;
           try {
-            const res = await fetch(GAS_URL + '?action=getFolderPhotos&folderId=' + m[1]);
+            const res = await fetch(DEALS_GET_URL + '?action=getFolderPhotos&folderId=' + m[1]);
             const info = await res.json();
             if (info.success && info.photos && info.photos.length) {
               d.photo = 'https://lh3.googleusercontent.com/d/' + info.photos[0].id;

@@ -3,7 +3,7 @@
 :root{--charcoal:#212121;--text:#212121;--salmon:#b89a5e;--salmon-light:#cdb27d;--bg:#f4f2ee;--surface2:#efece6;--border:#e4e1da;--muted:#6f6f6f;}
 body{font-family:'Montserrat',Helvetica,Arial,sans-serif;font-weight:400;}
 header{background:#fff !important;border-bottom:1px solid var(--border);}
-.header-logo{height:127px !important;}
+.header-logo{height:165px !important;}
 .logo-text h1,.header-center h1{color:var(--charcoal) !important;}
 .header-phone,.logo-text .phone{font-size:13px !important;font-weight:500;color:var(--charcoal) !important;letter-spacing:.28em !important;text-transform:uppercase;}
 .header-tagline,.logo-text p{font-size:10px !important;font-weight:400;color:var(--charcoal) !important;opacity:.7;letter-spacing:.32em !important;text-transform:uppercase;}
@@ -25,3 +25,4 @@ header{background:#fff !important;border-bottom:1px solid var(--border);}
 .form-hero h2{font-size:24px !important;letter-spacing:.3em !important;}
 .form-hero h2::after{content:"";display:block;width:48px;height:1px;background:var(--salmon);margin:14px auto 0;}
 .detail-notes{border-left-color:var(--salmon) !important;}
+@media (max-width:640px){.header-logo{height:120px !important;}}

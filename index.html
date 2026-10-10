@@ -444,7 +444,7 @@ function getFiltered() {
   const sort = document.getElementById('sortSelect').value;
   const zip = document.getElementById('zipSelect').value;
   let list = DEALS.filter(d => {
-    if (d.status === 'archived') return false;
+    if (d.status === 'archived' || d.status === 'needs_approval') return false;
     if (q) {
       // Zip may live in its own field, or only be embedded in the address
       // string — check both so searching a zip code always works.
@@ -904,7 +904,7 @@ function updateMapMarkers(deals) {
   if (!_dealMap || !_dealMarkersLayer) return;
   _dealMarkersLayer.clearLayers();
 
-  const activeDeals = deals.filter(d => d.status !== 'archived');
+  const activeDeals = deals.filter(d => d.status !== 'archived' && d.status !== 'needs_approval');
   const mapStats = document.getElementById('mapStats');
 
   if (!activeDeals.length) {

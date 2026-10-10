@@ -344,7 +344,7 @@ function getFiltered() {
   const sort = document.getElementById('sortSelect').value;
   const zip = document.getElementById('zipSelect').value;
   let list = DEALS.filter(d => {
-    if (d.status === 'archived') return false;
+    if (d.status === 'archived' || d.status === 'needs_approval') return false;
     if (q && !d.address.toLowerCase().includes(q) && !(d.city||'').toLowerCase().includes(q) && !(d.state||'').toLowerCase().includes(q)) return false;
     if (activeFilter === 'sfh') { if (!/single.?family/i.test(d.propertyType||'')) return false; }
     if (activeFilter === 'mfh') { if (!/multi.?family/i.test(d.propertyType||'')) return false; }

@@ -44,6 +44,16 @@
   .page-title { font-family:'Marcellus', serif; font-size:24px; font-weight:400; margin-bottom:6px; letter-spacing:0.04em; }
   .page-sub { color: var(--muted); font-size:14px; margin-bottom:36px; }
 
+  .approval-section { background:#fff8ec; border:1px solid #e8d3a4; padding:22px 24px; margin-bottom:32px; }
+  .approval-card { display:flex; gap:16px; align-items:flex-start; background:#fff; border:1px solid var(--border); padding:14px; margin-bottom:12px; flex-wrap:wrap; }
+  .approval-card img { width:140px; height:100px; object-fit:cover; background:var(--surface2); }
+  .approval-info { flex:1; min-width:220px; font-size:13px; line-height:1.55; }
+  .approval-addr { font-size:16px; font-weight:700; margin-bottom:2px; }
+  .approval-flag { color:#8a5a00; font-weight:700; }
+  .approval-actions { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:10px; }
+  .approve-btn { background:#2f7d57; color:#fff; border:none; padding:9px 18px; cursor:pointer; font-size:13px; }
+  .reject-btn { background:#fff; color:#b55a42; border:1px solid #b55a42; padding:9px 18px; cursor:pointer; font-size:13px; }
+  .approval-actions a { font-size:13px; }
   .section-label { font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color: var(--muted); margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid var(--border); }
 
   .deal-card { background: var(--surface); border:1px solid var(--border); border-radius:6px; margin-bottom:24px; overflow:hidden; }
@@ -202,6 +212,11 @@
   <!-- ═══════════════════════════════════════════════════════ -->
   <!-- EDIT DEALS SECTION                                      -->
   <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="approval-section" id="approvalSection" style="display:none">
+    <div class="section-label">Properties Awaiting Approval <span id="approvalCount"></span></div>
+    <div id="approvalQueue"></div>
+  </div>
+
   <div class="edit-deals-section">
     <div class="section-label">Edit Existing Deals</div>
     <div class="deal-search-row">
@@ -447,9 +462,57 @@ function matchesDealSearch(d, q) {
   return haystack.includes(q);
 }
 
+function renderApprovalQueue(all) {
+  const pending = all.filter(d => d.status === 'needs_approval');
+  const sec = document.getElementById('approvalSection');
+  if (!sec) return;
+  sec.style.display = pending.length ? 'block' : 'none';
+  document.getElementById('approvalCount').textContent = pending.length ? '(' + pending.length + ')' : '';
+  document.getElementById('approvalQueue').innerHTML = pending.map(d => {
+    const price = d.askingPrice ? '$' + Number(d.askingPrice).toLocaleString() : 'price not listed';
+    const specs = [d.beds ? d.beds + ' bd' : '', d.baths ? d.baths + ' ba' : '', d.sqft ? Number(d.sqft).toLocaleString() + ' sqft' : ''].filter(Boolean).join(' · ');
+    const adminNotes = d['Admin Notes'] || '';
+    const flagMatch = adminNotes.match(/NEEDS REVIEW:[^\n]*/);
+    const img = d.photo ? `<img src="${escHtml(d.photo)}" alt="" onerror="this.style.visibility='hidden'">` : '<img alt="" style="visibility:hidden">';
+    return `<div class="approval-card" id="appr-${d.leadId}">
+      ${img}
+      <div class="approval-info">
+        <div class="approval-addr">${escHtml(d.address || '')}</div>
+        <div>${escHtml(price)}${specs ? ' · ' + escHtml(specs) : ''} · ${escHtml(d.source || 'unknown source')}</div>
+        <div style="color:var(--muted)">${escHtml((d.notes || '').slice(0, 220))}</div>
+        ${flagMatch ? `<div class="approval-flag">⚠ ${escHtml(flagMatch[0])}</div>` : ''}
+        <div class="approval-actions">
+          <button class="approve-btn" onclick="setApproval('${d.leadId}','new')">✓ Approve &amp; publish</button>
+          <button class="reject-btn" onclick="setApproval('${d.leadId}','archived')">✕ Reject</button>
+          ${d.driveUrl ? `<a href="${escHtml(d.driveUrl)}" target="_blank" rel="noopener">📷 Photos folder</a>` : ''}
+          <span class="edit-status" id="appr-msg-${d.leadId}"></span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function setApproval(leadId, status) {
+  const msg = document.getElementById('appr-msg-' + leadId);
+  if (status === 'archived' && !confirm('Reject this property? It will not be published.')) return;
+  if (msg) msg.textContent = 'Saving…';
+  try {
+    const res = await fetch(GAS_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ action: 'updateDeal', deal: { leadId, status } }) });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error || 'Unknown error');
+    const d = ALL_DEALS_DATA.find(x => x.leadId === leadId);
+    if (d) d.status = status;
+    renderEditDeals(ALL_DEALS_DATA);
+  } catch (err) {
+    if (msg) { msg.textContent = '⚠️ ' + err.message; msg.className = 'edit-status error'; }
+  }
+}
+
 function renderEditDeals(deals) {
-  // Filter out archived deals and sort newest first
-  deals = [...deals].filter(d => d.status !== 'archived').sort((a,b) => new Date(b.date||0) - new Date(a.date||0));
+  renderApprovalQueue(deals);
+  // Filter out archived and pending-approval deals and sort newest first
+  deals = [...deals].filter(d => d.status !== 'archived' && d.status !== 'needs_approval').sort((a,b) => new Date(b.date||0) - new Date(a.date||0));
 
   const q = dealSearchQuery.toLowerCase();
   const totalActive = deals.length;

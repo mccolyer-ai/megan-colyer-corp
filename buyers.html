@@ -25,7 +25,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MC Buyer Portal">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #f5f2ee;
@@ -33,31 +33,31 @@
     --surface2: #f0ece6;
     --border: #e0d9d0;
     --charcoal: #303636;
-    --salmon: #b89a5e;
+    --salmon: #D4967D;
     --salmon-light: #e8b89f;
     --text: #303636;
     --muted: #7a8080;
     --green: #4a8c6f;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Montserrat',Helvetica,sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  body { font-family: 'PT Serif', Georgia, serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
   header { background: var(--charcoal); padding: 32px 40px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
-  .logo-text h1 { font-family:'Montserrat',sans-serif; font-size:22px; font-weight:400; color:white; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:6px; }
+  .logo-text h1 { font-family:'Marcellus', serif; font-size:22px; font-weight:400; color:white; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:6px; }
   .header-logo { height:127.5px; width:auto; display:block; margin:0 auto 6px; }
-  .logo-text .phone { font-family:'Montserrat',sans-serif; font-size:20px; color:var(--salmon); letter-spacing:0.06em; margin-bottom:6px; }
+  .logo-text .phone { font-family:'Marcellus', serif; font-size:20px; color:var(--salmon); letter-spacing:0.06em; margin-bottom:6px; }
   .logo-text p { font-size:11px; color:rgba(255,255,255,0.45); letter-spacing:0.16em; text-transform:uppercase; }
   .back-link { display:none; }
 
   .page { max-width:780px; margin:0 auto; padding:48px 40px 80px; }
 
   .form-hero { margin-bottom:40px; }
-  .form-hero h2 { font-family:'Montserrat',sans-serif; font-size:30px; font-weight:400; letter-spacing:0.04em; margin-bottom:10px; }
+  .form-hero h2 { font-family:'Marcellus', serif; font-size:30px; font-weight:400; letter-spacing:0.04em; margin-bottom:10px; }
   .form-hero p { color:var(--muted); font-size:15px; line-height:1.6; }
   .company-tag { font-size:12px; color:var(--muted); margin-top:6px; font-style:italic; }
 
   .form-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:36px; margin-bottom:24px; }
-  .section-title { font-family:'Montserrat',sans-serif; font-size:14px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--border); }
+  .section-title { font-family:'Marcellus', serif; font-size:14px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--border); }
 
   .field-row { display:grid; gap:16px; margin-bottom:20px; }
   .field-row.two { grid-template-columns:1fr 1fr; }
@@ -67,7 +67,7 @@
   label .req { color:var(--salmon); margin-left:2px; }
   input[type=text], input[type=email], input[type=tel], input[type=number] {
     border:1px solid var(--border); border-radius:4px; padding:10px 14px;
-    font-size:14px; font-family:'Montserrat',sans-serif; color:var(--text); background:white;
+    font-size:14px; font-family:'PT Serif', serif; color:var(--text); background:white;
     outline:none; transition:border-color .15s;
   }
   input:focus { border-color:var(--salmon); }
@@ -84,7 +84,7 @@
   .price-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
   .price-field { display:flex; align-items:center; gap:8px; border:1px solid var(--border); border-radius:4px; padding:10px 14px; background:white; }
   .price-field span { color:var(--muted); font-size:14px; }
-  .price-field input { border:none; outline:none; font-size:14px; font-family:'Montserrat',sans-serif; color:var(--text); width:100%; background:transparent; }
+  .price-field input { border:none; outline:none; font-size:14px; font-family:'PT Serif',serif; color:var(--text); width:100%; background:transparent; }
 
   .toggle-row { display:flex; align-items:center; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--border); }
   .toggle-row:last-child { border-bottom:none; }
@@ -98,8 +98,14 @@
 
   .zip-input-row { display:flex; gap:10px; margin-top:10px; }
   .zip-input-row input { flex:1; }
-  .zip-add-btn { background:var(--charcoal); color:white; border:none; padding:10px 18px; border-radius:4px; font-family:'Montserrat',sans-serif; font-size:13px; cursor:pointer; white-space:nowrap; }
+  .zip-add-btn { background:var(--charcoal); color:white; border:none; padding:10px 18px; border-radius:4px; font-family:'PT Serif',serif; font-size:13px; cursor:pointer; white-space:nowrap; }
   .zip-add-btn:hover { background:#404848; }
+  .zip-map-btn { margin-top:12px; background:white; color:var(--charcoal); border:1px solid var(--charcoal); padding:10px 18px; border-radius:4px; font-family:'PT Serif',serif; font-size:13px; cursor:pointer; }
+  .zip-map-btn:hover { background:var(--surface2); }
+  #zipMap { height:360px; border:1px solid var(--border); border-radius:4px; margin-top:8px; z-index:0; }
+  .zip-map-help { font-size:12px; color:var(--muted); margin-top:12px; }
+  .zip-msg { font-size:12px; margin-top:10px; color:var(--muted); }
+  .zip-msg.warn { color:var(--salmon); }
   .zip-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
   .zip-tag { background:var(--surface2); border:1px solid var(--border); border-radius:20px; padding:4px 12px; font-size:13px; display:flex; align-items:center; gap:6px; }
   .zip-tag button { background:none; border:none; cursor:pointer; color:var(--muted); font-size:14px; line-height:1; padding:0; }
@@ -111,13 +117,13 @@
   .consent-check span { font-size:13px; line-height:1.5; }
   .legal-text { font-size:11px; color:var(--muted); line-height:1.6; }
 
-  .submit-btn { width:100%; background:var(--salmon); color:white; border:none; padding:16px; border-radius:6px; font-size:16px; font-family:'Montserrat',sans-serif; letter-spacing:0.08em; cursor:pointer; transition:background .2s; }
+  .submit-btn { width:100%; background:var(--salmon); color:white; border:none; padding:16px; border-radius:6px; font-size:16px; font-family:'Marcellus',serif; letter-spacing:0.08em; cursor:pointer; transition:background .2s; }
   .submit-btn:hover { background:var(--salmon-light); }
   .submit-btn:disabled { background:#c8b8b0; cursor:not-allowed; }
 
   .success-msg { display:none; text-align:center; padding:48px 32px; }
   .success-msg .checkmark { font-size:48px; margin-bottom:16px; }
-  .success-msg h3 { font-family:'Montserrat',sans-serif; font-size:24px; margin-bottom:10px; }
+  .success-msg h3 { font-family:'Marcellus',serif; font-size:24px; margin-bottom:10px; }
   .success-msg p { color:var(--muted); font-size:14px; line-height:1.6; }
   .success-msg a { color:var(--salmon); }
 
@@ -130,7 +136,8 @@
     .price-row { grid-template-columns:1fr; }
   }
 </style>
-<link rel="stylesheet" href="theme.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme.css">
 </head>
 <body>
 
@@ -248,10 +255,17 @@
       </div>
 
       <label style="font-size:13px; font-weight:700; display:block; margin-top:24px; margin-bottom:6px;">ZIP Codes</label>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Type or paste ZIP codes, or draw your buying area on the map and we'll fill them in for you.</p>
       <div class="zip-input-row">
-        <input type="text" id="zipInput" placeholder="Enter a 5-digit ZIP code" maxlength="5" pattern="[0-9]{5}">
-        <button class="zip-add-btn" onclick="addZip()">Add</button>
+        <input type="text" id="zipInput" placeholder="Type or paste ZIP codes (e.g. 63101, 63104)" inputmode="numeric" autocomplete="off">
+        <button type="button" class="zip-add-btn" onclick="addZip()">Add</button>
       </div>
+      <button type="button" class="zip-map-btn" id="zipMapToggle" onclick="toggleZipMap()">Draw my area on the map</button>
+      <div id="zipMapWrap" style="display:none">
+        <p class="zip-map-help">Use the tools on the left of the map to draw a shape (outline, box or circle) around where you buy. Every ZIP code inside it is added below. Use the trash tool to remove a shape.</p>
+        <div id="zipMap"></div>
+      </div>
+      <p id="zipMsg" class="zip-msg" style="display:none"></p>
       <div class="zip-tags" id="zipTags"></div>
     </div>
 
@@ -368,28 +382,194 @@ const GAS_URL = 'https://script.google.com/macros/s/AKfycbxATueK1LD5LFGL_KNCBXF6
 
 const zips = [];
 
+// `zips` is what gets submitted. It is rebuilt from typed ZIPs (manualZips) plus
+// the ZIPs inside each shape drawn on the map (shapeZips: layerId -> Set).
+const manualZips = new Set();
+const shapeZips = new Map();
+const MAX_ZIPS_PER_SHAPE = 400;
+let zipCoords = null;      // { '63101': [lat, lng], ... } loaded on first map open
+let zipMap = null, drawnItems = null, dotLayer = null;
+
+function showZipMsg(text, warn) {
+  const el = document.getElementById('zipMsg');
+  if (!text) { el.style.display = 'none'; return; }
+  el.textContent = text;
+  el.className = 'zip-msg' + (warn ? ' warn' : '');
+  el.style.display = 'block';
+}
+
+function recomputeZips() {
+  const all = new Set(manualZips);
+  shapeZips.forEach(set => set.forEach(z => all.add(z)));
+  zips.length = 0;
+  [...all].sort().forEach(z => zips.push(z));
+  renderZips();
+}
+
 function addZip() {
   const input = document.getElementById('zipInput');
-  const val = input.value.trim();
-  if (!/^\d{5}$/.test(val)) { input.style.borderColor='var(--salmon)'; return; }
-  if (zips.includes(val)) { input.value=''; return; }
-  zips.push(val);
-  renderZips();
-  input.value = '';
-  input.style.borderColor = '';
+  const tokens = input.value.split(/[^0-9A-Za-z]+/).filter(Boolean);
+  if (!tokens.length) { return; }
+  const good = tokens.filter(t => /^\d{5}$/.test(t));
+  const bad = tokens.filter(t => !/^\d{5}$/.test(t));
+  good.forEach(z => manualZips.add(z));
+  recomputeZips();
+  if (bad.length) {
+    input.value = bad.join(', ');
+    input.style.borderColor = 'var(--salmon)';
+    showZipMsg('These do not look like 5-digit ZIP codes: ' + bad.join(', '), true);
+  } else {
+    input.value = '';
+    input.style.borderColor = '';
+    showZipMsg(good.length > 1 ? 'Added ' + good.length + ' ZIP codes.' : '', false);
+  }
 }
 
 function removeZip(zip) {
-  const i = zips.indexOf(zip);
-  if (i > -1) zips.splice(i, 1);
-  renderZips();
+  manualZips.delete(zip);
+  shapeZips.forEach(set => set.delete(zip));
+  recomputeZips();
 }
 
 function renderZips() {
   const container = document.getElementById('zipTags');
   container.innerHTML = zips.map(z =>
-    `<div class="zip-tag">${z} <button onclick="removeZip('${z}')" title="Remove">×</button></div>`
+    `<div class="zip-tag">${z} <button type="button" onclick="removeZip('${z}')" title="Remove">×</button></div>`
   ).join('');
+  drawZipDots();
+}
+
+// ---------- Draw-on-map ZIP picker ----------
+function loadScriptOnce(src) {
+  return new Promise((resolve, reject) => {
+    if ([...document.scripts].some(s => s.src === src)) { resolve(); return; }
+    const s = document.createElement('script');
+    s.src = src; s.onload = resolve; s.onerror = () => reject(new Error('load failed: ' + src));
+    document.head.appendChild(s);
+  });
+}
+function loadCssOnce(href) {
+  if ([...document.querySelectorAll('link')].some(l => l.href === href)) return;
+  const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href; document.head.appendChild(l);
+}
+
+async function toggleZipMap() {
+  const wrap = document.getElementById('zipMapWrap');
+  const btn = document.getElementById('zipMapToggle');
+  if (wrap.style.display !== 'none') {
+    wrap.style.display = 'none';
+    btn.textContent = 'Draw my area on the map';
+    return;
+  }
+  wrap.style.display = 'block';
+  btn.textContent = 'Hide map';
+  if (zipMap) { setTimeout(() => zipMap.invalidateSize(), 50); return; }
+  showZipMsg('Loading map…', false);
+  try {
+    loadCssOnce('https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css');
+    loadCssOnce('https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css');
+    await loadScriptOnce('https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js');
+    await loadScriptOnce('https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js');
+    const txt = await (await fetch('/zips.txt')).text();
+    zipCoords = {};
+    txt.split(';').forEach(rec => {
+      const p = rec.split(',');
+      if (p.length === 3) zipCoords[p[0]] = [parseFloat(p[1]), parseFloat(p[2])];
+    });
+  } catch (e) {
+    showZipMap_fail();
+    return;
+  }
+  showZipMsg('', false);
+  initZipMap();
+}
+function showZipMap_fail() {
+  document.getElementById('zipMapWrap').style.display = 'none';
+  document.getElementById('zipMapToggle').textContent = 'Draw my area on the map';
+  showZipMsg('The map could not load. You can still type or paste your ZIP codes above.', true);
+}
+
+function initZipMap() {
+  // Start on a state the buyer already ticked if we can, otherwise St. Louis.
+  zipMap = L.map('zipMap', { zoomControl: true }).setView([38.63, -90.2], 9);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18, attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(zipMap);
+  drawnItems = new L.FeatureGroup().addTo(zipMap);
+  dotLayer = L.layerGroup().addTo(zipMap);
+  const opts = { shapeOptions: { color: '#b55a42', weight: 2 } };
+  zipMap.addControl(new L.Control.Draw({
+    position: 'topleft',
+    draw: { polygon: Object.assign({ allowIntersection: false }, opts), rectangle: opts, circle: opts,
+            polyline: false, marker: false, circlemarker: false },
+    edit: { featureGroup: drawnItems }
+  }));
+  zipMap.on(L.Draw.Event.CREATED, e => {
+    const layer = e.layer;
+    const found = zipsInLayer(layer);
+    if (found.length > MAX_ZIPS_PER_SHAPE) {
+      showZipMsg('That area covers ' + found.length + ' ZIP codes, which is too many for one shape. Try a smaller area (you can draw several).', true);
+      return;
+    }
+    drawnItems.addLayer(layer);
+    shapeZips.set(L.stamp(layer), new Set(found));
+    recomputeZips();
+    showZipMsg(found.length
+      ? 'Added ' + found.length + ' ZIP code' + (found.length === 1 ? '' : 's') + ' from your shape. Remove any you do not want below.'
+      : 'No ZIP code centers fall inside that shape. Try drawing it a little larger.', !found.length);
+  });
+  zipMap.on(L.Draw.Event.EDITED, e => {
+    e.layers.eachLayer(layer => {
+      shapeZips.set(L.stamp(layer), new Set(zipsInLayer(layer).slice(0, MAX_ZIPS_PER_SHAPE)));
+    });
+    recomputeZips();
+  });
+  zipMap.on(L.Draw.Event.DELETED, e => {
+    e.layers.eachLayer(layer => shapeZips.delete(L.stamp(layer)));
+    recomputeZips();
+  });
+  drawZipDots();
+  // If they already typed ZIPs, show the map where those are.
+  const pts = zips.map(z => zipCoords[z]).filter(Boolean);
+  if (pts.length) zipMap.fitBounds(L.latLngBounds(pts).pad(0.3));
+}
+
+function pointInPolygon(lat, lng, ring) {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const yi = ring[i].lat, xi = ring[i].lng, yj = ring[j].lat, xj = ring[j].lng;
+    if (((yi > lat) !== (yj > lat)) && (lng < (xj - xi) * (lat - yi) / (yj - yi) + xi)) inside = !inside;
+  }
+  return inside;
+}
+
+function zipsInLayer(layer) {
+  const out = [];
+  let test;
+  if (layer instanceof L.Circle) {
+    const c = layer.getLatLng(), r = layer.getRadius();
+    test = (lat, lng) => c.distanceTo(L.latLng(lat, lng)) <= r;
+  } else {
+    let ring = layer.getLatLngs();
+    if (Array.isArray(ring[0])) ring = ring[0];
+    const b = layer.getBounds();
+    test = (lat, lng) => b.contains([lat, lng]) && pointInPolygon(lat, lng, ring);
+  }
+  for (const z in zipCoords) {
+    const p = zipCoords[z];
+    if (test(p[0], p[1])) out.push(z);
+  }
+  return out;
+}
+
+function drawZipDots() {
+  if (!dotLayer || !zipCoords) return;
+  dotLayer.clearLayers();
+  zips.forEach(z => {
+    const p = zipCoords[z];
+    if (p) L.circleMarker(p, { radius: 4, color: '#b55a42', weight: 1, fillColor: '#b55a42', fillOpacity: 0.8 })
+      .bindTooltip(z).addTo(dotLayer);
+  });
 }
 
 document.getElementById('zipInput').addEventListener('keydown', e => {
@@ -500,6 +680,7 @@ async function submitForm() {
         <p>As required by Missouri law and brokerage policy, any buyer wishing to access, tour, or receive property-specific information must first execute a Non-Exclusive Buyer Agency Agreement applicable to that specific transaction.</p>
       </div>
     </details>
+    <p style="margin-top:18px;text-align:center;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#212121">We are MISSOURI SENATE BILL 973 Compliant</p>
 
     <details>
       <summary style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7a8080;cursor:pointer;user-select:none;list-style:none;display:flex;align-items:center;gap:6px">
@@ -519,8 +700,6 @@ async function submitForm() {
         </ul>
       </div>
     </details>
-
-    <p style="margin-top:18px;text-align:center;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#212121">We are MISSOURI SENATE BILL 973 Compliant</p>
 
   </div>
 </footer>

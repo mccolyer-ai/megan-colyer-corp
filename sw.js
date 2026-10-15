@@ -2,7 +2,7 @@
 // keeps the last-seen version of each page available briefly offline.
 // Deal data itself is always fetched fresh over the network (never cached),
 // so buyers never see stale listings.
-const CACHE_NAME = 'mc-portal-v2';
+const CACHE_NAME = 'mc-portal-v4-2026-10-12';
 const PRECACHE_URLS = [
   '/',
   '/index.html',
@@ -10,8 +10,6 @@ const PRECACHE_URLS = [
   '/offer.html',
   '/owner.html',
   '/logo.png',
-  '/logo-white.png',
-  '/theme.css',
   '/icon-192.png',
   '/icon-512.png',
   '/manifest.json'

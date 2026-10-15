@@ -1,1 +1,9 @@
 /admin.html  /admin/  301
+
+# Main site and /deals both show the deals map/grid (open to everyone; buyers can log in for matches)
+/  /index.html  200!
+/deals  /index.html  200!
+
+# Score card is retired
+/score-card  /  301
+/my-score-card.html  /  301

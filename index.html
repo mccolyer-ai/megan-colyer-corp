@@ -25,7 +25,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MC Buyer Portal">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <style>
   :root {
@@ -34,7 +34,7 @@
     --surface2: #f0ece6;
     --border: #e0d9d0;
     --charcoal: #303636;
-    --salmon: #b89a5e;
+    --salmon: #D4967D;
     --salmon-light: #e8b89f;
     --text: #303636;
     --muted: #7a8080;
@@ -42,17 +42,17 @@
     --red: #b55a42;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Montserrat',Helvetica,sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  body { font-family: 'PT Serif', Georgia, serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
   header { background: var(--charcoal); padding: 20px 40px; display:flex; align-items:center; justify-content:space-between; z-index:100; }
   .header-center { display:flex; flex-direction:column; align-items:center; gap:4px; flex:1; text-align:center; }
-  .header-center h1 { font-family:'Montserrat',sans-serif; font-size:20px; font-weight:400; color:white; letter-spacing:0.08em; text-transform:uppercase; white-space:nowrap; }
+  .header-center h1 { font-family:'Marcellus', serif; font-size:20px; font-weight:400; color:white; letter-spacing:0.08em; text-transform:uppercase; white-space:nowrap; }
   .header-logo { height:127.5px; width:auto; display:block; }
-  .header-phone { font-family:'Montserrat',sans-serif; font-size:20px; font-weight:400; color:rgba(184,154,94,1); letter-spacing:0.06em; white-space:nowrap; }
-  .header-tagline { font-size:11px; color:rgba(255,255,255,0.45); letter-spacing:0.12em; text-transform:uppercase; font-family:'Montserrat',sans-serif; }
+  .header-phone { font-family:'Marcellus', serif; font-size:20px; font-weight:400; color:rgba(212,150,125,1); letter-spacing:0.06em; white-space:nowrap; }
+  .header-tagline { font-size:11px; color:rgba(255,255,255,0.45); letter-spacing:0.12em; text-transform:uppercase; font-family:'PT Serif', serif; }
   .header-side { flex:0 0 180px; }
   .logo-icon { display:none; }
-  .header-cta { background: var(--salmon); color:white; border:none; padding:10px 26px; border-radius:30px; font-size:13px; font-family:'Montserrat',sans-serif; letter-spacing:0.05em; cursor:pointer; transition:background .2s; }
+  .header-cta { background: var(--salmon); color:white; border:none; padding:10px 26px; border-radius:30px; font-size:13px; font-family:'PT Serif', serif; letter-spacing:0.05em; cursor:pointer; transition:background .2s; }
   .header-cta:hover { background: var(--salmon-light); }
   @media (max-width: 640px) {
     header { padding: 14px 16px; }
@@ -66,22 +66,22 @@
   }
 
   .buyers-banner { background: var(--salmon); text-align:center; padding:10px 20px; }
-  .buyers-banner a { color:white; font-family:'Montserrat',sans-serif; font-size:14px; letter-spacing:0.08em; text-decoration:none; display:inline-flex; align-items:center; gap:8px; }
+  .buyers-banner a { color:white; font-family:'Marcellus', serif; font-size:14px; letter-spacing:0.08em; text-decoration:none; display:inline-flex; align-items:center; gap:8px; }
   .buyers-banner a:hover { text-decoration:underline; }
 
   .controls { max-width:1400px; margin:0 auto; padding:28px 40px 20px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
   .search-wrap { position:relative; flex:1; min-width:200px; }
-  .search-wrap input { width:100%; background:white; border:1px solid var(--border); color:var(--text); padding:10px 14px 10px 38px; border-radius:4px; font-size:14px; font-family:'Montserrat',sans-serif; outline:none; }
+  .search-wrap input { width:100%; background:white; border:1px solid var(--border); color:var(--text); padding:10px 14px 10px 38px; border-radius:4px; font-size:14px; font-family:'PT Serif', serif; outline:none; }
   .search-wrap input:focus { border-color:var(--salmon); }
   .search-wrap input::placeholder { color:var(--muted); }
   .search-icon { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--muted); pointer-events:none; }
   .filter-chips { display:flex; gap:8px; flex-wrap:wrap; }
-  .chip { padding:8px 20px; border-radius:30px; border:1px solid var(--border); background:white; color:var(--muted); font-size:13px; font-family:'Montserrat',sans-serif; cursor:pointer; transition:all .2s; white-space:nowrap; }
+  .chip { padding:8px 20px; border-radius:30px; border:1px solid var(--border); background:white; color:var(--muted); font-size:13px; font-family:'PT Serif', serif; cursor:pointer; transition:all .2s; white-space:nowrap; }
   .chip:hover { border-color:var(--salmon); color:var(--charcoal); }
   .chip.active { background:var(--salmon); border-color:var(--salmon); color:white; }
-  .sort-select { background:white; border:1px solid var(--border); color:var(--text); padding:8px 14px; border-radius:4px; font-size:13px; font-family:'Montserrat',sans-serif; cursor:pointer; outline:none; }
+  .sort-select { background:white; border:1px solid var(--border); color:var(--text); padding:8px 14px; border-radius:4px; font-size:13px; font-family:'PT Serif', serif; cursor:pointer; outline:none; }
   .sort-select:focus { border-color:var(--salmon); }
-  .count-badge { padding:7px 14px; background:var(--charcoal); border-radius:30px; font-size:13px; color:white; white-space:nowrap; font-family:'Montserrat',sans-serif; letter-spacing:0.04em; }
+  .count-badge { padding:7px 14px; background:var(--charcoal); border-radius:30px; font-size:13px; color:white; white-space:nowrap; font-family:'PT Serif', serif; letter-spacing:0.04em; }
 
   .grid { max-width:1400px; margin:0 auto; padding:0 40px 60px; display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:24px; }
   .card { background:var(--surface); border:1px solid var(--border); border-radius:4px; overflow:hidden; transition:transform .25s, box-shadow .25s; }
@@ -90,7 +90,7 @@
   .card-photo { position:relative; height:200px; background:var(--surface2); overflow:hidden; text-decoration:none; display:block; }
   .card-photo img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s; }
   .card:hover .card-photo img { transform:scale(1.05); }
-  a.card-photo::after { content:'📷 View Property'; position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.55); color:white; font-size:11px; font-family:'Montserrat',sans-serif; padding:4px 8px; border-radius:12px; opacity:0; transition:opacity .2s; pointer-events:none; }
+  a.card-photo::after { content:'📷 View Property'; position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.55); color:white; font-size:11px; font-family:'PT Serif',serif; padding:4px 8px; border-radius:12px; opacity:0; transition:opacity .2s; pointer-events:none; }
   a.card-photo:hover::after { opacity:1; }
   .card-photo .photo-fallback {
     width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center;
@@ -109,21 +109,22 @@
   .card-photo.coliving-card .photo-fallback { background:linear-gradient(135deg,#4a3020,#8a6040,#2e1e10); }
   .card-photo.pending-card .photo-fallback { background:linear-gradient(135deg,#303636,#4a5454,#1e2424); }
 .photo-links { position:absolute; bottom:8px; right:8px; display:flex; gap:5px; }
-  .photo-link { padding:4px 10px; border-radius:4px; font-size:11px; font-weight:600; text-decoration:none; cursor:pointer; transition:opacity .2s; backdrop-filter:blur(6px); font-family:'Montserrat',sans-serif; }
+  .photo-link { padding:4px 10px; border-radius:4px; font-size:11px; font-weight:600; text-decoration:none; cursor:pointer; transition:opacity .2s; backdrop-filter:blur(6px); font-family:'PT Serif', serif; }
   .photo-link:hover { opacity:.85; }
   .photo-link.zillow { background:rgba(0,86,214,.85); color:white; }
   .photo-link.redfin { background:rgba(196,40,0,.85); color:white; }
   .photo-link.realtor { background:rgba(180,0,0,.85); color:white; }
-  .strategy-badge-photo { position:absolute; top:10px; left:10px; padding:4px 12px; border-radius:3px; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.8px; font-family:'Montserrat',sans-serif; backdrop-filter:blur(6px); }
-  .strategy-badge-photo.flip { background:rgba(184,154,94,.9); color:white; }
+  .strategy-badge-photo { position:absolute; top:10px; left:10px; padding:4px 12px; border-radius:3px; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.8px; font-family:'PT Serif', serif; backdrop-filter:blur(6px); }
+  .strategy-badge-photo.flip { background:rgba(212,150,125,.9); color:white; }
   .strategy-badge-photo.rental { background:rgba(74,140,111,.9); color:white; }
-  .strategy-badge-photo.pending { background:rgba(48,54,54,.8); color:rgba(184,154,94,1); }
+  .strategy-badge-photo.pending { background:rgba(48,54,54,.8); color:rgba(212,150,125,1); }
+  .exclusive-badge { position:absolute; top:10px; left:10px; z-index:3; background:linear-gradient(135deg,#D4967D,#b5735a); color:white; padding:5px 14px; border-radius:3px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.9px; font-family:'PT Serif', serif; box-shadow:0 2px 8px rgba(0,0,0,0.25); }
 
   .card-body { padding:18px 20px; }
-  .card-address { font-family:'Montserrat',sans-serif; font-size:15px; font-weight:400; margin-bottom:1px; color:var(--charcoal); }
+  .card-address { font-family:'PT Serif', serif; font-size:15px; font-weight:400; margin-bottom:1px; color:var(--charcoal); }
   .card-city { font-size:14px; color:var(--charcoal); margin-bottom:14px; letter-spacing:0.01em; }
   .price-row { display:flex; align-items:baseline; gap:8px; margin-bottom:14px; }
-  .asking-price { font-family:'Montserrat',sans-serif; font-size:26px; font-weight:400; color:var(--charcoal); }
+  .asking-price { font-family:'Marcellus', serif; font-size:26px; font-weight:400; color:var(--charcoal); }
   .price-label { font-size:12px; color:var(--muted); }
 
   .metrics { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:14px; }
@@ -137,61 +138,53 @@
 
   .card-footer { padding:12px 20px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:8px; background:var(--surface2); flex-wrap:wrap; }
   .date-badge { font-size:11px; color:var(--muted); letter-spacing:0.04em; }
-  .footer-btns { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
-  .interest-btn { background:var(--salmon); color:white; border:none; padding:8px 18px; border-radius:30px; font-size:12px; font-family:'Montserrat',sans-serif; letter-spacing:0.04em; cursor:pointer; transition:background .2s; text-decoration:none; display:inline-block; }
+  .footer-btns { display:flex; gap:8px; align-items:center; }
+  .interest-btn { background:var(--salmon); color:white; border:none; padding:8px 18px; border-radius:30px; font-size:12px; font-family:'PT Serif', serif; letter-spacing:0.04em; cursor:pointer; transition:background .2s; text-decoration:none; display:inline-block; }
   .interest-btn:hover { background:var(--salmon-light); }
   .interest-btn.secondary-btn { background:white; color:var(--charcoal); border:1px solid var(--border); }
   .interest-btn.secondary-btn:hover { background:white; border-color:var(--salmon); color:var(--salmon); }
-  .photos-btn { background:white; color:var(--charcoal); border:1px solid var(--border); padding:8px 14px; border-radius:30px; font-size:12px; font-family:'Montserrat',sans-serif; letter-spacing:0.04em; cursor:pointer; text-decoration:none; transition:border-color .2s; display:inline-block; }
+  .photos-btn { background:white; color:var(--charcoal); border:1px solid var(--border); padding:8px 14px; border-radius:30px; font-size:12px; font-family:'PT Serif', serif; letter-spacing:0.04em; cursor:pointer; text-decoration:none; transition:border-color .2s; display:inline-block; }
   .photos-btn:hover { border-color:var(--salmon); color:var(--salmon); }
-
-  .share-btn { background:white; color:var(--charcoal); border:1px solid var(--border); padding:8px 14px; border-radius:30px; font-size:12px; font-family:'Montserrat',sans-serif; letter-spacing:0.04em; cursor:pointer; transition:border-color .2s,color .2s; display:inline-flex; align-items:center; gap:5px; }
-  .share-btn:hover { border-color:var(--salmon); color:var(--salmon); }
-  .share-modal .share-addr { font-size:13px; color:var(--muted); margin-bottom:14px; }
-  .share-modal .share-link { display:block; word-break:break-all; font-size:13px; color:var(--charcoal); background:var(--surface2); border:1px solid var(--border); border-radius:4px; padding:10px 12px; margin-bottom:14px; text-decoration:underline; }
-  .share-modal .share-link:hover { color:var(--salmon); }
-  .share-actions { display:flex; gap:8px; flex-wrap:wrap; }
-  .share-actions .interest-btn { flex:1; text-align:center; justify-content:center; }
 
   .no-results { grid-column:1/-1; text-align:center; padding:80px 20px; color:var(--muted); }
   .no-results .icon { font-size:48px; margin-bottom:16px; }
-  .no-results h3 { font-family:'Montserrat',sans-serif; font-size:22px; font-weight:400; margin-bottom:8px; color:var(--charcoal); }
+  .no-results h3 { font-family:'Marcellus', serif; font-size:22px; font-weight:400; margin-bottom:8px; color:var(--charcoal); }
 
   .modal-overlay { display:none; position:fixed; inset:0; background:rgba(48,54,54,.6); backdrop-filter:blur(4px); z-index:1000; align-items:center; justify-content:center; padding:20px; }
   .modal-overlay.open { display:flex; }
   .modal { background:white; border:1px solid var(--border); border-radius:4px; padding:34px; width:100%; max-width:480px; position:relative; animation:slideUp .25s ease; max-height:90vh; overflow-y:auto; }
   @keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-  .modal h2 { font-family:'Montserrat',sans-serif; font-size:22px; font-weight:400; margin-bottom:4px; color:var(--charcoal); }
+  .modal h2 { font-family:'Marcellus', serif; font-size:22px; font-weight:400; margin-bottom:4px; color:var(--charcoal); }
   .modal-address { font-size:13px; color:var(--muted); margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid var(--border); }
   .modal-close { position:absolute; top:18px; right:18px; background:var(--surface2); border:1px solid var(--border); color:var(--muted); width:30px; height:30px; border-radius:50%; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center; }
   .modal-links { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
-  .modal-link { display:flex; align-items:center; gap:6px; padding:8px 14px; border-radius:4px; text-decoration:none; font-size:13px; font-family:'Montserrat',sans-serif; transition:opacity .2s; }
+  .modal-link { display:flex; align-items:center; gap:6px; padding:8px 14px; border-radius:4px; text-decoration:none; font-size:13px; font-family:'PT Serif', serif; transition:opacity .2s; }
   .modal-link:hover { opacity:.85; }
   .modal-link.zillow { background:#0056d6; color:white; }
   .modal-link.redfin { background:#c42800; color:white; }
   .modal-link.realtor { background:#d00000; color:white; }
   .form-group { margin-bottom:14px; }
   .form-group label { display:block; font-size:11px; font-weight:400; color:var(--muted); margin-bottom:5px; text-transform:uppercase; letter-spacing:0.08em; }
-  .form-group input, .form-group textarea { width:100%; background:white; border:1px solid var(--border); color:var(--text); padding:10px 12px; border-radius:4px; font-size:14px; outline:none; font-family:'Montserrat',sans-serif; }
+  .form-group input, .form-group textarea { width:100%; background:white; border:1px solid var(--border); color:var(--text); padding:10px 12px; border-radius:4px; font-size:14px; outline:none; font-family:'PT Serif', serif; }
   .form-group input:focus, .form-group textarea:focus { border-color:var(--salmon); }
   .form-group textarea { min-height:70px; resize:vertical; }
   .form-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-  .submit-btn { width:100%; background:var(--salmon); color:white; border:none; padding:13px; border-radius:30px; font-size:14px; font-family:'Montserrat',sans-serif; letter-spacing:0.06em; cursor:pointer; margin-top:6px; transition:background .2s; }
+  .submit-btn { width:100%; background:var(--salmon); color:white; border:none; padding:13px; border-radius:30px; font-size:14px; font-family:'PT Serif', serif; letter-spacing:0.06em; cursor:pointer; margin-top:6px; transition:background .2s; }
   .submit-btn:hover { background:var(--salmon-light); }
   .success-msg { text-align:center; padding:16px 0; }
   .success-msg .checkmark { font-size:44px; margin-bottom:10px; }
-  .success-msg h3 { font-family:'Montserrat',sans-serif; font-size:20px; font-weight:400; margin-bottom:6px; color:var(--charcoal); }
+  .success-msg h3 { font-family:'Marcellus', serif; font-size:20px; font-weight:400; margin-bottom:6px; color:var(--charcoal); }
   .success-msg p { color:var(--muted); font-size:13px; }
 
   .map-section { background: var(--surface); border-bottom: 1px solid var(--border); }
   .map-header { max-width:1400px; margin:0 auto; padding:16px 40px 10px; display:flex; align-items:center; justify-content:space-between; }
-  .map-title { font-family:'Montserrat',sans-serif; font-size:14px; color:var(--charcoal); letter-spacing:0.08em; text-transform:uppercase; }
+  .map-title { font-family:'Marcellus', serif; font-size:14px; color:var(--charcoal); letter-spacing:0.08em; text-transform:uppercase; }
   .map-stats { font-size:12px; color:var(--muted); font-style:italic; }
   #dealMap { height:360px; width:100%; }
   .map-loading { height:360px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:13px; font-style:italic; background:var(--surface2); }
-  .leaflet-popup-content-wrapper { font-family:'Montserrat',Helvetica,sans-serif; font-size:13px; border-radius:4px; box-shadow:0 4px 16px rgba(0,0,0,0.12); }
+  .leaflet-popup-content-wrapper { font-family:'PT Serif',Georgia,serif; font-size:13px; border-radius:4px; box-shadow:0 4px 16px rgba(0,0,0,0.12); }
   .leaflet-popup-content strong { font-size:13px; color:var(--charcoal); }
-  .leaflet-tooltip { font-family:'Montserrat',Helvetica,sans-serif; font-size:13px; border-radius:4px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,0.12); padding:8px 10px; }
+  .leaflet-tooltip { font-family:'PT Serif',Georgia,serif; font-size:13px; border-radius:4px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,0.12); padding:8px 10px; }
   .leaflet-tooltip strong { color:var(--charcoal); }
   .map-pin-price { color:var(--salmon); font-size:12px; margin-top:2px; }
   .map-pin-type { color:var(--muted); font-size:11px; margin-top:1px; }
@@ -208,7 +201,7 @@
 
   /* Single-property detail view (for personalized per-deal links) */
   .detail-wrap { max-width:900px; margin:0 auto; padding:24px 40px 60px; }
-  .back-link { display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--muted); text-decoration:none; margin-bottom:18px; cursor:pointer; font-family:'Montserrat',sans-serif; }
+  .back-link { display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--muted); text-decoration:none; margin-bottom:18px; cursor:pointer; font-family:'PT Serif', serif; }
   .back-link:hover { color:var(--salmon); }
   .detail-card { background:var(--surface); border:1px solid var(--border); border-radius:4px; overflow:hidden; }
 
@@ -220,15 +213,15 @@
   .detail-thumbs img { width:84px; height:64px; object-fit:cover; border-radius:3px; cursor:pointer; opacity:.65; transition:opacity .15s, outline-color .15s; flex:0 0 auto; outline:2px solid transparent; outline-offset:-2px; }
   .detail-thumbs img:hover { opacity:.9; }
   .detail-thumbs img.active { opacity:1; outline-color:var(--salmon); }
-  .detail-photo-count { position:absolute; bottom:10px; right:10px; background:rgba(0,0,0,.6); color:white; font-size:12px; font-family:'Montserrat',sans-serif; padding:4px 10px; border-radius:12px; }
+  .detail-photo-count { position:absolute; bottom:10px; right:10px; background:rgba(0,0,0,.6); color:white; font-size:12px; font-family:'PT Serif', serif; padding:4px 10px; border-radius:12px; }
 
   .detail-body { padding:28px 32px; }
-  .detail-address { font-family:'Montserrat',sans-serif; font-size:26px; font-weight:400; color:var(--charcoal); margin-bottom:4px; }
+  .detail-address { font-family:'Marcellus', serif; font-size:26px; font-weight:400; color:var(--charcoal); margin-bottom:4px; }
   .detail-city { font-size:15px; color:var(--muted); margin-bottom:20px; }
 
   /* Prominent stats bar — asking price, beds, baths, sqft */
   .detail-stats-bar { display:flex; flex-wrap:wrap; gap:24px 40px; align-items:baseline; margin-bottom:22px; padding-bottom:22px; border-bottom:1px solid var(--border); }
-  .detail-stats-bar .stat-price .m-value { font-family:'Montserrat',sans-serif; font-size:36px; font-weight:400; color:var(--charcoal); }
+  .detail-stats-bar .stat-price .m-value { font-family:'Marcellus', serif; font-size:36px; font-weight:400; color:var(--charcoal); }
   .detail-stats-bar .m-label { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.7px; margin-bottom:4px; }
   .detail-stats-bar .m-value { font-size:20px; font-weight:700; color:var(--charcoal); }
 
@@ -244,7 +237,7 @@
   .detail-not-found .icon { font-size:48px; margin-bottom:16px; }
 
   /* Per-property location map */
-  .detail-section-title { font-family:'Montserrat',sans-serif; font-size:15px; color:var(--charcoal); letter-spacing:0.08em; text-transform:uppercase; margin:32px 0 12px; }
+  .detail-section-title { font-family:'Marcellus', serif; font-size:15px; color:var(--charcoal); letter-spacing:0.08em; text-transform:uppercase; margin:32px 0 12px; }
   .detail-map-wrap { border-radius:4px; overflow:hidden; border:1px solid var(--border); }
   #detailMap { height:260px; background:var(--surface2); }
   .detail-map-caption { font-size:12px; color:var(--muted); margin-top:8px; }
@@ -252,7 +245,7 @@
   /* Listed-by card */
   .listed-by-card { margin-top:24px; padding-top:20px; border-top:1px solid var(--border); }
   .listed-by-card .lb-label { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.7px; margin-bottom:6px; }
-  .listed-by-card .lb-name { font-family:'Montserrat',sans-serif; font-size:18px; color:var(--charcoal); }
+  .listed-by-card .lb-name { font-family:'Marcellus', serif; font-size:18px; color:var(--charcoal); }
   .listed-by-card .lb-sub { font-size:13px; color:var(--muted); margin-top:2px; }
 
   @media(max-width:768px){
@@ -262,25 +255,81 @@
     .detail-address{font-size:20px;}
     .detail-stats-bar .stat-price .m-value{font-size:28px;}
   }
-</style>
-<link rel="stylesheet" href="theme.css">
-</head>
-<body>
 
-<header>
-  <div class="header-side"></div>
-  <div class="header-center">
-    <img src="logo.png" alt="Megan Colyer Corp" class="header-logo">
-    <div class="header-phone">Call/Text 636-698-1412</div>
-    <div class="header-tagline">Off-Market Investment Deals</div>
+  .match-tag { display:inline-block; background:var(--salmon); color:#fff; font-size:11px; letter-spacing:.06em; text-transform:uppercase; padding:3px 10px; border-radius:999px; margin-bottom:8px; }
+  .card.match { box-shadow:0 0 0 2px var(--salmon); }
+  .login-banner { background:var(--salmon); text-align:center; padding:11px 20px; color:#fff; font-family:'Marcellus',serif; font-size:15px; letter-spacing:.05em; }
+  .login-banner a { color:#fff; text-decoration:underline; text-underline-offset:3px; }
+  .login-banner .lb-btn { display:inline-block; margin-left:10px; background:#fff; color:var(--charcoal); text-decoration:none; padding:5px 16px; border-radius:999px; font-size:13px; }
+  .login-banner .lb-sep { opacity:.6; margin:0 12px; }
+  .admin-login-overlay { position:fixed; inset:0; background:rgba(43,49,49,0.92); display:none; align-items:center; justify-content:center; z-index:2000; padding:20px; }
+  .admin-login-box { background:white; border-radius:6px; padding:36px 34px; width:100%; max-width:360px; box-shadow:0 20px 60px rgba(0,0,0,.35); }
+  .admin-login-box h2 { font-family:'Marcellus', serif; font-size:20px; font-weight:400; color:var(--charcoal); margin-bottom:4px; }
+  .admin-login-box .sub { font-size:13px; color:var(--muted); margin-bottom:22px; }
+  .admin-login-box label { display:block; font-size:11px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:5px; }
+  .admin-login-box .field { margin-bottom:16px; }
+  .admin-login-box input { width:100%; border:1px solid var(--border); border-radius:4px; padding:10px 12px; font-size:14px; font-family:'PT Serif', serif; outline:none; box-sizing:border-box; }
+  .admin-login-box input:focus { border-color:var(--salmon); }
+  .admin-login-box .btn-row { display:flex; gap:10px; margin-top:6px; }
+  .admin-login-box button { flex:1; background:var(--salmon); color:white; border:none; padding:12px; border-radius:30px; font-size:14px; font-family:'PT Serif', serif; letter-spacing:0.05em; cursor:pointer; transition:background .2s; }
+  .admin-login-box button:hover { background:var(--salmon-light); }
+  .admin-login-box button:disabled { opacity:.6; cursor:not-allowed; }
+  .admin-login-box button.cancel { background:transparent; color:var(--muted); border:1px solid var(--border); }
+  .admin-login-box button.cancel:hover { background:#f5f2ee; }
+  .admin-login-error { color:var(--red); font-size:13px; margin-top:12px; display:none; }
+</style>
+<link rel="stylesheet" href="/site.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme.css">
+</head>
+<body data-page="deals">
+
+<div class="admin-login-overlay" id="adminLoginOverlay">
+  <div class="admin-login-box">
+    <h2>Admin Login</h2>
+    <div class="sub">Megan Colyer Corp — Portal Admin</div>
+    <div class="field">
+      <label>Email</label>
+      <input type="email" id="adminLoginEmail" autocomplete="username" placeholder="deals@megancolyer.com">
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="adminLoginPassword" autocomplete="current-password" placeholder="••••••••">
+    </div>
+    <div class="btn-row">
+      <button type="button" class="cancel" onclick="hideHomeAdminLogin()">Cancel</button>
+      <button type="button" id="adminLoginBtn" onclick="submitHomeAdminLogin()">Log In</button>
+    </div>
+    <div class="admin-login-error" id="adminLoginError"></div>
   </div>
-  <div class="header-side" style="display:flex;justify-content:flex-end">
-    <span></span>
+</div>
+
+
+
+<header class="site-header">
+  <div class="sh-inner">
+    <a class="sh-brand" href="/" aria-label="Megan Colyer Corp — home">
+      <img src="/logo-white.png" alt="Megan Colyer Corp">
+      <span class="sh-name">Megan Colyer Corp<small>Off-market deals · St. Louis</small></span>
+    </a>
+    <nav class="sh-nav" aria-label="Main">
+
+      <a href="/buyers" data-nav="buyers">Join Buyers List</a>
+      <a href="/joint-ventures" data-nav="jv">Wholesalers &amp; Realtors</a>
+      <a href="/" data-nav="deals" class="sh-deals">Available Deals</a>
+      <a href="/wholesaler-portal" data-nav="wholesaler-portal" class="sh-account">Wholesaler Login</a>
+      <a href="#" data-nav="admin-login" class="sh-account" onclick="showHomeAdminLogin(); return false;">Admin Login</a>
+    </nav>
+    <div class="sh-actions">
+      <a class="sh-call" href="tel:6366981412" aria-label="Call or text 636-698-1412"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span>Call/Text 636-698-1412</span></a>
+      <button class="sh-menu" type="button" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
   </div>
 </header>
 
-<div class="buyers-banner">
-  <a href='/buyers'>✉ Join Our Buyers List Today!</a>
+<div class="login-banner" id="loginBanner">
+  <span id="lbText"><b>Buyers:</b> log in to see the deals that match your buy box.</span>
+  <a class="lb-btn" href="/buyer-portal" id="lbBtn">Buyer Login →</a>
 </div>
 
 <div class="map-section">
@@ -300,6 +349,7 @@
     <div class="chip active" onclick="setFilter('all',this)">All</div>
     <div class="chip" onclick="setFilter('sfh',this)">Single Family</div>
     <div class="chip" onclick="setFilter('mfh',this)">Multi Family</div>
+    <div class="chip" id="matchChip" style="display:none" onclick="setFilter('match',this)">My Matches</div>
   </div>
   <select class="sort-select" id="zipSelect" onchange="render()">
     <option value="">All Zip Codes</option>
@@ -343,61 +393,14 @@
   </div>
 </div>
 
-<div class="modal-overlay" id="shareOverlay" onclick="if(event.target===this)closeShare()">
-  <div class="modal share-modal">
-    <button class="modal-close" onclick="closeShare()">✕</button>
-    <h2>Share This Property</h2>
-    <div class="share-addr" id="shareAddr"></div>
-    <a class="share-link" id="shareLink" href="#" target="_blank" rel="noopener"></a>
-    <div class="share-actions">
-      <button class="interest-btn" id="shareCopyBtn" onclick="copyShareLink()">Copy Link</button>
-      <button class="interest-btn secondary-btn" id="shareNativeBtn" style="display:none" onclick="nativeShare()">Share…</button>
-    </div>
-  </div>
-</div>
-
 <script>
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxATueK1LD5LFGL_KNCBXF6ijTeFyE5qcYsSFdcPucbsNQSD8SeDnBGT3O8ZBafqy2F7Q/exec';
-const DEALS_GET_URL = 'https://script.google.com/macros/s/AKfycbwg0FwrXkeFpCBEEH9EJM_83hy39iomeLwRBJvQtHx_epQ62UmIpsELUOodzzShk0xAEQ/exec'; // read-only deal/photo lookups
 let DEALS = [];
+let LOGGED_IN = false;
 
-// ── SHARE ────────────────────────────────────────────────────────────────────
-// Public per-property link (no buyer-tracking params) that opens straight to
-// that property's own page on the buyer portal.
-let _shareUrl = '', _shareTitle = '';
-function shareUrlFor(leadId) {
-  return location.origin + '/?deal=' + encodeURIComponent(leadId);
-}
-function openShareById(leadId) {
-  const d = DEALS.find(x => x.leadId === leadId);
-  if (!d) return;
-  _shareUrl = shareUrlFor(d.leadId);
-  _shareTitle = d.address.split(',')[0] + ' — Megan Colyer Corp';
-  document.getElementById('shareAddr').textContent = '📍 ' + d.address;
-  const a = document.getElementById('shareLink');
-  a.href = _shareUrl; a.textContent = _shareUrl;
-  document.getElementById('shareCopyBtn').textContent = 'Copy Link';
-  document.getElementById('shareNativeBtn').style.display = navigator.share ? '' : 'none';
-  document.getElementById('shareOverlay').classList.add('open');
-}
-function closeShare() { document.getElementById('shareOverlay').classList.remove('open'); }
-function copyShareLink() {
-  const btn = document.getElementById('shareCopyBtn');
-  const done = () => { btn.textContent = 'Copied ✓'; };
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(_shareUrl).then(done, fallback);
-  } else fallback();
-  function fallback() {
-    const r = document.createRange(); r.selectNodeContents(document.getElementById('shareLink'));
-    const s = getSelection(); s.removeAllRanges(); s.addRange(r);
-    try { document.execCommand('copy'); done(); } catch (e) { btn.textContent = 'Press Ctrl/Cmd+C'; }
-  }
-}
-function nativeShare() {
-  if (navigator.share) navigator.share({ title: _shareTitle, url: _shareUrl }).catch(() => {});
-}
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeShare(); });
-// ─────────────────────────────────────────────────────────────────────────────
+// leadIds Megan has flagged for an "Exclusive Deal" ribbon on their photo (grid card + detail page).
+// Add/remove leadIds here as she calls out specific properties — no Sheet/GAS schema change needed.
+const EXCLUSIVE_DEAL_IDS = ['35644285-df28-4abb-8d88-2dfd54c55721']; // 8525 Philo Ave, Affton MO
 
 // Log a portal visit if this link was personalized for a specific buyer (?b=<contactId>&n=<name>)
 (function(){
@@ -456,6 +459,7 @@ function getFiltered() {
       if (!matches) return false;
     }
     if (activeFilter === 'sfh') { if (!/single.?family/i.test(d.propertyType||'')) return false; }
+    if (activeFilter === 'match') { if (!d.matchesBuyBox) return false; }
     if (activeFilter === 'mfh') { if (!/multi.?family/i.test(d.propertyType||'')) return false; }
     if (zip) { const m = d.address.match(/\b(\d{5})\b/); if (!m || m[1] !== zip) return false; }
     return true;
@@ -466,6 +470,7 @@ function getFiltered() {
   else if (sort === 'price_desc') list.sort((a,b) => (b.askingPrice||0)-(a.askingPrice||0));
   else if (sort === 'arv') list.sort((a,b) => (b.arv||0)-(a.arv||0));
   else if (sort === 'spread') list.sort((a,b) => (b.spread||0)-(a.spread||0));
+  if (LOGGED_IN && (sort === 'newest' || !sort)) list = list.filter(d => d.matchesBuyBox).concat(list.filter(d => !d.matchesBuyBox));
   return list;
 }
 
@@ -506,9 +511,10 @@ function render() {
         <div class="fb-addr">No Photos Available</div>
         <div class="fb-city">${d.city||''}, ${d.state||''}</div>
       </div>`;
-    return `<div class="card" onclick="if(!event.target.closest('.card-photo-link'))openModal(${i})">
-      <a class="card-photo ${photoClass} card-photo-link" href="${dealUrl(d)}" onclick="event.preventDefault();event.stopPropagation();navigateToPropertyId('${d.leadId}')">${photoHtml}</a>
+    return `<div class="card${d.matchesBuyBox ? ' match' : ''}" onclick="if(!event.target.closest('.card-photo-link'))openModal(${i})">
+      <a class="card-photo ${photoClass} card-photo-link" href="${dealUrl(d)}" onclick="event.preventDefault();event.stopPropagation();navigateToPropertyId('${d.leadId}')">${EXCLUSIVE_DEAL_IDS.includes(d.leadId) ? '<div class="exclusive-badge">Exclusive Deal</div>' : ''}${window.mcShowBanner ? mcShowBanner(d) : ''}${photoHtml}</a>
       <div class="card-body">
+        ${d.matchesBuyBox ? '<div class="match-tag">✓ Matches your buy box</div>' : ''}
         <div class="card-address">${addr0}</div>
         <div class="card-city">${d.city}, ${d.state}${zip ? ' ' + zip : ''} ${statusDot}</div>
         <div class="price-row">
@@ -522,6 +528,7 @@ function render() {
         <div class="prop-row">
           <span>${parts.join(' · ')||'Details TBD'}</span>
           <span class="prop-pill">${d.propertyType||'Single Family'}</span>
+          ${(window.mcShowingDay && mcShowingDay(d.Showing || d.showing)) ? `<span class="prop-pill" style="background:#fdf0e6;border-color:#e8a36c;color:#a4521a">🏠 Open house ${mcShowingDay(d.Showing || d.showing)}</span>` : ''}
           ${d.yearBuilt?`<span>Built ${d.yearBuilt}</span>`:''}
         </div>
         ${d.notes ? `<div style="margin-top:10px;padding:10px 12px;background:var(--surface2);border-left:3px solid var(--salmon);border-radius:0 4px 4px 0;font-size:12px;color:var(--charcoal);line-height:1.5">${d.notes.length>120?d.notes.slice(0,120)+'…':d.notes}</div>` : ''}
@@ -529,9 +536,7 @@ function render() {
       <div class="card-footer">
         <span class="date-badge">Added ${d.date ? new Date(d.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : ''}</span>
         <div class="footer-btns">
-          ${d.driveUrl ? `<a class="photos-btn" href="${d.driveUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()">📷 View More Photos</a>` : ''}
-          <button class="interest-btn" onclick="event.stopPropagation();openModal(${i})">I'm Interested →</button>
-          <button class="share-btn" onclick="event.stopPropagation();openShareById('${d.leadId}')">🔗 Share</button>
+          <button class="interest-btn secondary-btn" onclick="event.stopPropagation();mcShareDeal('${d.leadId}', '${String(d.address||'').replace(/['"\\]/g,'')}', ${Number(d.askingPrice)||0})">🔗 Share</button><button class="interest-btn" onclick="event.stopPropagation();openModal(${i})">Schedule a Walk Through →</button>
         </div>
       </div>
     </div>`;
@@ -615,7 +620,7 @@ function showPropertyDetail(d, opts) {
     <a class="back-link" onclick="backToAllDeals()">← Back to All Deals</a>
     <div class="detail-card">
       <div class="detail-gallery">
-        <div class="detail-photo">${photoHtml}<div class="detail-photo-count" id="detailPhotoCount" style="display:none"></div></div>
+        <div class="detail-photo">${EXCLUSIVE_DEAL_IDS.includes(d.leadId) ? '<div class="exclusive-badge">Exclusive Deal</div>' : ''}${photoHtml}<div class="detail-photo-count" id="detailPhotoCount" style="display:none"></div></div>
         <div class="detail-thumbs" id="detailThumbs" style="display:none"></div>
       </div>
       <div class="detail-body">
@@ -635,12 +640,12 @@ function showPropertyDetail(d, opts) {
           <div class="detail-metric"><div class="m-label">Property Type</div><div class="m-value">${d.propertyType||'Single Family'}</div></div>
           ${d.yearBuilt?`<div class="detail-metric"><div class="m-label">Year Built</div><div class="m-value">${d.yearBuilt}</div></div>`:''}
         </div>
+        ${(window.mcShowingDay && mcShowingDay(d.Showing || d.showing)) ? `<div class="detail-notes" style="border-left-color:#e8a36c"><b>🏠 Open house:</b> ${mcShowingDay(d.Showing || d.showing)}</div>` : ''}
         ${d.notes ? `<div class="detail-notes">${d.notes}</div>` : ''}
         <div class="detail-actions">
           <a class="interest-btn" href="offer.html?address=${encodeURIComponent(d.address)}">Submit an Offer →</a>
           <button class="interest-btn secondary-btn" onclick="openModalForDeal(_currentDetailDeal)">Schedule a Walk Through</button>
-          ${d.driveUrl ? `<a class="photos-btn" href="${d.driveUrl}" target="_blank" rel="noopener">📷 View All Photos</a>` : ''}
-          <button class="share-btn" onclick="openShareById('${d.leadId}')">🔗 Share</button>
+          <button class="interest-btn secondary-btn" onclick="mcShareDeal(_currentDetailDeal.leadId, _currentDetailDeal.address, _currentDetailDeal.askingPrice)">🔗 Share this property</button>
         </div>
 
         ${cityCoords ? `
@@ -669,7 +674,7 @@ async function loadDetailGallery(d) {
   const m = d.driveUrl.match(/folders\/([^?&/]+)/);
   if (!m) return;
   try {
-    const res = await fetch(DEALS_GET_URL + '?action=getFolderPhotos&folderId=' + m[1]);
+    const res = await fetch(GAS_URL + '?action=getFolderPhotos&folderId=' + m[1]);
     const info = await res.json();
     if (!info.success || !info.photos || info.photos.length < 2) return;
     // Only show if we're still looking at this same property (user may have navigated away)
@@ -681,16 +686,22 @@ async function loadDetailGallery(d) {
     const heroImg = document.getElementById('detailHeroImg');
     if (!thumbs || !heroImg) return;
 
+    // Keep whatever photo is already showing (the card's main photo) as the hero
+    // if it's one of this folder's photos — Drive folder listing order isn't
+    // stable between calls, so "the first photo returned" often isn't the same
+    // photo as the card, and blindly swapping to it caused the hero image to
+    // change right after the detail view opened.
+    let heroIndex = urls.indexOf(heroImg.src);
+    if (heroIndex === -1) heroIndex = 0;
+
     thumbs.innerHTML = urls.map((u, i) =>
-      `<img src="${u}" data-i="${i}" class="${u===heroImg.src?'active':(i===0?'active':'')}" onclick="setDetailHero('${u.replace(/'/g,"\\'")}', this)">`
+      `<img src="${u}" data-i="${i}" class="${i===heroIndex?'active':''}" onclick="setDetailHero('${u.replace(/'/g,"\\'")}', this)">`
     ).join('');
     thumbs.style.display = 'flex';
     countEl.textContent = '📷 ' + urls.length + ' photos';
     countEl.style.display = 'block';
-    // Make sure the hero starts on photo #1 and is marked active in the strip
-    if (heroImg.src !== urls[0]) heroImg.src = urls[0];
-    const firstThumb = thumbs.querySelector('img');
-    if (firstThumb) firstThumb.classList.add('active');
+    // Only change the hero image if it isn't already one of this folder's photos.
+    if (heroImg.src !== urls[heroIndex]) heroImg.src = urls[heroIndex];
   } catch (e) { /* gallery is a nice-to-have — fail quietly */ }
 }
 
@@ -726,7 +737,7 @@ async function initDetailMap(d, center) {
   L.marker(center, {
     icon: L.divIcon({
       className: '',
-      html: `<div style="width:24px;height:24px;border-radius:50% 50% 50% 0;background:#b89a5e;border:2.5px solid white;box-shadow:0 2px 6px rgba(0,0,0,.4);transform:rotate(-45deg)"></div>`,
+      html: `<div style="width:24px;height:24px;border-radius:50% 50% 50% 0;background:#D4967D;border:2.5px solid white;box-shadow:0 2px 6px rgba(0,0,0,.4);transform:rotate(-45deg)"></div>`,
       iconSize: [24, 24], iconAnchor: [12, 24], popupAnchor: [0, -26]
     })
   }).addTo(_detailMap).bindPopup(`<strong>${d.address}</strong>`);
@@ -904,7 +915,7 @@ function updateMapMarkers(deals) {
   if (!_dealMap || !_dealMarkersLayer) return;
   _dealMarkersLayer.clearLayers();
 
-  const activeDeals = deals.filter(d => d.status !== 'archived' && d.status !== 'needs_approval');
+  const activeDeals = deals.filter(d => d.status !== 'archived');
   const mapStats = document.getElementById('mapStats');
 
   if (!activeDeals.length) {
@@ -912,7 +923,7 @@ function updateMapMarkers(deals) {
     return;
   }
 
-  const salmon = '#b89a5e';
+  const salmon = '#D4967D';
 
   function makePin() {
     return L.divIcon({
@@ -968,17 +979,58 @@ function updateMapMarkers(deals) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 // Load deals dynamically from Google Sheet
+function getBuyerToken() {
+  try { return localStorage.getItem('bpToken') || ''; } catch (e) { return ''; }
+}
+
+
+// Optional buyer login: a logged-in buyer sees which deals fit their buy box.
+async function applyBuyerMatches() {
+  let token = '';
+  try { token = localStorage.getItem('bpToken') || ''; } catch (e) {}
+  if (!token && !window.__PREVIEW_LOGGEDIN) return;
+  try {
+    let data;
+    if (window.__PREVIEW_LOGGEDIN) {
+      data = { success: true, deals: DEALS.filter((d, i) => i % 3 !== 1).map(d => ({ leadId: d.leadId, matchesBuyBox: true })) };
+    } else {
+      const res = await fetch(GAS_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ action: 'buyerGetDeals', token }) });
+      data = await res.json();
+    }
+    if (!data.success) return;
+    const hit = {};
+    (data.deals || []).forEach(d => { if (d.matchesBuyBox) hit[d.leadId] = true; });
+    DEALS.forEach(d => { d.matchesBuyBox = !!hit[d.leadId]; });
+    LOGGED_IN = true;
+    const n = DEALS.filter(d => d.matchesBuyBox && d.status !== 'archived').length;
+    let name = ''; try { name = localStorage.getItem('bpName') || ''; } catch (e) {}
+    document.getElementById('lbText').innerHTML = (name ? 'Welcome back, ' + String(name).replace(/[<>&"]/g, '') + '. ' : '') + '<b>' + n + '</b> deal' + (n === 1 ? '' : 's') + ' match your buy box.';
+    const btn = document.getElementById('lbBtn'); btn.textContent = 'My Buy Box & Loved Properties →';
+    document.getElementById('matchChip').style.display = '';
+    const nb = document.getElementById('navBuyerLogin'); if (nb) nb.textContent = 'My Deals';
+    render();
+  } catch (e) { /* stay on the open list */ }
+}
+
 (function initPortal() {
   document.getElementById('dealGrid').innerHTML = '<div class="no-results"><div class="icon">⏳</div><h3>Loading deals…</h3><p>Fetching the latest properties.</p></div>';
   document.getElementById('countBadge').textContent = 'Loading…';
-  fetch(DEALS_GET_URL + '?action=getDeals')
+  fetch(GAS_URL + '?action=publicDeals')
     .then(r => r.json())
     .then(async data => {
+      if (data && data.success === false) {
+        document.getElementById('dealGrid').innerHTML = '<div class="no-results"><div class="icon">⚠️</div><h3>Couldn\'t load deals</h3><p>Please refresh the page to try again.</p></div>';
+        document.getElementById('countBadge').textContent = '0 deals';
+        return;
+      }
       DEALS = Array.isArray(data) ? data : (data.deals || []);
+      DEALS = DEALS.filter(d => d.status !== 'needs_approval' && d.status !== 'archived');
+      DEALS = DEALS.map(d => { if (d.folderId && !d.driveUrl) d.driveUrl = 'https://drive.google.com/drive/folders/' + d.folderId; return d; });
       // Normalize: GAS may return 'Notes' (capital N) — map to lowercase 'notes'
       DEALS = DEALS.map(d => { if (d.Notes !== undefined) { d.notes = d.notes || d.Notes; } return d; });
       populateZips();
       render();
+      applyBuyerMatches();
       createMap(); // ← creates the map once, then plots whatever render() just filtered
 
       // If this is a personalized per-property link (?deal=<leadId>), show that
@@ -996,7 +1048,7 @@ function updateMapMarkers(deals) {
           const m = d.driveUrl.match(/folders\/([^?&/]+)/);
           if (!m) return;
           try {
-            const res = await fetch(DEALS_GET_URL + '?action=getFolderPhotos&folderId=' + m[1]);
+            const res = await fetch(GAS_URL + '?action=getFolderPhotos&folderId=' + m[1]);
             const info = await res.json();
             if (info.success && info.photos && info.photos.length) {
               d.photo = 'https://lh3.googleusercontent.com/d/' + info.photos[0].id;
@@ -1050,8 +1102,6 @@ function updateMapMarkers(deals) {
       </div>
     </details>
 
-    <p style="margin-top:18px;text-align:center;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#212121">We are MISSOURI SENATE BILL 973 Compliant</p>
-
   </div>
 </footer>
 <script>
@@ -1061,5 +1111,77 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
+<footer class="site-footer">
+  <div class="sf-inner">
+    <div class="sf-brand">
+      <img src="/logo-white.png" alt="Megan Colyer Corp">
+      <p>Off-market investment deals in St. Louis, matched to what you buy. A disposition partner for wholesalers and realtors.</p>
+    </div>
+    <div class="sf-links">
+      <div><h4>Buyers</h4><a href="/buyers">Join Buyers List</a><a href="/buyer-portal">Buyer Login</a></div>
+      <div><h4>Partners</h4><a href="/joint-ventures">Wholesalers &amp; Realtors</a><a href="/wholesaler-portal">Wholesaler Login</a></div>
+      <div><h4>Contact</h4><a href="tel:6366981412">Call/Text 636-698-1412</a><a href="/privacy-policy">Privacy Policy</a></div>
+    </div>
+  </div>
+  <div class="sb973">We are MISSOURI SENATE BILL 973 Compliant</div>
+  <div class="sf-bottom"><span>© Megan Colyer Corp — Off-Market Investment Deals</span><span>St. Louis, MO</span></div>
+</footer>
+<script>
+// ---- Admin login (from buyer portal / main login page) ----
+function showHomeAdminLogin() {
+  document.getElementById('adminLoginOverlay').style.display = 'flex';
+  document.getElementById('adminLoginError').style.display = 'none';
+  document.getElementById('adminLoginEmail').focus();
+}
+function hideHomeAdminLogin() {
+  document.getElementById('adminLoginOverlay').style.display = 'none';
+}
+async function submitHomeAdminLogin() {
+  const email = document.getElementById('adminLoginEmail').value.trim();
+  const password = document.getElementById('adminLoginPassword').value;
+  const btn = document.getElementById('adminLoginBtn');
+  const errEl = document.getElementById('adminLoginError');
+  errEl.style.display = 'none';
+  if (!email || !password) {
+    errEl.textContent = 'Enter your email and password.';
+    errEl.style.display = 'block';
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = 'Logging in…';
+  try {
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ action: 'adminLogin', email, password })
+    });
+    const data = await res.json();
+    if (data.success && data.key) {
+      try { localStorage.setItem('portalAdminKey', data.key); } catch (e) {}
+      window.location.href = '/admin/';
+      return;
+    } else {
+      errEl.textContent = data.error || 'Incorrect email or password.';
+      errEl.style.display = 'block';
+    }
+  } catch (err) {
+    errEl.textContent = 'Could not reach the server. Check your connection and try again.';
+    errEl.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Log In';
+  }
+}
+['adminLoginEmail', 'adminLoginPassword'].forEach(function(id) {
+  document.getElementById(id).addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') submitHomeAdminLogin();
+  });
+});
+document.getElementById('adminLoginOverlay').addEventListener('click', function(e) {
+  if (e.target === this) hideHomeAdminLogin();
+});
+
+</script>
+<script src="/site.js"></script>
 </body>
 </html>

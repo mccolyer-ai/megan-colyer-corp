@@ -2,7 +2,8 @@
    Loaded after each page's inline <style> so it overrides the old salmon/serif look. */
 :root{--charcoal:#212121;--text:#212121;--salmon:#b89a5e;--salmon-light:#cdb27d;--bg:#f4f2ee;--surface2:#efece6;--border:#e4e1da;--muted:#6f6f6f;}
 body{font-family:'Montserrat',Helvetica,Arial,sans-serif;font-weight:400;}
-header{background:#fff !important;border-bottom:1px solid var(--border);}
+header:not(.site-header){background:#fff !important;border-bottom:1px solid var(--border);}
+.site-header{background:rgba(33,33,33,.98) !important;border-bottom:1px solid rgba(255,255,255,.06) !important;}
 .header-logo{height:165px !important;}
 .logo-text h1,.header-center h1{color:var(--charcoal) !important;}
 .header-phone,.logo-text .phone{font-size:13px !important;font-weight:500;color:var(--charcoal) !important;letter-spacing:.28em !important;text-transform:uppercase;}

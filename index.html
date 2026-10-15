@@ -3,30 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-<title>Megan Colyer Corp — Available Deals</title>
-<meta name="description" content="Off-market investment deals for cash buyers. Browse available properties and get on our buyers list.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Megan Colyer Corp — Available Deals">
-<meta property="og:description" content="Off-market investment deals for cash buyers. Browse available properties and get on our buyers list.">
-<meta property="og:image" content="https://megancolyersbuyerportal.netlify.app/og-preview.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:url" content="https://megancolyersbuyerportal.netlify.app/">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Megan Colyer Corp — Available Deals">
-<meta name="twitter:description" content="Off-market investment deals for cash buyers. Browse available properties and get on our buyers list.">
-<meta name="twitter:image" content="https://megancolyersbuyerportal.netlify.app/og-preview.png">
-<link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#303636">
-<link rel="apple-touch-icon" href="/icon-192.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="MC Buyer Portal">
+<title>Admin — Megan Colyer Corp</title>
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
 <style>
   :root {
     --bg: #f5f2ee;
@@ -44,1144 +22,1361 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'PT Serif', Georgia, serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
-  header { background: var(--charcoal); padding: 20px 40px; display:flex; align-items:center; justify-content:space-between; z-index:100; }
-  .header-center { display:flex; flex-direction:column; align-items:center; gap:4px; flex:1; text-align:center; }
-  .header-center h1 { font-family:'Marcellus', serif; font-size:20px; font-weight:400; color:white; letter-spacing:0.08em; text-transform:uppercase; white-space:nowrap; }
-  .header-logo { height:127.5px; width:auto; display:block; }
-  .header-phone { font-family:'Marcellus', serif; font-size:20px; font-weight:400; color:rgba(212,150,125,1); letter-spacing:0.06em; white-space:nowrap; }
-  .header-tagline { font-size:11px; color:rgba(255,255,255,0.45); letter-spacing:0.12em; text-transform:uppercase; font-family:'PT Serif', serif; }
-  .header-side { flex:0 0 180px; }
-  .logo-icon { display:none; }
-  .header-cta { background: var(--salmon); color:white; border:none; padding:10px 26px; border-radius:30px; font-size:13px; font-family:'PT Serif', serif; letter-spacing:0.05em; cursor:pointer; transition:background .2s; }
-  .header-cta:hover { background: var(--salmon-light); }
-  @media (max-width: 640px) {
-    header { padding: 14px 16px; }
-    .header-side:first-child { display:none; }
-    .header-side:last-child { flex:0 0 auto; margin-left:12px; }
-    .header-center h1 { font-size:16px; }
-    .header-logo { height:96px; }
-    .header-phone { font-size:15px; }
-    .header-tagline { display:none; }
-    .header-cta { padding:8px 16px; font-size:12px; }
+  header { background: var(--charcoal); padding: 18px 40px; display:flex; align-items:center; justify-content:space-between; z-index:200; }
+  .logo-text h1 { font-family:'Marcellus', serif; font-size:18px; font-weight:400; color:white; letter-spacing:0.08em; text-transform:uppercase; }
+  .logo-text p { font-size:11px; color:rgba(255,255,255,0.5); letter-spacing:0.12em; text-transform:uppercase; }
+  .header-logo-sm { height:56px; width:auto; display:block; margin-top:4px; }
+  .header-right { display:flex; gap:12px; align-items:center; }
+  .back-btn { color: rgba(255,255,255,0.7); font-size:13px; text-decoration:none; letter-spacing:0.04em; }
+  .back-btn:hover { color:white; }
+  .apply-all-btn { background: var(--salmon); color:white; border:none; padding:9px 22px; border-radius:30px; font-size:13px; font-family:'PT Serif', serif; cursor:pointer; transition:background .2s; display:none; }
+  .apply-all-btn:hover { background: var(--salmon-light); }
+  .apply-all-btn.visible { display:block; }
+
+  .pending-bar { background: #fff8f4; border-bottom: 1px solid #f0d5c4; padding: 12px 40px; display:none; align-items:center; gap:16px; }
+  .pending-bar.visible { display:flex; }
+  .pending-badge { background: var(--salmon); color:white; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:bold; }
+  .pending-info { color: var(--text); font-size:13px; }
+  .copy-btn { margin-left:auto; background: var(--charcoal); color:white; border:none; padding:8px 20px; border-radius:4px; font-size:12px; cursor:pointer; letter-spacing:0.05em; }
+  .copy-btn:hover { background: #404848; }
+
+  .page { max-width:1200px; margin:0 auto; padding:36px 40px 80px; }
+  .page-title { font-family:'Marcellus', serif; font-size:24px; font-weight:400; margin-bottom:6px; letter-spacing:0.04em; }
+  .page-sub { color: var(--muted); font-size:14px; margin-bottom:36px; }
+
+  .approval-section { background:#fff8ec; border:1px solid #e8d3a4; padding:22px 24px; margin-bottom:32px; }
+  .approval-card { display:flex; gap:16px; align-items:flex-start; background:#fff; border:1px solid var(--border); padding:14px; margin-bottom:12px; flex-wrap:wrap; }
+  .approval-cover { width:260px; flex:0 0 260px; }
+  .approval-cover img { width:260px; height:180px; object-fit:cover; background:var(--surface2); display:block; cursor:zoom-in; border:1px solid var(--border); }
+  .approval-cover .cover-label { font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); margin-bottom:4px; }
+  .approval-cover .cover-missing { display:none; width:260px; height:180px; align-items:center; justify-content:center; text-align:center; font-size:12px; color:#8a5a00; background:#fff3d6; border:1px dashed #e0b95a; padding:10px; box-sizing:border-box; }
+  .approval-cover.no-img img { display:none; }
+  .approval-cover.no-img .cover-missing { display:flex; }
+  .approval-info { flex:1; min-width:220px; font-size:13px; line-height:1.55; }
+  .approval-addr { font-size:16px; font-weight:700; margin-bottom:2px; }
+  .approval-flag { color:#8a5a00; font-weight:700; }
+  .approval-showing { margin-top:10px; } .approval-showing label { display:block; font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin-bottom:3px; } .approval-showing input { width:100%; max-width:420px; padding:7px 9px; border:1px solid var(--border); font-size:13px; }
+  .approval-actions { display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-top:10px; }
+  .approve-btn { background:#2f7d57; color:#fff; border:none; padding:9px 18px; cursor:pointer; font-size:13px; }
+  .reject-btn { background:#fff; color:#b55a42; border:1px solid #b55a42; padding:9px 18px; cursor:pointer; font-size:13px; }
+  .approval-actions a { font-size:13px; }
+  .section-label { font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color: var(--muted); margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid var(--border); }
+
+  .deal-card { background: var(--surface); border:1px solid var(--border); border-radius:6px; margin-bottom:24px; overflow:hidden; }
+  .deal-header { padding:20px 24px; display:flex; align-items:center; gap:20px; cursor:pointer; user-select:none; }
+  .deal-header:hover { background: #faf8f6; }
+  .deal-cover-thumb { width:72px; height:54px; object-fit:cover; border-radius:4px; border:1px solid var(--border); background:#eee; flex-shrink:0; }
+  .deal-cover-thumb.no-photo { display:flex; align-items:center; justify-content:center; font-size:20px; color:var(--muted); background: var(--surface2); }
+  .deal-info { flex:1; }
+  .deal-address { font-size:15px; font-weight:700; margin-bottom:2px; }
+  .deal-meta { font-size:12px; color:var(--muted); }
+  .pending-tag { display:inline-block; background:#fff0e8; color: var(--salmon); border:1px solid #f0c8a8; border-radius:12px; font-size:11px; padding:2px 10px; margin-left:8px; }
+  .expand-icon { color:var(--muted); font-size:18px; transition:transform .2s; flex-shrink:0; }
+  .deal-card.open .expand-icon { transform: rotate(180deg); }
+
+  .photo-panel { display:none; border-top:1px solid var(--border); padding:20px 24px; background: #faf8f6; }
+  .deal-card.open .photo-panel { display:block; }
+
+  .photo-panel-header { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+  .photo-count { font-size:13px; color:var(--muted); }
+  .folder-link { font-size:12px; color: var(--salmon); text-decoration:none; }
+  .folder-link:hover { text-decoration:underline; }
+
+  .photo-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:10px; }
+  .photo-thumb { position:relative; cursor:pointer; border-radius:4px; overflow:hidden; border:3px solid transparent; transition:border-color .15s, transform .15s; }
+  .photo-thumb:hover { transform:scale(1.03); border-color: var(--salmon-light); }
+  .photo-thumb.current { border-color: var(--green); }
+  .photo-thumb.selected { border-color: var(--salmon); }
+  .photo-thumb img { width:100%; height:120px; object-fit:cover; display:block; background:#eee; }
+  .photo-thumb img[src=""] { display:none; }
+  .thumb-label { position:absolute; bottom:0; left:0; right:0; background:linear-gradient(transparent, rgba(0,0,0,0.7)); padding:6px 8px 4px; font-size:10px; color:white; }
+  .badge { position:absolute; top:5px; right:5px; border-radius:20px; font-size:10px; padding:2px 8px; font-weight:bold; }
+  .badge-current { background: var(--green); color:white; }
+  .badge-selected { background: var(--salmon); color:white; }
+
+  .lightbox { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.88); z-index:999; align-items:center; justify-content:center; }
+  .lightbox.open { display:flex; }
+  .lightbox-inner { position:relative; max-width:90vw; max-height:90vh; }
+  .lightbox-inner img { max-width:100%; max-height:85vh; object-fit:contain; border-radius:4px; }
+  .lightbox-close { position:absolute; top:-16px; right:-16px; background:white; border:none; width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:18px; display:flex; align-items:center; justify-content:center; }
+  .lightbox-set-btn { display:block; margin:16px auto 0; background: var(--salmon); color:white; border:none; padding:10px 28px; border-radius:30px; font-size:14px; cursor:pointer; font-family:'PT Serif', serif; }
+  .lightbox-set-btn:hover { background: var(--salmon-light); }
+  .lightbox-name { text-align:center; color:white; font-size:13px; margin-top:10px; opacity:.7; }
+
+  .no-photos-deal { background: var(--surface); border:1px solid var(--border); border-radius:6px; padding:16px 24px; margin-bottom:12px; display:flex; align-items:center; gap:16px; }
+  .no-photos-deal .deal-address { font-size:14px; }
+  .no-photos-deal .deal-meta { font-size:12px; color:var(--muted); }
+
+  .copy-area { margin-top:20px; background: var(--charcoal); border-radius:6px; padding:20px; }
+  .copy-area h3 { font-family:'Marcellus', serif; font-size:15px; color:white; margin-bottom:10px; font-weight:400; }
+  .copy-area textarea { width:100%; height:120px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:white; border-radius:4px; padding:12px; font-size:12px; font-family:monospace; resize:none; }
+  .copy-area-btns { display:flex; gap:10px; margin-top:10px; }
+  .copy-text-btn { background: var(--salmon); color:white; border:none; padding:9px 22px; border-radius:4px; font-size:13px; cursor:pointer; }
+  .copy-text-btn:hover { background: var(--salmon-light); }
+
+  .toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:var(--charcoal); color:white; padding:12px 24px; border-radius:30px; font-size:13px; opacity:0; transition:opacity .3s; z-index:9999; pointer-events:none; }
+  .toast.show { opacity:1; }
+
+  .add-folder-section { margin-top:24px; border-top:1px solid var(--border); padding-top:20px; }
+  .add-folder-section h3 { font-family:'Marcellus',serif; font-size:16px; font-weight:400; margin-bottom:6px; }
+  .add-folder-section p { font-size:13px; color:var(--muted); margin-bottom:14px; }
+  .folder-input-row { display:flex; gap:8px; }
+  .folder-input-row select { flex:1; padding:9px 12px; border:1px solid var(--border); border-radius:4px; font-family:'PT Serif',serif; font-size:13px; background:white; color:var(--text); }
+  .folder-input-row input { flex:2; padding:9px 12px; border:1px solid var(--border); border-radius:4px; font-family:'PT Serif',serif; font-size:13px; }
+  .folder-submit-btn { background:var(--charcoal); color:white; border:none; padding:9px 20px; border-radius:4px; font-size:13px; cursor:pointer; white-space:nowrap; }
+
+  /* ── Add Deal Section ── */
+  .add-deal-section { margin-top:48px; border-top:2px solid var(--border); padding-top:32px; }
+  .add-deal-section .section-label { margin-bottom:24px; }
+  .deal-form { background: var(--surface); border:1px solid var(--border); border-radius:8px; padding:28px 28px 24px; }
+  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px 24px; }
+  .form-group { display:flex; flex-direction:column; gap:5px; }
+  .form-group.full { grid-column:1/-1; }
+  .form-group label { font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); }
+  .form-group input, .form-group select, .form-group textarea {
+    padding:10px 13px; border:1px solid var(--border); border-radius:4px;
+    font-family:'PT Serif',Georgia,serif; font-size:14px; color:var(--text);
+    background:white; outline:none; transition:border-color .15s;
   }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--salmon-light); }
+  .form-group input::placeholder { color:#bbb; }
+  .form-row-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px 24px; }
+  .form-row-4 { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:16px 24px; }
+  .form-divider { grid-column:1/-1; border:none; border-top:1px solid var(--border); margin:4px 0; }
+  .form-actions { margin-top:22px; display:flex; align-items:center; gap:16px; }
+  .submit-deal-btn { background: var(--salmon); color:white; border:none; padding:12px 32px; border-radius:30px; font-size:14px; font-family:'PT Serif',serif; cursor:pointer; transition:background .2s; }
+  .submit-deal-btn:hover { background: var(--salmon-light); }
+  .submit-deal-btn:disabled { opacity:.5; cursor:default; }
+  .deal-form-status { font-size:13px; color:var(--muted); }
+  .deal-form-status.success { color: var(--green); font-weight:700; }
+  .deal-form-status.error { color: var(--red); }
+  .price-hint { font-size:11px; color:var(--muted); margin-top:2px; }
+  /* Edit Deals */
+  .edit-deals-section { margin-top:48px; border-top:2px solid var(--border); padding-top:32px; }
+  .edit-deals-section .section-label { margin-bottom:24px; }
+  .deal-search-row { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+  .deal-search-input { flex:1; padding:11px 16px; border:1px solid var(--border); border-radius:30px; font-family:'PT Serif',Georgia,serif; font-size:14px; color:var(--text); background:white; outline:none; transition:border-color .15s; }
+  .deal-search-input:focus { border-color: var(--salmon-light); }
+  .deal-search-input::placeholder { color:#bbb; }
+  .deal-search-count { font-size:12px; color:var(--muted); white-space:nowrap; }
+  .edit-deal-list { display:flex; flex-direction:column; gap:10px; }
+  .edit-deal-row { background:white; border:1px solid var(--border); border-radius:4px; overflow:hidden; }
+  .edit-deal-header { display:flex; align-items:center; justify-content:space-between; padding:14px 18px; cursor:pointer; user-select:none; }
+  .edit-deal-header:hover { background:var(--surface2); }
+  .edit-deal-addr { font-family:'PT Serif',serif; font-size:14px; color:var(--charcoal); }
+  .edit-deal-meta { font-size:12px; color:var(--muted); margin-top:2px; }
+  .edit-deal-chevron { color:var(--muted); font-size:12px; transition:transform .2s; }
+  .edit-deal-row.open .edit-deal-chevron { transform:rotate(180deg); }
+  .edit-deal-body { display:none; padding:20px 18px; border-top:1px solid var(--border); background:var(--surface2); }
+  .edit-deal-row.open .edit-deal-body { display:block; }
+  .edit-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px; }
+  .edit-form-row4 { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:12px; margin-bottom:14px; }
+  .edit-form-row3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-bottom:14px; }
+  .edit-form-full { margin-bottom:14px; }
+  .edit-form-group label { display:block; font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px; }
+  .edit-form-group input, .edit-form-group select { width:100%; background:white; border:1px solid var(--border); color:var(--text); padding:8px 10px; border-radius:4px; font-size:13px; font-family:'PT Serif',serif; outline:none; }
+  .edit-form-group input:focus, .edit-form-group select:focus { border-color:var(--salmon); }
+  .edit-actions { display:flex; align-items:center; gap:12px; margin-top:6px; }
+  .save-deal-btn { background:var(--salmon); color:white; border:none; padding:9px 24px; border-radius:30px; font-size:13px; font-family:'PT Serif',serif; cursor:pointer; transition:background .2s; }
+  .save-deal-btn:hover { background:var(--salmon-light); }
+  .save-deal-btn:disabled { opacity:.5; cursor:default; }
+  .delete-deal-btn { background:white; color:var(--red); border:1px solid var(--red); padding:9px 20px; border-radius:30px; font-size:13px; font-family:'PT Serif',serif; cursor:pointer; transition:all .2s; margin-left:auto; }
+  .delete-deal-btn:hover { background:var(--red); color:white; }
+  .delete-deal-btn:disabled { opacity:.5; cursor:default; }
+  .edit-status { font-size:13px; color:var(--muted); }
+  .edit-status.success { color:var(--green); font-weight:700; }
+  .edit-status.error { color:var(--red); }
+  /* Edit section photo grid */
+  .edit-photo-section { margin-top:14px; padding-top:14px; border-top:1px solid var(--border); }
+  .edit-photo-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .edit-photo-label { font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); }
+  .edit-photo-hint { font-size:11px; color:var(--muted); }
+  .edit-photo-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:8px; }
+  .edit-photo-thumb { position:relative; border-radius:4px; overflow:hidden; border:3px solid transparent; transition:border-color .15s; }
+  .edit-photo-thumb.is-cover { border-color:var(--green); }
+  .edit-photo-thumb img { width:100%; height:100px; object-fit:cover; display:block; background:#eee; }
+  .edit-photo-actions { position:absolute; inset:0; background:rgba(0,0,0,0); display:flex; align-items:flex-end; justify-content:space-between; padding:4px; opacity:0; transition:opacity .15s; }
+  .edit-photo-thumb:hover .edit-photo-actions { opacity:1; background:rgba(0,0,0,0.35); }
+  .ephoto-cover-btn { background:var(--green); color:white; border:none; padding:3px 8px; border-radius:3px; font-size:10px; cursor:pointer; white-space:nowrap; }
+  .ephoto-del-btn { background:var(--red); color:white; border:none; padding:3px 8px; border-radius:3px; font-size:10px; cursor:pointer; }
+  .edit-photo-cover-badge { position:absolute; top:4px; right:4px; background:var(--green); color:white; font-size:9px; padding:2px 6px; border-radius:10px; font-weight:bold; pointer-events:none; }
 
-  .buyers-banner { background: var(--salmon); text-align:center; padding:10px 20px; }
-  .buyers-banner a { color:white; font-family:'Marcellus', serif; font-size:14px; letter-spacing:0.08em; text-decoration:none; display:inline-flex; align-items:center; gap:8px; }
-  .buyers-banner a:hover { text-decoration:underline; }
-
-  .controls { max-width:1400px; margin:0 auto; padding:28px 40px 20px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
-  .search-wrap { position:relative; flex:1; min-width:200px; }
-  .search-wrap input { width:100%; background:white; border:1px solid var(--border); color:var(--text); padding:10px 14px 10px 38px; border-radius:4px; font-size:14px; font-family:'PT Serif', serif; outline:none; }
-  .search-wrap input:focus { border-color:var(--salmon); }
-  .search-wrap input::placeholder { color:var(--muted); }
-  .search-icon { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--muted); pointer-events:none; }
-  .filter-chips { display:flex; gap:8px; flex-wrap:wrap; }
-  .chip { padding:8px 20px; border-radius:30px; border:1px solid var(--border); background:white; color:var(--muted); font-size:13px; font-family:'PT Serif', serif; cursor:pointer; transition:all .2s; white-space:nowrap; }
-  .chip:hover { border-color:var(--salmon); color:var(--charcoal); }
-  .chip.active { background:var(--salmon); border-color:var(--salmon); color:white; }
-  .sort-select { background:white; border:1px solid var(--border); color:var(--text); padding:8px 14px; border-radius:4px; font-size:13px; font-family:'PT Serif', serif; cursor:pointer; outline:none; }
-  .sort-select:focus { border-color:var(--salmon); }
-  .count-badge { padding:7px 14px; background:var(--charcoal); border-radius:30px; font-size:13px; color:white; white-space:nowrap; font-family:'PT Serif', serif; letter-spacing:0.04em; }
-
-  .grid { max-width:1400px; margin:0 auto; padding:0 40px 60px; display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:24px; }
-  .card { background:var(--surface); border:1px solid var(--border); border-radius:4px; overflow:hidden; transition:transform .25s, box-shadow .25s; }
-  .card:hover { transform:translateY(-4px); box-shadow:0 16px 48px rgba(48,54,54,.12); }
-
-  .card-photo { position:relative; height:200px; background:var(--surface2); overflow:hidden; text-decoration:none; display:block; }
-  .card-photo img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s; }
-  .card:hover .card-photo img { transform:scale(1.05); }
-  a.card-photo::after { content:'📷 View Property'; position:absolute; bottom:8px; right:8px; background:rgba(0,0,0,0.55); color:white; font-size:11px; font-family:'PT Serif',serif; padding:4px 8px; border-radius:12px; opacity:0; transition:opacity .2s; pointer-events:none; }
-  a.card-photo:hover::after { opacity:1; }
-  .card-photo .photo-fallback {
-    width:100%; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center;
-    color:rgba(255,255,255,.85); font-size:13px; gap:6px; padding:16px; text-align:center;
-    position:relative; overflow:hidden;
-  }
-  .card-photo .photo-fallback::before {
-    content:''; position:absolute; inset:0;
-    background:radial-gradient(ellipse at 30% 30%,rgba(255,255,255,.06) 0%,transparent 70%);
-  }
-  .card-photo .photo-fallback .house-icon { font-size:38px; line-height:1; filter:drop-shadow(0 2px 6px rgba(0,0,0,.3)); position:relative; z-index:1; }
-  .card-photo .photo-fallback .fb-addr { font-size:12px; font-weight:600; color:rgba(255,255,255,.9); position:relative; z-index:1; max-width:200px; line-height:1.4; }
-  .card-photo .photo-fallback .fb-city { font-size:11px; color:rgba(255,255,255,.6); position:relative; z-index:1; }
-  .card-photo.flip-card .photo-fallback { background:linear-gradient(135deg,#4a3820,#7a5c38,#2e2010); }
-  .card-photo.rental-card .photo-fallback { background:linear-gradient(135deg,#2a3d38,#4a6e60,#1a2820); }
-  .card-photo.coliving-card .photo-fallback { background:linear-gradient(135deg,#4a3020,#8a6040,#2e1e10); }
-  .card-photo.pending-card .photo-fallback { background:linear-gradient(135deg,#303636,#4a5454,#1e2424); }
-.photo-links { position:absolute; bottom:8px; right:8px; display:flex; gap:5px; }
-  .photo-link { padding:4px 10px; border-radius:4px; font-size:11px; font-weight:600; text-decoration:none; cursor:pointer; transition:opacity .2s; backdrop-filter:blur(6px); font-family:'PT Serif', serif; }
-  .photo-link:hover { opacity:.85; }
-  .photo-link.zillow { background:rgba(0,86,214,.85); color:white; }
-  .photo-link.redfin { background:rgba(196,40,0,.85); color:white; }
-  .photo-link.realtor { background:rgba(180,0,0,.85); color:white; }
-  .strategy-badge-photo { position:absolute; top:10px; left:10px; padding:4px 12px; border-radius:3px; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.8px; font-family:'PT Serif', serif; backdrop-filter:blur(6px); }
-  .strategy-badge-photo.flip { background:rgba(212,150,125,.9); color:white; }
-  .strategy-badge-photo.rental { background:rgba(74,140,111,.9); color:white; }
-  .strategy-badge-photo.pending { background:rgba(48,54,54,.8); color:rgba(212,150,125,1); }
-  .exclusive-badge { position:absolute; top:10px; left:10px; z-index:3; background:linear-gradient(135deg,#D4967D,#b5735a); color:white; padding:5px 14px; border-radius:3px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.9px; font-family:'PT Serif', serif; box-shadow:0 2px 8px rgba(0,0,0,0.25); }
-
-  .card-body { padding:18px 20px; }
-  .card-address { font-family:'PT Serif', serif; font-size:15px; font-weight:400; margin-bottom:1px; color:var(--charcoal); }
-  .card-city { font-size:14px; color:var(--charcoal); margin-bottom:14px; letter-spacing:0.01em; }
-  .price-row { display:flex; align-items:baseline; gap:8px; margin-bottom:14px; }
-  .asking-price { font-family:'Marcellus', serif; font-size:26px; font-weight:400; color:var(--charcoal); }
-  .price-label { font-size:12px; color:var(--muted); }
-
-  .metrics { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:14px; }
-  .metric { border-top:2px solid var(--border); padding-top:8px; }
-  .metric .m-label { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.7px; margin-bottom:3px; }
-  .metric .m-value { font-size:14px; font-weight:700; color:var(--charcoal); }
-  .metric .m-value.na { color:var(--muted); font-style:italic; font-weight:400; font-size:12px; }
-
-  .prop-row { display:flex; align-items:center; gap:10px; padding-top:12px; border-top:1px solid var(--border); font-size:12px; color:var(--muted); flex-wrap:wrap; }
-  .prop-pill { background:var(--surface2); padding:2px 8px; border-radius:3px; font-size:11px; letter-spacing:0.03em; }
-
-  .card-footer { padding:12px 20px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:8px; background:var(--surface2); flex-wrap:wrap; }
-  .date-badge { font-size:11px; color:var(--muted); letter-spacing:0.04em; }
-  .footer-btns { display:flex; gap:8px; align-items:center; }
-  .interest-btn { background:var(--salmon); color:white; border:none; padding:8px 18px; border-radius:30px; font-size:12px; font-family:'PT Serif', serif; letter-spacing:0.04em; cursor:pointer; transition:background .2s; text-decoration:none; display:inline-block; }
-  .interest-btn:hover { background:var(--salmon-light); }
-  .interest-btn.secondary-btn { background:white; color:var(--charcoal); border:1px solid var(--border); }
-  .interest-btn.secondary-btn:hover { background:white; border-color:var(--salmon); color:var(--salmon); }
-  .photos-btn { background:white; color:var(--charcoal); border:1px solid var(--border); padding:8px 14px; border-radius:30px; font-size:12px; font-family:'PT Serif', serif; letter-spacing:0.04em; cursor:pointer; text-decoration:none; transition:border-color .2s; display:inline-block; }
-  .photos-btn:hover { border-color:var(--salmon); color:var(--salmon); }
-
-  .no-results { grid-column:1/-1; text-align:center; padding:80px 20px; color:var(--muted); }
-  .no-results .icon { font-size:48px; margin-bottom:16px; }
-  .no-results h3 { font-family:'Marcellus', serif; font-size:22px; font-weight:400; margin-bottom:8px; color:var(--charcoal); }
-
-  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(48,54,54,.6); backdrop-filter:blur(4px); z-index:1000; align-items:center; justify-content:center; padding:20px; }
-  .modal-overlay.open { display:flex; }
-  .modal { background:white; border:1px solid var(--border); border-radius:4px; padding:34px; width:100%; max-width:480px; position:relative; animation:slideUp .25s ease; max-height:90vh; overflow-y:auto; }
-  @keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-  .modal h2 { font-family:'Marcellus', serif; font-size:22px; font-weight:400; margin-bottom:4px; color:var(--charcoal); }
-  .modal-address { font-size:13px; color:var(--muted); margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid var(--border); }
-  .modal-close { position:absolute; top:18px; right:18px; background:var(--surface2); border:1px solid var(--border); color:var(--muted); width:30px; height:30px; border-radius:50%; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center; }
-  .modal-links { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
-  .modal-link { display:flex; align-items:center; gap:6px; padding:8px 14px; border-radius:4px; text-decoration:none; font-size:13px; font-family:'PT Serif', serif; transition:opacity .2s; }
-  .modal-link:hover { opacity:.85; }
-  .modal-link.zillow { background:#0056d6; color:white; }
-  .modal-link.redfin { background:#c42800; color:white; }
-  .modal-link.realtor { background:#d00000; color:white; }
-  .form-group { margin-bottom:14px; }
-  .form-group label { display:block; font-size:11px; font-weight:400; color:var(--muted); margin-bottom:5px; text-transform:uppercase; letter-spacing:0.08em; }
-  .form-group input, .form-group textarea { width:100%; background:white; border:1px solid var(--border); color:var(--text); padding:10px 12px; border-radius:4px; font-size:14px; outline:none; font-family:'PT Serif', serif; }
-  .form-group input:focus, .form-group textarea:focus { border-color:var(--salmon); }
-  .form-group textarea { min-height:70px; resize:vertical; }
-  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-  .submit-btn { width:100%; background:var(--salmon); color:white; border:none; padding:13px; border-radius:30px; font-size:14px; font-family:'PT Serif', serif; letter-spacing:0.06em; cursor:pointer; margin-top:6px; transition:background .2s; }
-  .submit-btn:hover { background:var(--salmon-light); }
-  .success-msg { text-align:center; padding:16px 0; }
-  .success-msg .checkmark { font-size:44px; margin-bottom:10px; }
-  .success-msg h3 { font-family:'Marcellus', serif; font-size:20px; font-weight:400; margin-bottom:6px; color:var(--charcoal); }
-  .success-msg p { color:var(--muted); font-size:13px; }
-
-  .map-section { background: var(--surface); border-bottom: 1px solid var(--border); }
-  .map-header { max-width:1400px; margin:0 auto; padding:16px 40px 10px; display:flex; align-items:center; justify-content:space-between; }
-  .map-title { font-family:'Marcellus', serif; font-size:14px; color:var(--charcoal); letter-spacing:0.08em; text-transform:uppercase; }
-  .map-stats { font-size:12px; color:var(--muted); font-style:italic; }
-  #dealMap { height:360px; width:100%; }
-  .map-loading { height:360px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:13px; font-style:italic; background:var(--surface2); }
-  .leaflet-popup-content-wrapper { font-family:'PT Serif',Georgia,serif; font-size:13px; border-radius:4px; box-shadow:0 4px 16px rgba(0,0,0,0.12); }
-  .leaflet-popup-content strong { font-size:13px; color:var(--charcoal); }
-  .leaflet-tooltip { font-family:'PT Serif',Georgia,serif; font-size:13px; border-radius:4px; border:1px solid var(--border); box-shadow:0 4px 16px rgba(0,0,0,0.12); padding:8px 10px; }
-  .leaflet-tooltip strong { color:var(--charcoal); }
-  .map-pin-price { color:var(--salmon); font-size:12px; margin-top:2px; }
-  .map-pin-type { color:var(--muted); font-size:11px; margin-top:1px; }
-  .map-pin-link { display:inline-block; margin-top:6px; color:var(--salmon); font-weight:700; font-size:12px; text-decoration:none; }
-  .map-pin-link:hover { text-decoration:underline; }
-
-  @media(max-width:768px){
-    header{padding:16px 20px;}
-    .controls,.grid{padding-left:20px;padding-right:20px;}
-    .grid{grid-template-columns:1fr;}
-    .map-header{padding:12px 20px 8px;}
-    #dealMap{height:280px;}
-  }
-
-  /* Single-property detail view (for personalized per-deal links) */
-  .detail-wrap { max-width:900px; margin:0 auto; padding:24px 40px 60px; }
-  .back-link { display:inline-flex; align-items:center; gap:6px; font-size:13px; color:var(--muted); text-decoration:none; margin-bottom:18px; cursor:pointer; font-family:'PT Serif', serif; }
-  .back-link:hover { color:var(--salmon); }
-  .detail-card { background:var(--surface); border:1px solid var(--border); border-radius:4px; overflow:hidden; }
-
-  /* Photo gallery: hero + thumbnail strip (thumbnails populate async from the Drive folder) */
-  .detail-gallery { position:relative; background:var(--surface2); }
-  .detail-photo { position:relative; height:420px; background:var(--surface2); overflow:hidden; }
-  .detail-photo img { width:100%; height:100%; object-fit:cover; display:block; cursor:pointer; }
-  .detail-thumbs { display:flex; gap:6px; padding:6px; overflow-x:auto; background:var(--surface); }
-  .detail-thumbs img { width:84px; height:64px; object-fit:cover; border-radius:3px; cursor:pointer; opacity:.65; transition:opacity .15s, outline-color .15s; flex:0 0 auto; outline:2px solid transparent; outline-offset:-2px; }
-  .detail-thumbs img:hover { opacity:.9; }
-  .detail-thumbs img.active { opacity:1; outline-color:var(--salmon); }
-  .detail-photo-count { position:absolute; bottom:10px; right:10px; background:rgba(0,0,0,.6); color:white; font-size:12px; font-family:'PT Serif', serif; padding:4px 10px; border-radius:12px; }
-
-  .detail-body { padding:28px 32px; }
-  .detail-address { font-family:'Marcellus', serif; font-size:26px; font-weight:400; color:var(--charcoal); margin-bottom:4px; }
-  .detail-city { font-size:15px; color:var(--muted); margin-bottom:20px; }
-
-  /* Prominent stats bar — asking price, beds, baths, sqft */
-  .detail-stats-bar { display:flex; flex-wrap:wrap; gap:24px 40px; align-items:baseline; margin-bottom:22px; padding-bottom:22px; border-bottom:1px solid var(--border); }
-  .detail-stats-bar .stat-price .m-value { font-family:'Marcellus', serif; font-size:36px; font-weight:400; color:var(--charcoal); }
-  .detail-stats-bar .m-label { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.7px; margin-bottom:4px; }
-  .detail-stats-bar .m-value { font-size:20px; font-weight:700; color:var(--charcoal); }
-
-  .detail-metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:16px; margin-bottom:22px; }
-  .detail-metric { border-top:2px solid var(--border); padding-top:10px; }
-  .detail-metric .m-label { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.7px; margin-bottom:4px; }
-  .detail-metric .m-value { font-size:17px; font-weight:700; color:var(--charcoal); }
-  .detail-metric .m-value.na { color:var(--muted); font-style:italic; font-weight:400; font-size:14px; }
-  .detail-notes { background:var(--surface2); border-left:3px solid var(--salmon); border-radius:0 4px 4px 0; padding:14px 18px; margin-bottom:24px; font-size:14px; color:var(--charcoal); line-height:1.6; }
-  .detail-actions { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:8px; }
-  .detail-actions .interest-btn { padding:12px 28px; font-size:14px; }
-  .detail-not-found { text-align:center; padding:80px 20px; color:var(--muted); }
-  .detail-not-found .icon { font-size:48px; margin-bottom:16px; }
-
-  /* Per-property location map */
-  .detail-section-title { font-family:'Marcellus', serif; font-size:15px; color:var(--charcoal); letter-spacing:0.08em; text-transform:uppercase; margin:32px 0 12px; }
-  .detail-map-wrap { border-radius:4px; overflow:hidden; border:1px solid var(--border); }
-  #detailMap { height:260px; background:var(--surface2); }
-  .detail-map-caption { font-size:12px; color:var(--muted); margin-top:8px; }
-
-  /* Listed-by card */
-  .listed-by-card { margin-top:24px; padding-top:20px; border-top:1px solid var(--border); }
-  .listed-by-card .lb-label { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.7px; margin-bottom:6px; }
-  .listed-by-card .lb-name { font-family:'Marcellus', serif; font-size:18px; color:var(--charcoal); }
-  .listed-by-card .lb-sub { font-size:13px; color:var(--muted); margin-top:2px; }
-
-  @media(max-width:768px){
-    .detail-wrap{padding:20px 20px 40px;}
-    .detail-photo{height:240px;}
-    .detail-body{padding:20px;}
-    .detail-address{font-size:20px;}
-    .detail-stats-bar .stat-price .m-value{font-size:28px;}
-  }
-
-  .match-tag { display:inline-block; background:var(--salmon); color:#fff; font-size:11px; letter-spacing:.06em; text-transform:uppercase; padding:3px 10px; border-radius:999px; margin-bottom:8px; }
-  .card.match { box-shadow:0 0 0 2px var(--salmon); }
-  .login-banner { background:var(--salmon); text-align:center; padding:11px 20px; color:#fff; font-family:'Marcellus',serif; font-size:15px; letter-spacing:.05em; }
-  .login-banner a { color:#fff; text-decoration:underline; text-underline-offset:3px; }
-  .login-banner .lb-btn { display:inline-block; margin-left:10px; background:#fff; color:var(--charcoal); text-decoration:none; padding:5px 16px; border-radius:999px; font-size:13px; }
-  .login-banner .lb-sep { opacity:.6; margin:0 12px; }
-  .admin-login-overlay { position:fixed; inset:0; background:rgba(43,49,49,0.92); display:none; align-items:center; justify-content:center; z-index:2000; padding:20px; }
-  .admin-login-box { background:white; border-radius:6px; padding:36px 34px; width:100%; max-width:360px; box-shadow:0 20px 60px rgba(0,0,0,.35); }
-  .admin-login-box h2 { font-family:'Marcellus', serif; font-size:20px; font-weight:400; color:var(--charcoal); margin-bottom:4px; }
-  .admin-login-box .sub { font-size:13px; color:var(--muted); margin-bottom:22px; }
-  .admin-login-box label { display:block; font-size:11px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:5px; }
-  .admin-login-box .field { margin-bottom:16px; }
-  .admin-login-box input { width:100%; border:1px solid var(--border); border-radius:4px; padding:10px 12px; font-size:14px; font-family:'PT Serif', serif; outline:none; box-sizing:border-box; }
-  .admin-login-box input:focus { border-color:var(--salmon); }
-  .admin-login-box .btn-row { display:flex; gap:10px; margin-top:6px; }
-  .admin-login-box button { flex:1; background:var(--salmon); color:white; border:none; padding:12px; border-radius:30px; font-size:14px; font-family:'PT Serif', serif; letter-spacing:0.05em; cursor:pointer; transition:background .2s; }
-  .admin-login-box button:hover { background:var(--salmon-light); }
-  .admin-login-box button:disabled { opacity:.6; cursor:not-allowed; }
-  .admin-login-box button.cancel { background:transparent; color:var(--muted); border:1px solid var(--border); }
-  .admin-login-box button.cancel:hover { background:#f5f2ee; }
-  .admin-login-error { color:var(--red); font-size:13px; margin-top:12px; display:none; }
+  .admin-gate { position:fixed; inset:0; background:#212121; z-index:5000; display:none; align-items:center; justify-content:center; padding:20px; }
+  .admin-gate-box { background:#fff; padding:36px 34px; width:100%; max-width:360px; }
+  .admin-gate-box h2 { font-size:18px; letter-spacing:.14em; text-transform:uppercase; font-weight:500; margin-bottom:4px; }
+  .admin-gate-box .sub { font-size:13px; color:#6f6f6f; margin-bottom:22px; }
+  .admin-gate-box label { display:block; font-size:11px; font-weight:600; color:#6f6f6f; text-transform:uppercase; letter-spacing:.06em; margin-bottom:5px; }
+  .admin-gate-box input { width:100%; border:1px solid #ddd; padding:10px 12px; font-size:14px; margin-bottom:16px; box-sizing:border-box; }
+  .admin-gate-box button { width:100%; background:#b89a5e; color:#fff; border:none; padding:12px; font-size:13px; letter-spacing:.14em; text-transform:uppercase; cursor:pointer; }
+  .admin-gate-box button:disabled { opacity:.6; cursor:not-allowed; }
+  .admin-gate-err { color:#b0513a; font-size:13px; margin-top:12px; min-height:16px; }
 </style>
-<link rel="stylesheet" href="/site.css">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/theme.css">
 </head>
-<body data-page="deals">
-
-<div class="admin-login-overlay" id="adminLoginOverlay">
-  <div class="admin-login-box">
+<body>
+<div class="admin-gate" id="adminGate">
+  <div class="admin-gate-box">
     <h2>Admin Login</h2>
-    <div class="sub">Megan Colyer Corp — Portal Admin</div>
-    <div class="field">
-      <label>Email</label>
-      <input type="email" id="adminLoginEmail" autocomplete="username" placeholder="deals@megancolyer.com">
-    </div>
-    <div class="field">
-      <label>Password</label>
-      <input type="password" id="adminLoginPassword" autocomplete="current-password" placeholder="••••••••">
-    </div>
-    <div class="btn-row">
-      <button type="button" class="cancel" onclick="hideHomeAdminLogin()">Cancel</button>
-      <button type="button" id="adminLoginBtn" onclick="submitHomeAdminLogin()">Log In</button>
-    </div>
-    <div class="admin-login-error" id="adminLoginError"></div>
+    <div class="sub">Megan Colyer Corp: Portal Admin</div>
+    <label for="agEmail">Email</label><input type="email" id="agEmail" autocomplete="username">
+    <label for="agPass">Password</label><input type="password" id="agPass" autocomplete="current-password">
+    <button type="button" id="agBtn" onclick="adminGateLogin()">Log In</button>
+    <div class="admin-gate-err" id="agErr"></div>
   </div>
 </div>
 
 
-
-<header class="site-header">
-  <div class="sh-inner">
-    <a class="sh-brand" href="/" aria-label="Megan Colyer Corp — home">
-      <img src="/logo-white.png" alt="Megan Colyer Corp">
-      <span class="sh-name">Megan Colyer Corp<small>Off-market deals · St. Louis</small></span>
-    </a>
-    <nav class="sh-nav" aria-label="Main">
-
-      <a href="/buyers" data-nav="buyers">Join Buyers List</a>
-      <a href="/joint-ventures" data-nav="jv">Wholesalers &amp; Realtors</a>
-      <a href="/" data-nav="deals" class="sh-deals">Available Deals</a>
-      <a href="/wholesaler-portal" data-nav="wholesaler-portal" class="sh-account">Wholesaler Login</a>
-      <a href="#" data-nav="admin-login" class="sh-account" onclick="showHomeAdminLogin(); return false;">Admin Login</a>
-    </nav>
-    <div class="sh-actions">
-      <a class="sh-call" href="tel:6366981412" aria-label="Call or text 636-698-1412"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span>Call/Text 636-698-1412</span></a>
-      <button class="sh-menu" type="button" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-    </div>
+<header>
+  <div class="logo-text">
+    <h1>Admin</h1>
+    <img src="../logo-white.png" alt="Megan Colyer Corp" class="header-logo-sm">
+  </div>
+  <div class="header-right">
+    <a class='back-btn' href='/owner'>← Back to Portal</a>
   </div>
 </header>
 
-<div class="login-banner" id="loginBanner">
-  <span id="lbText"><b>Buyers:</b> log in to see the deals that match your buy box.</span>
-  <a class="lb-btn" href="/buyer-portal" id="lbBtn">Buyer Login →</a>
-</div>
-
-<div class="map-section">
-  <div class="map-header">
-    <span class="map-title">📍 Properties by Area</span>
-    <span class="map-stats" id="mapStats">Loading map…</span>
+<div class="page">
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- EDIT DEALS SECTION                                      -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="approval-section" id="approvalSection" style="display:none">
+    <div class="section-label">Properties Awaiting Approval <span id="approvalCount"></span></div>
+    <div id="approvalQueue"></div>
   </div>
-  <div id="dealMap"><div class="map-loading">Loading map…</div></div>
-</div>
 
-<div class="controls">
-  <div class="search-wrap">
-    <span class="search-icon">🔍</span>
-    <input type="text" id="searchInput" placeholder="Search address, city, state..." oninput="render()">
+  <div class="edit-deals-section">
+    <div class="section-label">Edit Existing Deals</div>
+    <div class="deal-search-row">
+      <input type="text" id="dealSearchInput" class="deal-search-input" placeholder="Search by address, city, source, status…" oninput="onDealSearchInput(this.value)" />
+      <span class="deal-search-count" id="dealSearchCount"></span>
+    </div>
+    <div class="edit-deal-list" id="editDealList">
+      <p style="color:var(--muted);font-size:14px;">Loading deals…</p>
+    </div>
   </div>
-  <div class="filter-chips">
-    <div class="chip active" onclick="setFilter('all',this)">All</div>
-    <div class="chip" onclick="setFilter('sfh',this)">Single Family</div>
-    <div class="chip" onclick="setFilter('mfh',this)">Multi Family</div>
-    <div class="chip" id="matchChip" style="display:none" onclick="setFilter('match',this)">My Matches</div>
-  </div>
-  <select class="sort-select" id="zipSelect" onchange="render()">
-    <option value="">All Zip Codes</option>
-  </select>
-  <select class="sort-select" id="sortSelect" onchange="render()">
-    <option value="newest">Newest First</option>
-    <option value="zip">Zip Code</option>
-    <option value="price_asc">Price: Low to High</option>
-    <option value="price_desc">Price: High to Low</option>
-    <option value="arv">Best ARV</option>
-    <option value="spread">Best Spread</option>
-  </select>
-  <div class="count-badge" id="countBadge">— deals</div>
-</div>
 
-<div class="grid" id="dealGrid"></div>
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- ADD DEAL SECTION                                        -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="add-deal-section">
+    <div class="section-label">Add New Deal</div>
+    <div class="deal-form">
 
-<div class="detail-wrap" id="propertyDetailView" style="display:none"></div>
-
-<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <h2>Schedule a Walk Through</h2>
-    <div class="modal-address" id="modalAddress">Let us know you'd like to walk through this property and we'll be in touch to set a time.</div>
-    <div id="modalLinks" class="modal-links"></div>
-    <div id="modalNotes" style="display:none;background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:12px 16px;margin-bottom:18px;font-size:13px;line-height:1.6;color:var(--charcoal)"></div>
-    <div id="modalForm">
-      <div class="form-row">
-        <div class="form-group"><label>First Name *</label><input type="text" id="fname" placeholder="Jane"></div>
-        <div class="form-group"><label>Last Name *</label><input type="text" id="lname" placeholder="Smith"></div>
+      <!-- Row 1: Address (full width) -->
+      <div style="margin-bottom:16px;">
+        <div class="form-group full">
+          <label>Property Address *</label>
+          <input type="text" id="df-address" placeholder="e.g. 1234 Main St, Saint Louis, MO 63101" required />
+        </div>
       </div>
-      <div class="form-group"><label>Email *</label><input type="email" id="email" placeholder="jane@example.com"></div>
-      <div class="form-group"><label>Phone</label><input type="tel" id="phone" placeholder="(314) 555-0100"></div>
-      <div class="form-group"><label>Notes / Preferred Times</label><textarea id="notes" placeholder="Preferred days/times, questions, etc..."></textarea></div>
-      <button class="submit-btn" onclick="submitForm()">Request Walk Through →</button>
-    </div>
-    <div id="modalSuccess" class="success-msg" style="display:none">
-      <div class="checkmark">✅</div><h3>Got it!</h3>
-      <p>We'll reach out within 24 hours to schedule your walk through.</p>
+
+      <!-- Row 2: Type + Source + Zip -->
+      <div class="form-row-3" style="margin-bottom:16px;">
+        <div class="form-group">
+          <label>Property Type</label>
+          <select id="df-type">
+            <option value="Single Family">Single Family</option>
+            <option value="Multi Family">Multi Family</option>
+            <option value="Condo">Condo</option>
+            <option value="Mobile">Mobile</option>
+            <option value="Commercial">Commercial</option>
+            <option value="Land">Land</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Source / Who Sent It</label>
+          <input type="text" id="df-source" placeholder="e.g. New Western, Liah Avisar" />
+        </div>
+        <div class="form-group">
+          <label>Zip Code</label>
+          <input type="text" id="df-zip" placeholder="63101" maxlength="5" />
+        </div>
+      </div>
+
+      <!-- Row 3: Beds / Baths / Sqft / Year -->
+      <div class="form-row-4" style="margin-bottom:16px;">
+        <div class="form-group">
+          <label>Beds</label>
+          <input type="number" id="df-beds" placeholder="3" min="0" step="1" />
+        </div>
+        <div class="form-group">
+          <label>Baths</label>
+          <input type="number" id="df-baths" placeholder="2" min="0" step="0.5" />
+        </div>
+        <div class="form-group">
+          <label>Sq Ft</label>
+          <input type="number" id="df-sqft" placeholder="1200" min="0" />
+        </div>
+        <div class="form-group">
+          <label>Year Built</label>
+          <input type="number" id="df-year" placeholder="1955" min="1800" max="2030" />
+        </div>
+      </div>
+
+      <!-- Row 4: Prices -->
+      <div class="form-row-3" style="margin-bottom:16px;">
+        <div class="form-group">
+          <label>Asking Price</label>
+          <input type="number" id="df-price" placeholder="125000" min="0" />
+          <div class="price-hint">Leave blank if unknown</div>
+        </div>
+        <div class="form-group">
+          <label>ARV (After Repair Value)</label>
+          <input type="number" id="df-arv" placeholder="220000" min="0" />
+          <div class="price-hint">Leave blank if unknown</div>
+        </div>
+        <div class="form-group">
+          <label>Estimated Repair Cost</label>
+          <input type="number" id="df-repairs" placeholder="45000" min="0" />
+          <div class="price-hint">Leave blank if unknown</div>
+        </div>
+      </div>
+
+      <!-- Row 5: Drive folder + Date -->
+      <div class="form-grid" style="margin-bottom:4px;">
+        <div class="form-group">
+          <label>Google Drive Photo Folder (optional)</label>
+          <input type="text" id="df-drive" placeholder="https://drive.google.com/drive/folders/..." />
+        </div>
+        <div class="form-group">
+          <label>Date Received</label>
+          <input type="date" id="df-date" />
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="submit-deal-btn" id="submitDealBtn" onclick="submitDeal()">Add to Portal →</button>
+        <span class="deal-form-status" id="dealFormStatus"></span>
+      </div>
     </div>
   </div>
 </div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lightboxImg" src="" alt="">
+    <div class="lightbox-name" id="lightboxName"></div>
+    <button class="lightbox-set-btn" id="lightboxSetBtn" onclick="setFromLightbox()">Set as Cover Photo</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
 
 <script>
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbxATueK1LD5LFGL_KNCBXF6ijTeFyE5qcYsSFdcPucbsNQSD8SeDnBGT3O8ZBafqy2F7Q/exec';
-let DEALS = [];
-let LOGGED_IN = false;
+// ============================================================
+// DATA: All known deals (from portal)
+// ============================================================
+const DEALS = [{"leadId":"a0e32485-16b8-406b-96fa-91b443141057","address":"7038 Oleatha Ave, Saint Louis, MO 63139","photo":"photos/7038-oleatha-ext.jpg","driveUrl":"https://drive.google.com/drive/folders/1Rjyy96yCgjt1V-V4x3Aw4PstwWfrWdEh","source":"Liah Avisar"},{"leadId":"7ce0d6ec-62bd-41da-8e6e-1c8ea0ef0b7f","address":"659 Chelsea Ave, Saint Louis, MO 63122","photo":"photos/659-chelsea-ext.jpg","driveUrl":null,"source":""},{"leadId":"b68b2caa-7ff7-4f32-9d0b-9b3d4cf7ec3b","address":"5475 Partridge Ave, Saint Louis, MO 63120","photo":"photos/5475-partridge-ext.jpg","driveUrl":null,"source":""}];
 
-// leadIds Megan has flagged for an "Exclusive Deal" ribbon on their photo (grid card + detail page).
-// Add/remove leadIds here as she calls out specific properties — no Sheet/GAS schema change needed.
-const EXCLUSIVE_DEAL_IDS = ['35644285-df28-4abb-8d88-2dfd54c55721']; // 8525 Philo Ave, Affton MO
+// Note: full DEALS array of 43 deals — only photo-relevant fields shown above.
+// Full list sourced from index.html on build.
 
-// Log a portal visit if this link was personalized for a specific buyer (?b=<contactId>&n=<name>)
-(function(){
-  try {
-    var params = new URLSearchParams(window.location.search);
-    var buyerId = params.get('b');
-    if (buyerId) {
-      var buyerName = params.get('n') || '';
-      var url = GAS_URL + '?action=logPortalClick'
-        + '&buyerId=' + encodeURIComponent(buyerId)
-        + '&buyerName=' + encodeURIComponent(buyerName)
-        + '&ua=' + encodeURIComponent(navigator.userAgent || '')
-        + '&ref=' + encodeURIComponent(document.referrer || '');
-      fetch(url, { mode: 'no-cors' }).catch(function(){});
-    }
-  } catch (e) {}
-})();
+let ALL_DEAL_ADDRESSES = [];
 
-let activeFilter = 'all';
-
-function populateZips() {
-  const zips = [...new Set(DEALS.map(d => {
-    const m = d.address.match(/\b(\d{5})\b/);
-    return m ? m[1] : null;
-  }).filter(Boolean))].sort();
-  const sel = document.getElementById('zipSelect');
-  sel.innerHTML = '<option value="">All Zip Codes</option>';
-  zips.forEach(z => {
-    const opt = document.createElement('option');
-    opt.value = z; opt.textContent = z;
-    sel.appendChild(opt);
-  });
-}
-
-function setFilter(f, el) {
-  activeFilter = f;
-  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-  el.classList.add('active');
-  render();
-}
-
-function getFiltered() {
-  const q = document.getElementById('searchInput').value.toLowerCase().trim();
-  const sort = document.getElementById('sortSelect').value;
-  const zip = document.getElementById('zipSelect').value;
-  let list = DEALS.filter(d => {
-    if (d.status === 'archived' || d.status === 'needs_approval') return false;
-    if (q) {
-      // Zip may live in its own field, or only be embedded in the address
-      // string — check both so searching a zip code always works.
-      const dealZip = String(d.zip || (d.address.match(/\b(\d{5})\b/) || [])[1] || '');
-      const matches = d.address.toLowerCase().includes(q)
-        || (d.city||'').toLowerCase().includes(q)
-        || (d.state||'').toLowerCase().includes(q)
-        || dealZip.includes(q);
-      if (!matches) return false;
-    }
-    if (activeFilter === 'sfh') { if (!/single.?family/i.test(d.propertyType||'')) return false; }
-    if (activeFilter === 'match') { if (!d.matchesBuyBox) return false; }
-    if (activeFilter === 'mfh') { if (!/multi.?family/i.test(d.propertyType||'')) return false; }
-    if (zip) { const m = d.address.match(/\b(\d{5})\b/); if (!m || m[1] !== zip) return false; }
-    return true;
-  });
-  if (sort === 'newest' || !sort) list.sort((a,b) => new Date(b.date) - new Date(a.date));
-  else if (sort === 'zip') list.sort((a,b) => { const za=(a.address.match(/\b(\d{5})\b/)||['',''])[1]; const zb=(b.address.match(/\b(\d{5})\b/)||['',''])[1]; return za.localeCompare(zb); });
-  else if (sort === 'price_asc') list.sort((a,b) => (a.askingPrice||Infinity)-(b.askingPrice||Infinity));
-  else if (sort === 'price_desc') list.sort((a,b) => (b.askingPrice||0)-(a.askingPrice||0));
-  else if (sort === 'arv') list.sort((a,b) => (b.arv||0)-(a.arv||0));
-  else if (sort === 'spread') list.sort((a,b) => (b.spread||0)-(a.spread||0));
-  if (LOGGED_IN && (sort === 'newest' || !sort)) list = list.filter(d => d.matchesBuyBox).concat(list.filter(d => !d.matchesBuyBox));
-  return list;
-}
-
-function fmt(n) { return n!=null ? '$'+Math.round(n).toLocaleString() : '—'; }
-
-function render() {
-  const deals = getFiltered();
-  document.getElementById('countBadge').textContent = deals.length + ' deal' + (deals.length!==1?'s':'');
-  const grid = document.getElementById('dealGrid');
-  // Keep the map in sync with whatever's currently filtered/searched — this
-  // runs even on a zero-match search, so the map clears its pins instead of
-  // showing stale ones from before the search.
-  updateMapMarkers(deals);
-  if (!deals.length) {
-    grid.innerHTML = '<div class="no-results"><div class="icon">🔍</div><h3>No deals match</h3><p>Try adjusting your filters or search.</p></div>';
-    return;
+// ============================================================
+// DATA: Photo folders for deals
+// ============================================================
+const PHOTO_FOLDERS = {
+  "7038 Oleatha Ave, Saint Louis, MO 63139": {
+    folderId: "1Rjyy96yCgjt1V-V4x3Aw4PstwWfrWdEh",
+    currentPhotoFile: "1BxezKBCQpNDXxWSReijT9xSWatmEgrTF", // IMG_1130 (current cover)
+    photos: [
+      {name:"IMG_1130",id:"1BxezKBCQpNDXxWSReijT9xSWatmEgrTF"},
+      {name:"IMG_1131",id:"1bibPevQmt5TRERXJ9lCwrxeb3ELdlwHG"},
+      {name:"IMG_1132",id:"1h3VshZW1DLpSdZRGXqqCaVAiozBc0J1T"},
+      {name:"IMG_1133",id:"1dtTUR9Tu-Bf3VTOpCIE_EnY1E5oXLtjm"},
+      {name:"IMG_1134",id:"12iQsIVNj7T9X_h0OVhgykeIW9SP-OghO"},
+      {name:"IMG_1135",id:"13XCjfpxwEicrwhsfBIjG1t2qaGY_Zvcg"},
+      {name:"IMG_1136",id:"18QHgJjTfM1tDcgfNwlmIacYGs_HPPbzP"},
+      {name:"IMG_1137",id:"1PIQ8tDwF0FyllKszELB6DUXzTRSS9_mr"},
+      {name:"IMG_1138",id:"1S2TI96ULGjkej1U23Pc7F6x8zwqKb_-3"},
+      {name:"IMG_1139",id:"1HW6L5-Ig9w1Zl8Ei3AfMvc-kuXqJkB-w"},
+      {name:"IMG_1140",id:"1CMXt1_vxfBdIelZlRYTqaCJdiWWYixQ4"},
+      {name:"IMG_1141",id:"1nFyYc8EjcZc3JXv1ifzm9wexidZUXwwX"},
+      {name:"IMG_1142",id:"15H9HHOl8y_Xi7IymXISBXi-NW9SBY77H"},
+      {name:"IMG_1143",id:"1a2-bETQRpsdOonduR-XM9hdpzYeKyaTy"},
+      {name:"IMG_1144",id:"1oxtaxZIgOqtUf3WnXidfP_5VpuyjhcSo"},
+      {name:"IMG_1145",id:"1HL57HkvRKy9JL-TLSJEHhiviJkYK1-CE"},
+      {name:"IMG_1146",id:"14IGktwQuVqjtQL8zr7UhcHCF1wQMhaku"},
+      {name:"IMG_1148",id:"1sHGyJjNyeBhl8o_VPZ2zXkHjSh7gu0w3"},
+      {name:"IMG_1149",id:"1wxRYvKGtW_xWG5WZGZcuLCAZFYb02R-R"},
+      {name:"IMG_1150",id:"1I4QzTAQiJJH_41AQbJ9JOXQvvVyavNFq"},
+      {name:"IMG_1151",id:"14DyGYymVWJ1Y0fTVytFUzRWPdEqzAdJb"},
+      {name:"IMG_1152",id:"1XkOi84vdrDUvV_JKq2zU1TOKBCePdgB1"},
+      {name:"IMG_1153",id:"1r_Png2ZmtHUxDqp8oGGl6hb2Ol3T87P0"},
+      {name:"IMG_1154",id:"1RbVJCT1cBKEI2NKZ2P1Z9zmHWMY1A8HB"},
+      {name:"IMG_1155",id:"1SdFr6Xymrkjr_HbL2_JTH8QwQYoJJm6S"},
+      {name:"IMG_1156",id:"17Ta4NZDY1GCKSv8Rlg-VorCbp6P2VuZo"},
+      {name:"IMG_1157",id:"1fn7WkD2esrzonBdOYNf7XRrUXYHwTNMy"},
+      {name:"IMG_1158",id:"1WBSYY2ZdvMQowEM3yI8PMK6GnApsPVSa"},
+      {name:"IMG_1159",id:"1mvU0zpFXxsl6tdK5k9EmOymA2lknnCCD"},
+      {name:"IMG_1160",id:"1SH-XPLmdWPuMTNr8rjQWzUzQ0yBBB4-A"},
+      {name:"IMG_1161",id:"1Z_yyl9Yyx2zCbxQNwz7VFv7r6KOyjU8O"},
+      {name:"IMG_1162",id:"1qhmfnVrxHd9DKx7zGAdiO3-W5VF3HEGD"},
+      {name:"IMG_1163",id:"10ws-TX8JfKLdDtqHdETklTkjGU6rHXIn"},
+      {name:"IMG_1164",id:"1Vyn_FgTK0h56vhjjnM6NICvLxpSbu-Wd"},
+      {name:"IMG_1165",id:"1biPpfY5PT05nfEfg-MEDoaXvN2JArL8W"},
+      {name:"IMG_1166",id:"1qyZoDIAS-wmQGmNyR-go4YMeKaNfV_eI"},
+      {name:"IMG_1167",id:"17Vg6za8o_ICcMUWUnpdLuVWgcwYuzPpY"},
+      {name:"IMG_1168",id:"1n0BHK7ObvYITLOuvSwWnbWDxtOV4uYd6"},
+      {name:"IMG_1169",id:"1QAUCbPPnzAUNmvrp8uWoPhlUqUV_Dwi8"},
+      {name:"IMG_1170",id:"12Pt1mmiUVBt0Foi7nKMGZWgXI3lq0p6D"},
+      {name:"IMG_1171",id:"1oW3XV7HESPTlPdtPUUbwaw-RInnXSfMg"},
+      {name:"IMG_1172",id:"1inrTYUK3pR_6x7bd6NMwISRmH27U_x3o"},
+      {name:"IMG_1173",id:"1_SbYJiXX5MfLxAMtf3Q0pCM99ApNw7pT"},
+      {name:"IMG_1174",id:"1zw1dQY9nxfewGa9FLd3AHR9D8n8savi4"},
+      {name:"IMG_1175",id:"1rdk-_lWlGT6_AaEccjvwqzbATIWkMk18"},
+      {name:"IMG_1176",id:"1iyK7amg6jHKhDeuC2xRcC3syvTT7VMGZ"},
+      {name:"IMG_1177",id:"1EkJht2I4DZUoszC_kjbWlzhO2tT6a-KW"},
+      {name:"IMG_1178",id:"1df9Gt5tutP6NvuUdtHPnyyx9dLRl0O0o"},
+      {name:"IMG_1179",id:"1r0WfV-NmIvwkeKQQ82hSiVmibG00BNRB"},
+      {name:"IMG_1180",id:"1F1L6EzNzZXJCJVQP3uEJ9FRONTpRthdd"},
+      {name:"IMG_1181",id:"1buWUvO_njJDfPQ914cuzJEpdz1fLYcUf"},
+      {name:"IMG_1182",id:"10UywYt3biy_NmsiN6XWWmo_8GVgBeiQe"},
+      {name:"IMG_1183",id:"1gNIfoDi7mmCFxJxLqsmwVyckhMUwJBar"},
+      {name:"IMG_1184",id:"1tUIqjgNGxfn4WROxZvt1xY5uWV8IaIxP"},
+      {name:"IMG_1185",id:"1tIqyroqSgAr5uBtC8terFlxWEK1vdeRF"},
+      {name:"IMG_1186",id:"1JFZ90XXaHKGj9I81HD3UM8K2YFmfQyiK"},
+      {name:"IMG_1187",id:"1_nWmt8O_565cnvuirexrxQ7KQ1LGud-u"},
+      {name:"IMG_1188",id:"1rH-8j1VKGD5qi41LSSu9VL5bvapbvX69"},
+      {name:"IMG_1189",id:"1yPZy3Rx0GSKlawtB_ohZMdTi_T4TpOq4"},
+      {name:"IMG_1190",id:"1eYUtavtx-fySx1KJqSinxJ2XatRmzQUm"},
+      {name:"IMG_1191",id:"1Asi58MJswsiGfTsVgN0wnobtQZW-0nY4"},
+      {name:"IMG_1192",id:"1Gxbg9Vibw4SWJUx8pmay94KUXLf40AnO"},
+      {name:"IMG_1193",id:"1TbOjIjnq_MAU8732THdvOJv9BBJv9_6N"},
+      {name:"IMG_1194",id:"1RiJlfdPWAW7l8LND94zB1_G1x9Ak90zl"},
+      {name:"IMG_1195",id:"1X7R3D3kFGWA1JuCv_CQ5vHYD-rvwoIMG"},
+      {name:"IMG_1196",id:"1RtfiPSRQXcdVidgJew8ARDwe2xWemc1w"},
+      {name:"IMG_1197",id:"1cx5FecTzg8fO_yCyDfZWskSDaM_G3frE"},
+    ]
   }
-  grid.innerHTML = deals.map((d, i) => {
+};
 
-    const parts=[d.beds?d.beds+' bd':'',d.baths?d.baths+' ba':'',d.sqft?d.sqft.toLocaleString()+' sqft':''].filter(Boolean);
-    const statusDot = d.status==='new'?'🟢':d.status==='sent'?'🔵':'👁';
-    const addr0 = d.address.split(',')[0];
-    const propIcon = d.propertyType && d.propertyType.toLowerCase().includes('multi') ? '🏘️'
-      : d.propertyType && d.propertyType.toLowerCase().includes('condo') ? '🏢'
-      : '🏠';
-    const photoClass = d.strategy==='flip'?'flip-card':d.strategy==='coLiving'?'coliving-card':d.strategy==='longTermRental'?'rental-card':'pending-card';
-    const addr0short = d.address.split(',')[0];
-    const zip = d.zip || (d.address.match(/(\d{5})(?:-\d{4})?\s*$/) || [])[1] || '';
-    const photoHtml = d.photo ? `
-      <img src="${d.photo}" alt="${addr0short}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="photo-fallback" style="display:none">
-        <div class="house-icon">${propIcon}</div>
-        <div class="fb-addr">${addr0short}</div>
-        <div class="fb-city">${d.city||''}, ${d.state||''}</div>
-      </div>` : `
-      <div class="photo-fallback">
-        <div class="house-icon">${propIcon}</div>
-        <div class="fb-addr">No Photos Available</div>
-        <div class="fb-city">${d.city||''}, ${d.state||''}</div>
+// ============================================================
+// STATE
+// ============================================================
+let pendingChanges = JSON.parse(localStorage.getItem('photoChanges') || '{}');
+let lightboxCurrent = null; // {address, photo}
+let additionalFolders = JSON.parse(localStorage.getItem('additionalFolders') || '{}');
+let liveFolders = {}; // populated from GAS driveUrl data
+
+function thumbUrl(fileId, size) {
+  return `https://lh3.googleusercontent.com/d/${fileId}`;
+}
+
+function shortAddr(address) {
+  return address.split(',')[0];
+}
+
+// ============================================================
+// EDIT DEALS
+// ============================================================
+let ALL_DEALS_DATA = []; // full deal objects from GAS
+let dealSearchQuery = '';
+
+function onDealSearchInput(val) {
+  dealSearchQuery = (val || '').trim();
+  renderEditDeals(ALL_DEALS_DATA);
+}
+
+function matchesDealSearch(d, q) {
+  if (!q) return true;
+  const haystack = [d.address, d.city, d.state, d.zip, d.source, d.status, d.propertyType, d.notes]
+    .map(v => (v == null ? '' : String(v)).toLowerCase())
+    .join(' | ');
+  return haystack.includes(q);
+}
+
+function renderApprovalQueue(all) {
+  const pending = all.filter(d => d.status === 'needs_approval');
+  const sec = document.getElementById('approvalSection');
+  if (!sec) return;
+  sec.style.display = pending.length ? 'block' : 'none';
+  document.getElementById('approvalCount').textContent = pending.length ? '(' + pending.length + ')' : '';
+  document.getElementById('approvalQueue').innerHTML = pending.map(d => {
+    const price = d.askingPrice ? '$' + Number(d.askingPrice).toLocaleString() : 'price not listed';
+    const specs = [d.beds ? d.beds + ' bd' : '', d.baths ? d.baths + ' ba' : '', d.sqft ? Number(d.sqft).toLocaleString() + ' sqft' : ''].filter(Boolean).join(' · ');
+    const adminNotes = d['Admin Notes'] || '';
+    const flagMatch = adminNotes.match(/NEEDS REVIEW:[^\n]*/);
+    const linkPart = (adminNotes.split('Photo links NOT auto-saved (add manually):')[1] || '');
+    const emailPhotoLinks = (linkPart.match(/https?:\/\/[^\s|]+/g) || []).slice(0, 5);
+    const cover = `<div class="approval-cover${d.photo ? '' : ' no-img'}">
+        <div class="cover-label">Cover photo (shown on the portal)</div>
+        ${d.photo ? `<img src="${escHtml(d.photo)}" alt="Cover photo" onclick="window.open(this.src,'_blank')" onerror="this.parentNode.classList.add('no-img')">` : ''}
+        <div class="cover-missing">No cover photo yet &mdash; check the Photos folder before approving</div>
       </div>`;
-    return `<div class="card${d.matchesBuyBox ? ' match' : ''}" onclick="if(!event.target.closest('.card-photo-link'))openModal(${i})">
-      <a class="card-photo ${photoClass} card-photo-link" href="${dealUrl(d)}" onclick="event.preventDefault();event.stopPropagation();navigateToPropertyId('${d.leadId}')">${EXCLUSIVE_DEAL_IDS.includes(d.leadId) ? '<div class="exclusive-badge">Exclusive Deal</div>' : ''}${window.mcShowBanner ? mcShowBanner(d) : ''}${photoHtml}</a>
-      <div class="card-body">
-        ${d.matchesBuyBox ? '<div class="match-tag">✓ Matches your buy box</div>' : ''}
-        <div class="card-address">${addr0}</div>
-        <div class="card-city">${d.city}, ${d.state}${zip ? ' ' + zip : ''} ${statusDot}</div>
-        <div class="price-row">
-          <div class="asking-price">${fmt(d.askingPrice)}</div>
-          <div class="price-label">asking</div>
+    return `<div class="approval-card" id="appr-${d.leadId}">
+      ${cover}
+      <div class="approval-info">
+        <div class="approval-addr">${escHtml(d.address || '')}</div>
+        <div>${escHtml(price)}${specs ? ' · ' + escHtml(specs) : ''} · ${escHtml(d.source || 'unknown source')}</div>
+        <div style="color:var(--muted)">${escHtml((d.notes || '').slice(0, 220))}</div>
+        ${flagMatch ? `<div class="approval-flag">⚠ ${escHtml(flagMatch[0])}</div>` : ''}
+        <div class="approval-showing">
+          <label>Showing info (included in the text &amp; email to buyers &mdash; leave blank if none yet)</label>
+          <input type="text" id="appr-showing-${d.leadId}" value="${escHtml(d.Showing || '')}" placeholder="e.g. Sat 10/18, 10am-12pm">
         </div>
-        <div class="metrics">
-          <div class="metric"><div class="m-label">ARV</div><div class="m-value ${!d.arv?'na':''}">${d.arv?fmt(d.arv):'Unknown'}</div></div>
-          <div class="metric"><div class="m-label">Repairs</div><div class="m-value ${!d.repairCost?'na':''}">${d.repairCost?fmt(d.repairCost):'Unknown'}</div></div>
-        </div>
-        <div class="prop-row">
-          <span>${parts.join(' · ')||'Details TBD'}</span>
-          <span class="prop-pill">${d.propertyType||'Single Family'}</span>
-          ${(window.mcShowingDay && mcShowingDay(d.Showing || d.showing)) ? `<span class="prop-pill" style="background:#fdf0e6;border-color:#e8a36c;color:#a4521a">🏠 Open house ${mcShowingDay(d.Showing || d.showing)}</span>` : ''}
-          ${d.yearBuilt?`<span>Built ${d.yearBuilt}</span>`:''}
-        </div>
-        ${d.notes ? `<div style="margin-top:10px;padding:10px 12px;background:var(--surface2);border-left:3px solid var(--salmon);border-radius:0 4px 4px 0;font-size:12px;color:var(--charcoal);line-height:1.5">${d.notes.length>120?d.notes.slice(0,120)+'…':d.notes}</div>` : ''}
-      </div>
-      <div class="card-footer">
-        <span class="date-badge">Added ${d.date ? new Date(d.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : ''}</span>
-        <div class="footer-btns">
-          <button class="interest-btn secondary-btn" onclick="event.stopPropagation();mcShareDeal('${d.leadId}', '${String(d.address||'').replace(/['"\\]/g,'')}', ${Number(d.askingPrice)||0})">🔗 Share</button><button class="interest-btn" onclick="event.stopPropagation();openModal(${i})">Schedule a Walk Through →</button>
+        <div class="approval-actions">
+          <button class="approve-btn" onclick="setApproval('${d.leadId}','new')">✓ Approve &amp; send to matched buyers</button>
+          <button class="reject-btn" onclick="setApproval('${d.leadId}','archived')">✕ Reject</button>
+          ${d.driveUrl ? `<a href="${escHtml(d.driveUrl)}" target="_blank" rel="noopener">📷 Photos folder</a>` : ''}
+          ${emailPhotoLinks.map((u, i) => `<a href="${escHtml(u)}" target="_blank" rel="noopener">🔗 Photo link from email${emailPhotoLinks.length > 1 ? ' ' + (i + 1) : ''}</a>`).join('')}
+          <span class="edit-status" id="appr-msg-${d.leadId}"></span>
         </div>
       </div>
     </div>`;
   }).join('');
 }
 
-function openModal(idx) {
-  const deals = getFiltered();
-  const d = idx !== null ? deals[idx] : null;
-  openModalForDeal(d);
-}
-
-function openModalForDeal(d) {
-  document.getElementById('modalAddress').textContent = d ? '📍 '+d.address : "Let us know you'd like to walk through this property and we'll be in touch to set a time.";
-  document.getElementById('modalLinks').style.display = 'none';
-  document.getElementById('modalForm').style.display = 'block';
-  document.getElementById('modalSuccess').style.display = 'none';
-  ['fname','lname','email','phone','notes'].forEach(id => document.getElementById(id).value = '');
-  // Show property notes if available
-  const notesEl = document.getElementById('modalNotes');
-  if (d && d.notes) {
-    notesEl.textContent = d.notes;
-    notesEl.style.display = 'block';
-  } else {
-    notesEl.style.display = 'none';
+async function setApproval(leadId, status) {
+  const msg = document.getElementById('appr-msg-' + leadId);
+  if (status === 'archived' && !confirm('Reject this property? It will not be published.')) return;
+  if (msg) msg.textContent = 'Saving…';
+  try {
+    const res = await fetch(GAS_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ key: PORTAL_ADMIN_KEY, action: 'updateDeal', deal: (() => { const dl = { leadId, status }; const sh = document.getElementById('appr-showing-' + leadId); if (sh) dl.Showing = sh.value.trim(); return dl; })() }) });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error || 'Unknown error');
+    const d = ALL_DEALS_DATA.find(x => x.leadId === leadId);
+    if (d) d.status = status;
+    renderEditDeals(ALL_DEALS_DATA);
+  } catch (err) {
+    if (msg) { msg.textContent = '⚠️ ' + err.message; msg.className = 'edit-status error'; }
   }
-  document.getElementById('modalOverlay').classList.add('open');
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Single-property detail view — shown when the URL has ?deal=<leadId>, e.g. the
-// personalized link sent for a specific property. Lets a buyer land straight on
-// that property's own page, with a way back to the full deal list.
-let _currentDetailDeal = null;
+function renderEditDeals(deals) {
+  renderApprovalQueue(deals);
+  // Filter out archived and pending-approval deals and sort newest first
+  deals = [...deals].filter(d => d.status !== 'archived' && d.status !== 'needs_approval').sort((a,b) => new Date(b.date||0) - new Date(a.date||0));
 
-function dealUrl(d, opts) {
-  opts = opts || {};
-  const params = new URLSearchParams(window.location.search);
-  if (d) params.set('deal', d.leadId); else params.delete('deal');
-  if (opts.keepBuyer === false) { params.delete('b'); params.delete('n'); }
-  const qs = params.toString();
-  return window.location.pathname + (qs ? '?' + qs : '');
-}
+  const q = dealSearchQuery.toLowerCase();
+  const totalActive = deals.length;
+  deals = deals.filter(d => matchesDealSearch(d, q));
 
-function navigateToProperty(d) {
-  if (!d) return;
-  history.pushState({}, '', dealUrl(d));
-  showPropertyDetail(d);
-  window.scrollTo(0, 0);
-}
+  const countEl = document.getElementById('dealSearchCount');
+  if (countEl) {
+    countEl.textContent = q ? `${deals.length} of ${totalActive} match` : '';
+  }
 
-function navigateToPropertyId(leadId) {
-  navigateToProperty(DEALS.find(d => d.leadId === leadId) || null);
-}
-
-function showPropertyDetail(d, opts) {
-  opts = opts || {};
-  _currentDetailDeal = d;
-  document.querySelector('.map-section').style.display = 'none';
-  document.querySelector('.controls').style.display = 'none';
-  document.getElementById('dealGrid').style.display = 'none';
-  const view = document.getElementById('propertyDetailView');
-  view.style.display = 'block';
-
-  if (!d) {
-    view.innerHTML = '<div class="detail-not-found"><div class="icon">🔍</div><h3>Property not found</h3><p>It may have sold or been taken off the market.</p><br><a class="back-link" onclick="backToAllDeals()">← Back to All Deals</a></div>';
-    document.title = 'Megan Colyer Corp — Available Deals';
+  const container = document.getElementById('editDealList');
+  if (!deals.length) {
+    container.innerHTML = q
+      ? `<p style="color:var(--muted);font-size:14px;">No deals match "${escHtml(dealSearchQuery)}".</p>`
+      : '<p style="color:var(--muted);font-size:14px;">No deals found.</p>';
     return;
   }
+  container.innerHTML = '';
+  deals.forEach((d, idx) => {
+    const row = document.createElement('div');
+    row.className = 'edit-deal-row';
+    row.id = 'edit-row-' + (d.leadId || idx);
 
-  const parts=[d.beds?d.beds+' bd':'',d.baths?d.baths+' ba':'',d.sqft?d.sqft.toLocaleString()+' sqft':''].filter(Boolean);
-  const addr0 = d.address.split(',')[0];
-  const propIcon = d.propertyType && d.propertyType.toLowerCase().includes('multi') ? '🏘️'
-    : d.propertyType && d.propertyType.toLowerCase().includes('condo') ? '🏢' : '🏠';
-  const photoHtml = d.photo
-    ? `<img id="detailHeroImg" src="${d.photo}" alt="${addr0}">`
-    : `<div class="photo-fallback" style="display:flex"><div class="house-icon">${propIcon}</div><div class="fb-addr">No Photos Available</div><div class="fb-city">${d.city||''}, ${d.state||''}</div></div>`;
-  const cityCoords = getCityCoords(d);
+    const street = (d.address || '').split(',')[0];
+    const cityLine = [d.city, d.state].filter(Boolean).join(', ');
+    const priceStr = d.askingPrice ? '$' + Number(d.askingPrice).toLocaleString() : '—';
 
-  view.innerHTML = `
-    <a class="back-link" onclick="backToAllDeals()">← Back to All Deals</a>
-    <div class="detail-card">
-      <div class="detail-gallery">
-        <div class="detail-photo">${EXCLUSIVE_DEAL_IDS.includes(d.leadId) ? '<div class="exclusive-badge">Exclusive Deal</div>' : ''}${photoHtml}<div class="detail-photo-count" id="detailPhotoCount" style="display:none"></div></div>
-        <div class="detail-thumbs" id="detailThumbs" style="display:none"></div>
+    row.innerHTML = `
+      <div class="edit-deal-header" onclick="toggleEditRow('${d.leadId || idx}')">
+        <div>
+          <div class="edit-deal-addr">${street}</div>
+          <div class="edit-deal-meta">${cityLine} · ${priceStr} asking · ${d.status || 'new'}</div>
+        </div>
+        <span class="edit-deal-chevron">▼</span>
       </div>
-      <div class="detail-body">
-        <div class="detail-address">${addr0}</div>
-        <div class="detail-city">${d.city||''}, ${d.state||''}${d.zip?' '+d.zip:''}</div>
-
-        <div class="detail-stats-bar">
-          <div class="stat-price"><div class="m-label">Asking Price</div><div class="m-value">${fmt(d.askingPrice)}</div></div>
-          ${d.beds?`<div><div class="m-label">Bedrooms</div><div class="m-value">${d.beds}</div></div>`:''}
-          ${d.baths?`<div><div class="m-label">Bathrooms</div><div class="m-value">${d.baths}</div></div>`:''}
-          ${d.sqft?`<div><div class="m-label">Sq Ft</div><div class="m-value">${d.sqft.toLocaleString()}</div></div>`:''}
+      <div class="edit-deal-body">
+        <div class="edit-form-full edit-form-group">
+          <label>Address</label>
+          <input type="text" id="ef-address-${d.leadId}" value="${escHtml(d.address || '')}" />
         </div>
-
-        <div class="detail-metrics">
-          <div class="detail-metric"><div class="m-label">ARV</div><div class="m-value ${!d.arv?'na':''}">${d.arv?fmt(d.arv):'Unknown'}</div></div>
-          <div class="detail-metric"><div class="m-label">Est. Repairs</div><div class="m-value ${!d.repairCost?'na':''}">${d.repairCost?fmt(d.repairCost):'Unknown'}</div></div>
-          <div class="detail-metric"><div class="m-label">Property Type</div><div class="m-value">${d.propertyType||'Single Family'}</div></div>
-          ${d.yearBuilt?`<div class="detail-metric"><div class="m-label">Year Built</div><div class="m-value">${d.yearBuilt}</div></div>`:''}
+        <div class="edit-form-row3">
+          <div class="edit-form-group">
+            <label>City</label>
+            <input type="text" id="ef-city-${d.leadId}" value="${escHtml(d.city || '')}" />
+          </div>
+          <div class="edit-form-group">
+            <label>State</label>
+            <input type="text" id="ef-state-${d.leadId}" value="${escHtml(d.state || '')}" maxlength="2" style="text-transform:uppercase" />
+          </div>
+          <div class="edit-form-group">
+            <label>Zip Code</label>
+            <input type="text" id="ef-zip-${d.leadId}" value="${escHtml(d.zip || '')}" maxlength="5" />
+          </div>
         </div>
-        ${(window.mcShowingDay && mcShowingDay(d.Showing || d.showing)) ? `<div class="detail-notes" style="border-left-color:#e8a36c"><b>🏠 Open house:</b> ${mcShowingDay(d.Showing || d.showing)}</div>` : ''}
-        ${d.notes ? `<div class="detail-notes">${d.notes}</div>` : ''}
-        <div class="detail-actions">
-          <a class="interest-btn" href="offer.html?address=${encodeURIComponent(d.address)}">Submit an Offer →</a>
-          <button class="interest-btn secondary-btn" onclick="openModalForDeal(_currentDetailDeal)">Schedule a Walk Through</button>
-          <button class="interest-btn secondary-btn" onclick="mcShareDeal(_currentDetailDeal.leadId, _currentDetailDeal.address, _currentDetailDeal.askingPrice)">🔗 Share this property</button>
+        <div class="edit-form-grid">
+          <div class="edit-form-group">
+            <label>Property Type</label>
+            <select id="ef-type-${d.leadId}">
+              ${['Single Family','Multi Family','Condo','Mobile','Commercial','Land'].map(t =>
+                `<option${t === d.propertyType ? ' selected' : ''}>${t}</option>`).join('')}
+            </select>
+          </div>
+          <div class="edit-form-group">
+            <label>Status</label>
+            <select id="ef-status-${d.leadId}">
+              ${['new','viewed','sent'].map(s =>
+                `<option value="${s}"${s === d.status ? ' selected' : ''}>${s}</option>`).join('')}
+            </select>
+          </div>
         </div>
-
-        ${cityCoords ? `
-        <div class="detail-section-title">Location</div>
-        <div class="detail-map-wrap"><div id="detailMap"></div></div>
-        <div class="detail-map-caption">Approximate area — pin centered on ${d.city||'the property’s city'}, not the exact address.</div>
-        ` : ''}
-
-        <div class="listed-by-card">
-          <div class="lb-label">Listed By</div>
-          <div class="lb-name">Megan Colyer Corp</div>
-          <div class="lb-sub">Off-Market Investment Deals · Call/Text 636-698-1412</div>
+        <div class="edit-form-row4">
+          <div class="edit-form-group"><label>Beds</label><input type="number" id="ef-beds-${d.leadId}" value="${d.beds ?? ''}" min="0" step="1" /></div>
+          <div class="edit-form-group"><label>Baths</label><input type="number" id="ef-baths-${d.leadId}" value="${d.baths ?? ''}" min="0" step="0.5" /></div>
+          <div class="edit-form-group"><label>Sq Ft</label><input type="number" id="ef-sqft-${d.leadId}" value="${d.sqft ?? ''}" min="0" /></div>
+          <div class="edit-form-group"><label>Year Built</label><input type="number" id="ef-year-${d.leadId}" value="${d.yearBuilt ?? ''}" min="1800" max="2030" /></div>
         </div>
-      </div>
-    </div>`;
-
-  document.title = addr0 + ' — Megan Colyer Corp';
-
-  if (d.driveUrl) loadDetailGallery(d);
-  if (cityCoords) initDetailMap(d, cityCoords);
-}
-
-// Fetch every photo in the deal's Drive folder (not just the first) and render
-// them as a thumbnail strip under the hero image; clicking a thumb swaps the hero.
-async function loadDetailGallery(d) {
-  const m = d.driveUrl.match(/folders\/([^?&/]+)/);
-  if (!m) return;
-  try {
-    const res = await fetch(GAS_URL + '?action=getFolderPhotos&folderId=' + m[1]);
-    const info = await res.json();
-    if (!info.success || !info.photos || info.photos.length < 2) return;
-    // Only show if we're still looking at this same property (user may have navigated away)
-    if (!_currentDetailDeal || _currentDetailDeal.leadId !== d.leadId) return;
-
-    const urls = info.photos.map(p => 'https://lh3.googleusercontent.com/d/' + p.id);
-    const thumbs = document.getElementById('detailThumbs');
-    const countEl = document.getElementById('detailPhotoCount');
-    const heroImg = document.getElementById('detailHeroImg');
-    if (!thumbs || !heroImg) return;
-
-    // Keep whatever photo is already showing (the card's main photo) as the hero
-    // if it's one of this folder's photos — Drive folder listing order isn't
-    // stable between calls, so "the first photo returned" often isn't the same
-    // photo as the card, and blindly swapping to it caused the hero image to
-    // change right after the detail view opened.
-    let heroIndex = urls.indexOf(heroImg.src);
-    if (heroIndex === -1) heroIndex = 0;
-
-    thumbs.innerHTML = urls.map((u, i) =>
-      `<img src="${u}" data-i="${i}" class="${i===heroIndex?'active':''}" onclick="setDetailHero('${u.replace(/'/g,"\\'")}', this)">`
-    ).join('');
-    thumbs.style.display = 'flex';
-    countEl.textContent = '📷 ' + urls.length + ' photos';
-    countEl.style.display = 'block';
-    // Only change the hero image if it isn't already one of this folder's photos.
-    if (heroImg.src !== urls[heroIndex]) heroImg.src = urls[heroIndex];
-  } catch (e) { /* gallery is a nice-to-have — fail quietly */ }
-}
-
-function setDetailHero(url, thumbEl) {
-  const heroImg = document.getElementById('detailHeroImg');
-  if (heroImg) heroImg.src = url;
-  document.querySelectorAll('#detailThumbs img').forEach(t => t.classList.remove('active'));
-  if (thumbEl) thumbEl.classList.add('active');
-}
-
-// Small Leaflet map for the single-property page — reuses the same city-level
-// coordinates as the main map (no per-address geocoding API required).
-let _detailMap = null;
-async function initDetailMap(d, center) {
-  await new Promise((res, rej) => {
-    if (window.L) return res();
-    const s = document.createElement('script');
-    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
-    s.onload = res; s.onerror = rej;
-    document.head.appendChild(s);
+        <div class="edit-form-row3">
+          <div class="edit-form-group"><label>Asking Price</label><input type="number" id="ef-price-${d.leadId}" value="${d.askingPrice ?? ''}" min="0" /></div>
+          <div class="edit-form-group"><label>ARV</label><input type="number" id="ef-arv-${d.leadId}" value="${d.arv ?? ''}" min="0" /></div>
+          <div class="edit-form-group"><label>Repair Cost</label><input type="number" id="ef-repairs-${d.leadId}" value="${d.repairCost ?? ''}" min="0" /></div>
+        </div>
+        <div class="edit-form-grid">
+          <div class="edit-form-group">
+            <label>Source</label>
+            <input type="text" id="ef-source-${d.leadId}" value="${escHtml(d.source || '')}" />
+          </div>
+          <div class="edit-form-group">
+            <label>📷 Drive Folder URL <span style="color:var(--salmon);font-size:10px;text-transform:none;letter-spacing:0">(photo click links here)</span></label>
+            <input type="text" id="ef-drive-${d.leadId}" value="${escHtml(d.driveUrl || '')}" placeholder="https://drive.google.com/drive/folders/..." style="${d.driveUrl ? '' : 'border-color:#f0b090'}" />
+          </div>
+        </div>
+        <div class="edit-form-full edit-form-group">
+          <label>Notes <span style="color:var(--muted);font-size:10px;text-transform:none;letter-spacing:0">(shown to buyers on the portal)</span></label>
+          <textarea id="ef-notes-${d.leadId}" rows="3" style="width:100%;background:white;border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:4px;font-size:13px;font-family:'PT Serif',serif;outline:none;resize:vertical;line-height:1.5" placeholder="e.g. Seller is motivated, cash only, inspection contingency waived…">${escHtml(d.notes || '')}</textarea>
+        </div>
+        ${d.driveUrl ? `
+        <div class="edit-photo-section" id="ephoto-section-${d.leadId}">
+          <div class="edit-photo-header">
+            <span class="edit-photo-label">Photos</span>
+            <span class="edit-photo-hint">Hover a photo · green = current cover</span>
+          </div>
+          <div class="edit-photo-grid" id="ephoto-grid-${d.leadId}" data-loaded="0">
+            <p style="color:var(--muted);font-size:13px;grid-column:1/-1;">Photos will load when you open this deal.</p>
+          </div>
+        </div>` : ''}
+        <div class="edit-actions">
+          <button class="save-deal-btn" onclick="saveDeal('${d.leadId}')">Save Changes</button>
+          <span class="edit-status" id="ef-status-msg-${d.leadId}"></span>
+          <button class="delete-deal-btn" onclick="deleteDeal('${d.leadId}', '${escHtml(d.address)}')">🗑 Delete Deal</button>
+        </div>
+      </div>`;
+    container.appendChild(row);
   });
-  const mapEl = document.getElementById('detailMap');
-  if (!mapEl || !_currentDetailDeal || _currentDetailDeal.leadId !== d.leadId) return;
-
-  if (_detailMap) { _detailMap.remove(); _detailMap = null; }
-  mapEl.innerHTML = '';
-  _detailMap = L.map(mapEl, { scrollWheelZoom: false, zoomControl: true });
-  _detailMap.setView(center, 13);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    maxZoom: 19
-  }).addTo(_detailMap);
-  L.marker(center, {
-    icon: L.divIcon({
-      className: '',
-      html: `<div style="width:24px;height:24px;border-radius:50% 50% 50% 0;background:#D4967D;border:2.5px solid white;box-shadow:0 2px 6px rgba(0,0,0,.4);transform:rotate(-45deg)"></div>`,
-      iconSize: [24, 24], iconAnchor: [12, 24], popupAnchor: [0, -26]
-    })
-  }).addTo(_detailMap).bindPopup(`<strong>${d.address}</strong>`);
 }
 
-function backToAllDeals() {
-  _currentDetailDeal = null;
-  // The single-property mini-map is destroyed here (not just hidden) since it's
-  // re-created into a fresh #detailMap element each time showPropertyDetail runs.
-  if (_detailMap) { _detailMap.remove(); _detailMap = null; }
-  document.querySelector('.map-section').style.display = '';
-  document.querySelector('.controls').style.display = '';
-  document.getElementById('dealGrid').style.display = '';
-  document.getElementById('propertyDetailView').style.display = 'none';
-  document.title = 'Megan Colyer Corp — Available Deals';
-  // The map may have been initialized (or is still loading) while its container
-  // was hidden behind the property detail view — Leaflet doesn't auto-detect
-  // becoming visible again, so it measured itself at 0x0 and both its size AND
-  // its zoom/pan (from fitBounds, computed against that 0x0 size) are wrong
-  // until we redo both now that the container is actually visible.
-  if (_dealMap) {
-    setTimeout(() => {
-      _dealMap.invalidateSize();
-      if (_dealMapBounds) _dealMap.fitBounds(_dealMapBounds);
-    }, 0);
-  }
-  history.pushState({}, '', dealUrl(null));
-}
-// ─────────────────────────────────────────────────────────────────────────────
-
-function closeModal(e) {
-  if (!e || e.target===document.getElementById('modalOverlay')) document.getElementById('modalOverlay').classList.remove('open');
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-function submitForm() {
-  const fname = document.getElementById('fname').value.trim();
-  const lname = document.getElementById('lname').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const phone = document.getElementById('phone').value.trim();
-  const notes = document.getElementById('notes').value.trim();
-  if (!fname||!lname||!email) { alert('Please fill in your name and email.'); return; }
-
-  // Get the property this person is interested in
-  const addrEl = document.getElementById('modalAddress');
-  const property = addrEl ? addrEl.textContent.replace('📍 ','').trim() : '';
-
-  // Show success immediately so the form feels fast
-  document.getElementById('modalForm').style.display = 'none';
-  document.getElementById('modalSuccess').style.display = 'block';
-
-  // POST to our own backend so submissions are logged and emailed reliably
-  fetch(GAS_URL, {
-    method: 'POST',
-    body: JSON.stringify({
-      action: 'addInterest',
-      interest: {
-        name: fname + ' ' + lname,
-        email: email,
-        phone: phone || '',
-        property: property || '',
-        notes: notes || ''
+function toggleEditRow(id) {
+  const row = document.getElementById('edit-row-' + id);
+  if (!row) return;
+  const wasOpen = row.classList.contains('open');
+  row.classList.toggle('open');
+  // Auto-load photos on first open if the deal has a Drive folder
+  if (!wasOpen) {
+    const deal = ALL_DEALS_DATA.find(d => (d.leadId || '') === String(id));
+    if (deal && deal.driveUrl) {
+      const grid = document.getElementById('ephoto-grid-' + id);
+      if (grid && grid.dataset.loaded === '0') {
+        grid.dataset.loaded = '1';
+        loadEditPhotos(id, extractFolderId(deal.driveUrl));
       }
-    })
-  }).catch(() => {});
-}
-
-document.addEventListener('keydown', e => { if(e.key==='Escape') document.getElementById('modalOverlay').classList.remove('open'); });
-
-window.addEventListener('popstate', () => {
-  const dealParam = new URLSearchParams(window.location.search).get('deal');
-  if (dealParam && DEALS.length) {
-    showPropertyDetail(DEALS.find(d => d.leadId === dealParam) || null);
-  } else if (!dealParam && _currentDetailDeal !== null) {
-    backToAllDeals();
-  }
-});
-
-// ── MAP ──────────────────────────────────────────────────────────────────────
-let _dealMap = null;
-let _dealMapBounds = null;
-
-// Hardcoded city → [lat, lng] lookup — no geocoding API needed, instant load
-const CITY_COORDS = {
-  'saint louis':      [38.6270, -90.1994],
-  'st louis':         [38.6270, -90.1994],
-  'st. louis':        [38.6270, -90.1994],
-  'arnold':           [38.4320, -90.3651],
-  'chesterfield':     [38.6634, -90.5771],
-  'crystal city':     [38.2214, -90.3817],
-  'de soto':          [38.1375, -90.5590],
-  'desoto':           [38.1375, -90.5590],
-  'new haven':        [38.6078, -91.2218],
-  'potosi':           [37.9373, -90.7848],
-  'hazelwood':        [38.7717, -90.3651],
-  'florissant':       [38.7895, -90.3224],
-  'kirkwood':         [38.5834, -90.4068],
-  'webster groves':   [38.5931, -90.3537],
-  'ballwin':          [38.5950, -90.5468],
-  'manchester':       [38.5981, -90.5085],
-  'fenton':           [38.5131, -90.4429],
-  'festus':           [38.2175, -90.3993],
-  'imperial':         [38.3653, -90.3790],
-  'eureka':           [38.5028, -90.6293],
-  'pacific':          [38.4814, -90.7382],
-  'sullivan':         [38.2083, -91.1568],
-  'rolla':            [37.9514, -91.7715],
-  'columbia':         [38.9517, -92.3341],
-  'jefferson city':   [38.5767, -92.1735],
-  'kansas city':      [39.0997, -94.5786],
-  'springfield':      [37.2090, -93.2923],
-  'joplin':           [37.0842, -94.5133],
-  'cape girardeau':   [37.3059, -89.5181],
-  'st. charles':      [38.7881, -90.4974],
-  'saint charles':    [38.7881, -90.4974],
-  'st charles':       [38.7881, -90.4974],
-  'wentzville':       [38.8114, -90.8529],
-  'o\'fallon':        [38.8106, -90.6998],
-  'ofallon':          [38.8106, -90.6998],
-  'longmont':         [40.1672, -105.1019],
-  'belleville':       [38.5200, -89.9840],
-  'east saint louis': [38.6242, -90.1562],
-  'east st. louis':   [38.6242, -90.1562],
-  'east st louis':    [38.6242, -90.1562],
-  'rocky mount':      [37.9906, -92.2827],
-};
-
-function getCityCoords(deal) {
-  const city = (deal.city || '').toLowerCase().trim();
-  if (city && CITY_COORDS[city]) return CITY_COORDS[city];
-  // Fallback: try to extract city from address string
-  const parts = (deal.address || '').split(',');
-  if (parts.length >= 2) {
-    const c = parts[1].trim().toLowerCase();
-    if (CITY_COORDS[c]) return CITY_COORDS[c];
-  }
-  return null;
-}
-
-let _dealMarkersLayer = null;
-
-// One-time map setup: creates the Leaflet map + tile layer, then does the
-// first marker render. After this, filtering/search calls updateMapMarkers()
-// directly — the map itself is only ever created once.
-async function createMap() {
-  const mapEl = document.getElementById('dealMap');
-  if (!mapEl || _dealMap) return;
-
-  // Lazy-load Leaflet JS
-  await new Promise((res, rej) => {
-    if (window.L) return res();
-    const s = document.createElement('script');
-    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
-    s.onload = res; s.onerror = rej;
-    document.head.appendChild(s);
-  });
-
-  mapEl.innerHTML = '';
-  _dealMap = L.map(mapEl, { scrollWheelZoom: false, zoomControl: true });
-  _dealMap.setView([38.57, -92.46], 7);
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    maxZoom: 19
-  }).addTo(_dealMap);
-
-  _dealMarkersLayer = L.layerGroup().addTo(_dealMap);
-  updateMapMarkers(getFiltered());
-}
-
-// Re-plots pins for whatever deal list is passed in (already filtered by
-// search/zip/type — see render()) and zooms the map to fit just those pins.
-// This is what makes searching an address, city, or zip code "pull it up"
-// on the map: render() calls this every time the filters change.
-function updateMapMarkers(deals) {
-  if (!_dealMap || !_dealMarkersLayer) return;
-  _dealMarkersLayer.clearLayers();
-
-  const activeDeals = deals.filter(d => d.status !== 'archived');
-  const mapStats = document.getElementById('mapStats');
-
-  if (!activeDeals.length) {
-    if (mapStats) mapStats.textContent = 'No matching deals';
-    return;
-  }
-
-  const salmon = '#D4967D';
-
-  function makePin() {
-    return L.divIcon({
-      className: '',
-      html: `<div style="width:24px;height:24px;border-radius:50% 50% 50% 0;background:${salmon};border:2.5px solid white;box-shadow:0 2px 6px rgba(0,0,0,.4);transform:rotate(-45deg);cursor:pointer;"></div>`,
-      iconSize: [24, 24], iconAnchor: [12, 24], popupAnchor: [0, -26]
-    });
-  }
-
-  // Place a pin for each active deal — instant, no geocoding API
-  let placed = 0;
-  const allPts = [];
-  // Track offsets per city so stacked pins spread slightly
-  const cityOffset = {};
-
-  activeDeals.forEach(deal => {
-    const center = getCityCoords(deal);
-    if (!center) return;
-
-    const cityKey = (deal.city || deal.address || '').toLowerCase();
-    cityOffset[cityKey] = (cityOffset[cityKey] || 0) + 1;
-    const idx = cityOffset[cityKey];
-    // Spiral offset so multiple pins in same city don't overlap
-    const angle = idx * 2.4; // golden angle spread
-    const radius = Math.min(idx * 0.004, 0.04);
-    const lat = center[0] + radius * Math.cos(angle);
-    const lng = center[1] + radius * Math.sin(angle);
-    allPts.push([lat, lng]);
-
-    const price = deal.askingPrice ? '$' + Number(deal.askingPrice).toLocaleString() : null;
-    const type  = deal.propertyType || null;
-    // Hover preview (not click) — click is reserved for jumping straight to
-    // the property page, so the two interactions don't fight each other.
-    const tooltip = `<strong style="font-size:13px">${deal.address}</strong>`
-      + (price ? `<div class="map-pin-price">${price}</div>` : '')
-      + (type  ? `<div class="map-pin-type">${type}</div>`  : '');
-
-    L.marker([lat, lng], { icon: makePin() })
-      .addTo(_dealMarkersLayer)
-      .bindTooltip(tooltip, { direction: 'top', offset: [0, -26], opacity: 0.97 })
-      .on('click', () => navigateToPropertyId(deal.leadId));
-    placed++;
-  });
-
-  // Fit to pins if we have them, otherwise keep Missouri view
-  if (allPts.length) {
-    _dealMapBounds = L.latLngBounds(allPts).pad(0.15);
-    _dealMap.fitBounds(_dealMapBounds, { maxZoom: 14 });
-  }
-
-  if (mapStats) mapStats.textContent = `${placed} active ${placed === 1 ? 'deal' : 'deals'} plotted`;
-}
-// ─────────────────────────────────────────────────────────────────────────────
-
-// Load deals dynamically from Google Sheet
-function getBuyerToken() {
-  try { return localStorage.getItem('bpToken') || ''; } catch (e) { return ''; }
-}
-
-
-// Optional buyer login: a logged-in buyer sees which deals fit their buy box.
-async function applyBuyerMatches() {
-  let token = '';
-  try { token = localStorage.getItem('bpToken') || ''; } catch (e) {}
-  if (!token && !window.__PREVIEW_LOGGEDIN) return;
-  try {
-    let data;
-    if (window.__PREVIEW_LOGGEDIN) {
-      data = { success: true, deals: DEALS.filter((d, i) => i % 3 !== 1).map(d => ({ leadId: d.leadId, matchesBuyBox: true })) };
-    } else {
-      const res = await fetch(GAS_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ action: 'buyerGetDeals', token }) });
-      data = await res.json();
     }
-    if (!data.success) return;
-    const hit = {};
-    (data.deals || []).forEach(d => { if (d.matchesBuyBox) hit[d.leadId] = true; });
-    DEALS.forEach(d => { d.matchesBuyBox = !!hit[d.leadId]; });
-    LOGGED_IN = true;
-    const n = DEALS.filter(d => d.matchesBuyBox && d.status !== 'archived').length;
-    let name = ''; try { name = localStorage.getItem('bpName') || ''; } catch (e) {}
-    document.getElementById('lbText').innerHTML = (name ? 'Welcome back, ' + String(name).replace(/[<>&"]/g, '') + '. ' : '') + '<b>' + n + '</b> deal' + (n === 1 ? '' : 's') + ' match your buy box.';
-    const btn = document.getElementById('lbBtn'); btn.textContent = 'My Buy Box & Loved Properties →';
-    document.getElementById('matchChip').style.display = '';
-    const nb = document.getElementById('navBuyerLogin'); if (nb) nb.textContent = 'My Deals';
-    render();
-  } catch (e) { /* stay on the open list */ }
-}
-
-(function initPortal() {
-  document.getElementById('dealGrid').innerHTML = '<div class="no-results"><div class="icon">⏳</div><h3>Loading deals…</h3><p>Fetching the latest properties.</p></div>';
-  document.getElementById('countBadge').textContent = 'Loading…';
-  fetch(GAS_URL + '?action=publicDeals')
-    .then(r => r.json())
-    .then(async data => {
-      if (data && data.success === false) {
-        document.getElementById('dealGrid').innerHTML = '<div class="no-results"><div class="icon">⚠️</div><h3>Couldn\'t load deals</h3><p>Please refresh the page to try again.</p></div>';
-        document.getElementById('countBadge').textContent = '0 deals';
-        return;
-      }
-      DEALS = Array.isArray(data) ? data : (data.deals || []);
-      DEALS = DEALS.filter(d => d.status !== 'needs_approval' && d.status !== 'archived');
-      DEALS = DEALS.map(d => { if (d.folderId && !d.driveUrl) d.driveUrl = 'https://drive.google.com/drive/folders/' + d.folderId; return d; });
-      // Normalize: GAS may return 'Notes' (capital N) — map to lowercase 'notes'
-      DEALS = DEALS.map(d => { if (d.Notes !== undefined) { d.notes = d.notes || d.Notes; } return d; });
-      populateZips();
-      render();
-      applyBuyerMatches();
-      createMap(); // ← creates the map once, then plots whatever render() just filtered
-
-      // If this is a personalized per-property link (?deal=<leadId>), show that
-      // property's own page instead of the full grid, with a way back to all deals.
-      const dealParam = new URLSearchParams(window.location.search).get('deal');
-      if (dealParam) {
-        const match = DEALS.find(d => d.leadId === dealParam);
-        showPropertyDetail(match || null);
-      }
-
-      // Auto-fill missing photos from Drive folders
-      const missing = DEALS.filter(d => !d.photo && d.driveUrl);
-      if (missing.length) {
-        await Promise.all(missing.map(async d => {
-          const m = d.driveUrl.match(/folders\/([^?&/]+)/);
-          if (!m) return;
-          try {
-            const res = await fetch(GAS_URL + '?action=getFolderPhotos&folderId=' + m[1]);
-            const info = await res.json();
-            if (info.success && info.photos && info.photos.length) {
-              d.photo = 'https://lh3.googleusercontent.com/d/' + info.photos[0].id;
-            }
-          } catch(e) {}
-        }));
-        render();
-        // Re-render the detail view too in case its photo just arrived
-        if (_currentDetailDeal) showPropertyDetail(_currentDetailDeal);
-      }
-    })
-    .catch(err => {
-      console.error('Failed to load deals:', err);
-      document.getElementById('dealGrid').innerHTML = '<div class="no-results"><div class="icon">⚠️</div><h3>Couldn\'t load deals</h3><p>Please refresh the page to try again.</p></div>';
-      document.getElementById('countBadge').textContent = '0 deals';
-    });
-})();
-</script>
-
-<footer style="background:#f0ece6;border-top:1px solid #e0d9d0;padding:28px 24px;margin-top:32px">
-  <div style="max-width:1400px;margin:0 auto">
-
-    <details style="margin-bottom:14px">
-      <summary style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7a8080;cursor:pointer;user-select:none;list-style:none;display:flex;align-items:center;gap:6px">
-        <span style="font-size:9px;color:#b0b8b8">▶</span>
-        Wholesale Property &amp; Assignment Disclosure
-      </summary>
-      <div style="margin-top:10px;font-size:12px;color:#5a6060;line-height:1.6">
-        <p style="font-weight:600;color:#303636;margin-bottom:4px">Licensed Real Estate Agent Disclosure</p>
-        <p style="margin-bottom:10px">I am a licensed real estate agent in the State of Missouri. The properties advertised are not my real estate listings and are not being marketed for sale through my brokerage. These opportunities represent assignments of equitable interest in purchase contracts or other legally permissible contractual interests.</p>
-        <p>As required by Missouri law and brokerage policy, any buyer wishing to access, tour, or receive property-specific information must first execute a Non-Exclusive Buyer Agency Agreement applicable to that specific transaction.</p>
-      </div>
-    </details>
-
-    <details>
-      <summary style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7a8080;cursor:pointer;user-select:none;list-style:none;display:flex;align-items:center;gap:6px">
-        <span style="font-size:9px;color:#b0b8b8">▶</span>
-        Terms &amp; Conditions
-      </summary>
-      <div style="margin-top:10px;font-size:12px;color:#5a6060;line-height:1.6">
-        <ul style="padding-left:16px;display:flex;flex-direction:column;gap:5px">
-          <li>All properties are offered AS-IS, WHERE-IS, with no repairs or concessions.</li>
-          <li>Cash or hard money financing only, unless otherwise expressly stated.</li>
-          <li>Buyers are solely responsible for conducting their own due diligence, including but not limited to verifying the property's condition, value, title, square footage, zoning, occupancy status, estimated repair costs, and investment potential.</li>
-          <li>A property shall not be considered under contract until a fully executed purchase agreement has been received, the required earnest money has been deposited, and all contingencies have been satisfied, waived, or removed.</li>
-          <li>All offers are subject to prior sale, assignment, modification, withdrawal, errors, omissions, or changes without notice.</li>
-          <li>Seller reserves the right to accept, reject, or negotiate any offer at its sole discretion.</li>
-          <li>No guarantees, warranties, representations, or disclosures are made or implied regarding the property, including but not limited to condition, habitability, value, repair estimates, or future profitability. Any verbal statements are for informational purposes only and shall not be relied upon.</li>
-          <li>By requesting access to a property or submitting an offer, Buyer acknowledges and agrees to these terms and understands that the transaction involves the assignment of contractual rights rather than the purchase of a brokerage listing.</li>
-        </ul>
-      </div>
-    </details>
-
-  </div>
-</footer>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js').catch(() => {});
-  });
-}
-</script>
-<footer class="site-footer">
-  <div class="sf-inner">
-    <div class="sf-brand">
-      <img src="/logo-white.png" alt="Megan Colyer Corp">
-      <p>Off-market investment deals in St. Louis, matched to what you buy. A disposition partner for wholesalers and realtors.</p>
-    </div>
-    <div class="sf-links">
-      <div><h4>Buyers</h4><a href="/buyers">Join Buyers List</a><a href="/buyer-portal">Buyer Login</a></div>
-      <div><h4>Partners</h4><a href="/joint-ventures">Wholesalers &amp; Realtors</a><a href="/wholesaler-portal">Wholesaler Login</a></div>
-      <div><h4>Contact</h4><a href="tel:6366981412">Call/Text 636-698-1412</a><a href="/privacy-policy">Privacy Policy</a></div>
-    </div>
-  </div>
-  <div class="sb973">We are MISSOURI SENATE BILL 973 Compliant</div>
-  <div class="sf-bottom"><span>© Megan Colyer Corp — Off-Market Investment Deals</span><span>St. Louis, MO</span></div>
-</footer>
-<script>
-// ---- Admin login (from buyer portal / main login page) ----
-function showHomeAdminLogin() {
-  document.getElementById('adminLoginOverlay').style.display = 'flex';
-  document.getElementById('adminLoginError').style.display = 'none';
-  document.getElementById('adminLoginEmail').focus();
-}
-function hideHomeAdminLogin() {
-  document.getElementById('adminLoginOverlay').style.display = 'none';
-}
-async function submitHomeAdminLogin() {
-  const email = document.getElementById('adminLoginEmail').value.trim();
-  const password = document.getElementById('adminLoginPassword').value;
-  const btn = document.getElementById('adminLoginBtn');
-  const errEl = document.getElementById('adminLoginError');
-  errEl.style.display = 'none';
-  if (!email || !password) {
-    errEl.textContent = 'Enter your email and password.';
-    errEl.style.display = 'block';
-    return;
   }
+}
+
+function extractFolderId(url) {
+  if (!url) return null;
+  const m = url.match(/\/folders\/([a-zA-Z0-9_-]+)/);
+  return m ? m[1] : null;
+}
+
+async function loadEditPhotos(leadId, folderId) {
+  const grid = document.getElementById('ephoto-grid-' + leadId);
+  if (!folderId || !grid) return;
+  grid.innerHTML = '<p style="color:var(--muted);font-size:13px;grid-column:1/-1;">Loading photos from Drive…</p>';
+  try {
+    const res = await fetch(DEALS_GET_URL + '?action=getFolderPhotos&folderId=' + encodeURIComponent(folderId));
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error || 'Could not load photos');
+    if (!data.photos || !data.photos.length) {
+      grid.innerHTML = '<p style="color:var(--muted);font-size:13px;grid-column:1/-1;">No photos found in this Drive folder.</p>';
+      return;
+    }
+    const deal = ALL_DEALS_DATA.find(d => d.leadId === leadId);
+    const currentPhotoUrl = deal ? (deal.photo || '') : '';
+    grid.innerHTML = data.photos.map(photo => {
+      const isCover = currentPhotoUrl && currentPhotoUrl.includes(photo.id);
+      return `<div class="edit-photo-thumb${isCover ? ' is-cover' : ''}" id="ephoto-${photo.id}">
+        <img src="${thumbUrl(photo.id, 'w300')}" alt="${photo.name}" loading="lazy" onerror="this.style.opacity=0.3">
+        ${isCover ? '<div class="edit-photo-cover-badge">✓ Cover</div>' : ''}
+        <div class="edit-photo-actions">
+          <button class="ephoto-cover-btn" onclick="setEditCoverPhoto('${leadId}','${photo.id}',this)">Set Cover</button>
+          <button class="ephoto-del-btn" onclick="deleteEditPhoto('${leadId}','${photo.id}',this)">Delete</button>
+        </div>
+      </div>`;
+    }).join('');
+  } catch(err) {
+    grid.innerHTML = `<p style="color:var(--red);font-size:13px;grid-column:1/-1;">Error loading photos: ${err.message}</p>`;
+  }
+}
+
+async function setEditCoverPhoto(leadId, fileId, btn) {
   btn.disabled = true;
-  btn.textContent = 'Logging in…';
+  btn.textContent = '…';
+  const newPhotoUrl = `https://lh3.googleusercontent.com/d/${fileId}`;
+  try {
+    const deal = ALL_DEALS_DATA.find(d => d.leadId === leadId);
+    if (!deal) throw new Error('Deal not found');
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ key: PORTAL_ADMIN_KEY, action: 'updateDeal', deal: Object.assign({}, deal, { photo: newPhotoUrl }) })
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.error || 'Failed to set cover');
+    deal.photo = newPhotoUrl;
+    // Update UI — clear all cover marks, mark this one
+    const grid = document.getElementById('ephoto-grid-' + leadId);
+    if (grid) {
+      grid.querySelectorAll('.edit-photo-thumb').forEach(el => {
+        el.classList.remove('is-cover');
+        const badge = el.querySelector('.edit-photo-cover-badge');
+        if (badge) badge.remove();
+      });
+      const thisThumb = document.getElementById('ephoto-' + fileId);
+      if (thisThumb) {
+        thisThumb.classList.add('is-cover');
+        thisThumb.insertAdjacentHTML('afterbegin', '<div class="edit-photo-cover-badge">✓ Cover</div>');
+      }
+    }
+    showToast('Cover photo updated!');
+  } catch(err) {
+    showToast('Error: ' + err.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Set Cover';
+  }
+}
+
+async function deleteEditPhoto(leadId, fileId, btn) {
+  if (!confirm('Delete this photo from Drive? This cannot be undone.')) return;
+  btn.disabled = true;
+  btn.textContent = '…';
   try {
     const res = await fetch(GAS_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({ action: 'adminLogin', email, password })
+      body: JSON.stringify({ key: PORTAL_ADMIN_KEY, action: 'deletePhoto', fileId })
     });
     const data = await res.json();
-    if (data.success && data.key) {
-      try { localStorage.setItem('portalAdminKey', data.key); } catch (e) {}
-      window.location.href = '/admin/';
-      return;
-    } else {
-      errEl.textContent = data.error || 'Incorrect email or password.';
-      errEl.style.display = 'block';
-    }
-  } catch (err) {
-    errEl.textContent = 'Could not reach the server. Check your connection and try again.';
-    errEl.style.display = 'block';
-  } finally {
+    if (!data.success) throw new Error(data.error || 'Failed to delete');
+    const thumb = document.getElementById('ephoto-' + fileId);
+    if (thumb) thumb.remove();
+    showToast('Photo deleted from Drive');
+  } catch(err) {
+    showToast('Error: ' + err.message);
     btn.disabled = false;
-    btn.textContent = 'Log In';
+    btn.textContent = 'Delete';
   }
 }
-['adminLoginEmail', 'adminLoginPassword'].forEach(function(id) {
-  document.getElementById(id).addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') submitHomeAdminLogin();
+
+async function saveDeal(leadId) {
+  const btn = document.querySelector(`#edit-row-${leadId} .save-deal-btn`);
+  const statusEl = document.getElementById('ef-status-msg-' + leadId);
+  btn.disabled = true;
+  statusEl.textContent = 'Saving…';
+  statusEl.className = 'edit-status';
+
+  const numOrNull = id => {
+    const v = document.getElementById(id);
+    return v && v.value !== '' ? parseFloat(v.value) : null;
+  };
+  const strVal = id => {
+    const v = document.getElementById(id);
+    return v ? v.value.trim() : '';
+  };
+
+  const deal = {
+    leadId,
+    address: strVal('ef-address-' + leadId),
+    city: strVal('ef-city-' + leadId),
+    state: strVal('ef-state-' + leadId).toUpperCase(),
+    propertyType: strVal('ef-type-' + leadId),
+    status: strVal('ef-status-' + leadId),
+    beds: numOrNull('ef-beds-' + leadId),
+    baths: numOrNull('ef-baths-' + leadId),
+    sqft: numOrNull('ef-sqft-' + leadId),
+    yearBuilt: numOrNull('ef-year-' + leadId) ? parseInt(numOrNull('ef-year-' + leadId)) : null,
+    askingPrice: numOrNull('ef-price-' + leadId),
+    arv: numOrNull('ef-arv-' + leadId),
+    repairCost: numOrNull('ef-repairs-' + leadId),
+    source: strVal('ef-source-' + leadId),
+    driveUrl: strVal('ef-drive-' + leadId) || null,
+    zip: strVal('ef-zip-' + leadId),
+    notes: strVal('ef-notes-' + leadId) || null,
+  };
+
+  try {
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ key: PORTAL_ADMIN_KEY, action: 'updateDeal', deal })
+    });
+    const data = await res.json();
+    if (data.success) {
+      statusEl.textContent = '✅ Saved!';
+      statusEl.className = 'edit-status success';
+      // Update the header summary
+      const row = document.getElementById('edit-row-' + leadId);
+      const street = deal.address.split(',')[0];
+      const cityLine = [deal.city, deal.state].filter(Boolean).join(', ');
+      const priceStr = deal.askingPrice ? '$' + Math.round(deal.askingPrice).toLocaleString() : '—';
+      row.querySelector('.edit-deal-addr').textContent = street;
+      row.querySelector('.edit-deal-meta').textContent = cityLine + ' · ' + priceStr + ' asking · ' + deal.status;
+      setTimeout(() => { statusEl.textContent = ''; }, 3000);
+    } else {
+      throw new Error(data.error || 'Unknown error');
+    }
+  } catch(err) {
+    statusEl.textContent = '⚠️ ' + err.message;
+    statusEl.className = 'edit-status error';
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function deleteDeal(leadId, address) {
+  if (!confirm(`Remove "${address}" from the portal?\n\nBuyers will no longer see this deal. You can restore it by changing its status back in the sheet.`)) return;
+  const btn = document.querySelector(`#edit-row-${leadId} .delete-deal-btn`);
+  const statusEl = document.getElementById('ef-status-msg-' + leadId);
+  if (btn) { btn.disabled = true; btn.textContent = 'Removing…'; }
+  try {
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ key: PORTAL_ADMIN_KEY, action: 'updateDeal', deal: { leadId, status: 'archived' } })
+    });
+    const data = await res.json();
+    if (data.success) {
+      const row = document.getElementById('edit-row-' + leadId);
+      if (row) {
+        row.style.transition = 'opacity .3s';
+        row.style.opacity = '0';
+        setTimeout(() => row.remove(), 320);
+      }
+    } else {
+      throw new Error(data.error || 'Unknown error');
+    }
+  } catch(err) {
+    if (statusEl) { statusEl.textContent = '⚠️ ' + err.message; statusEl.className = 'edit-status error'; }
+    if (btn) { btn.disabled = false; btn.textContent = '🗑 Delete Deal'; }
+  }
+}
+
+// ============================================================
+// RENDER DEALS WITH PHOTOS
+// ============================================================
+function renderDealsWithPhotos() {
+  const container = document.getElementById('dealsWithPhotos');
+  if (!container) return; // section removed from HTML — skip silently
+
+  // Merge hardcoded + live GAS folders + any user-added ones from localStorage
+  const allFolders = Object.assign({}, PHOTO_FOLDERS, liveFolders, additionalFolders);
+
+  const addresses = Object.keys(allFolders);
+  if (!addresses.length) {
+    container.innerHTML = '<p style="color:var(--muted);font-size:14px;padding:20px 0;">No photo folders linked yet. Add one below.</p>';
+    return;
+  }
+
+  container.innerHTML = '';
+  addresses.forEach(address => {
+    const folder = allFolders[address];
+    const pending = pendingChanges[address];
+    const isPending = !!pending;
+    const shortAddress = shortAddr(address);
+
+    const card = document.createElement('div');
+    card.className = 'deal-card';
+    card.dataset.address = address;
+
+    // Determine current display photo for header
+    const currentFileId = isPending ? pending.fileId : folder.currentPhotoFile;
+    const coverThumbHtml = currentFileId
+      ? `<img class="deal-cover-thumb" src="${thumbUrl(currentFileId, 'w200')}" alt="" onerror="this.style.display='none'">`
+      : `<div class="deal-cover-thumb no-photo">📷</div>`;
+
+    card.innerHTML = `
+      <div class="deal-header" onclick="toggleCard(this)">
+        ${coverThumbHtml}
+        <div class="deal-info">
+          <div class="deal-address">${shortAddress}${isPending ? '<span class="pending-tag">Pending Change</span>' : ''}</div>
+          <div class="deal-meta">${folder.photos ? folder.photos.length + '+' : '?'} photos available &nbsp;·&nbsp; ${address.split(',').slice(1).join(',').trim()}</div>
+        </div>
+        <div class="expand-icon">▾</div>
+      </div>
+      <div class="photo-panel">
+        <div class="photo-panel-header">
+          <span class="photo-count">${folder.photos ? folder.photos.length : 0} photos loaded</span>
+          ${folder.folderId ? `<a class="folder-link" href="https://drive.google.com/drive/folders/${folder.folderId}" target="_blank">Open in Drive ↗</a>` : ''}
+          ${isPending ? `<button onclick="clearPending('${address}')" style="margin-left:auto;font-size:11px;color:var(--red);background:none;border:1px solid var(--red);border-radius:4px;padding:3px 10px;cursor:pointer;">Clear Pending</button>` : ''}
+        </div>
+        <div class="photo-grid" id="grid-${address.replace(/[^a-z0-9]/gi,'_')}">
+          ${renderPhotoGrid(address, folder)}
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
   });
-});
-document.getElementById('adminLoginOverlay').addEventListener('click', function(e) {
-  if (e.target === this) hideHomeAdminLogin();
+
+  populateAddFolderSelect();
+}
+
+function renderPhotoGrid(address, folder) {
+  if (!folder.photos || !folder.photos.length) return '<p style="color:var(--muted);font-size:13px;">No photos listed.</p>';
+
+  const currentFileId = folder.currentPhotoFile;
+  const pendingFileId = pendingChanges[address] ? pendingChanges[address].fileId : null;
+
+  return folder.photos.map(photo => {
+    const isCurrent = photo.id === currentFileId;
+    const isPendingSelected = photo.id === pendingFileId;
+    const cls = `photo-thumb${isCurrent ? ' current' : ''}${isPendingSelected ? ' selected' : ''}`;
+    const badge = isCurrent
+      ? '<span class="badge badge-current">✓ Current</span>'
+      : isPendingSelected
+        ? '<span class="badge badge-selected">★ Selected</span>'
+        : '';
+
+    return `<div class="${cls}" onclick="selectPhoto('${address}','${photo.id}','${photo.name}')" ondblclick="openLightbox('${address}','${photo.id}','${photo.name}',event)">
+      <img src="${thumbUrl(photo.id, 'w300')}" alt="${photo.name}" loading="lazy" onerror="this.style.opacity=0.3">
+      ${badge}
+      <div class="thumb-label">${photo.name}</div>
+    </div>`;
+  }).join('');
+}
+
+async function toggleCard(header) {
+  const card = header.closest('.deal-card');
+  const wasOpen = card.classList.contains('open');
+  card.classList.toggle('open');
+
+  // When opening, load photos from Drive if not yet populated
+  if (!wasOpen) {
+    const address = card.dataset.address;
+    const allFolders = Object.assign({}, PHOTO_FOLDERS, liveFolders, additionalFolders);
+    const folder = allFolders[address];
+    if (folder && (!folder.photos || !folder.photos.length) && folder.folderId) {
+      const gridId = 'grid-' + address.replace(/[^a-z0-9]/gi, '_');
+      const grid = document.getElementById(gridId);
+      if (grid) {
+        grid.innerHTML = '<p style="color:var(--muted);font-size:13px;">Loading photos from Drive…</p>';
+        try {
+          const res = await fetch(DEALS_GET_URL + '?action=getFolderPhotos&folderId=' + encodeURIComponent(folder.folderId));
+          const data = await res.json();
+          if (data.success && data.photos && data.photos.length) {
+            folder.photos = data.photos;
+            // Update the current cover photo marker if we know it
+            const deal = ALL_DEALS_DATA.find(d => d.address === address);
+            if (deal && deal.photo) {
+              const matchedPhoto = data.photos.find(p => deal.photo.includes(p.id));
+              if (matchedPhoto) folder.currentPhotoFile = matchedPhoto.id;
+            }
+            const countEl = card.querySelector('.photo-count');
+            if (countEl) countEl.textContent = data.photos.length + ' photos loaded';
+            grid.innerHTML = renderPhotoGrid(address, folder);
+          } else {
+            grid.innerHTML = '<p style="color:var(--muted);font-size:13px;">No photos found in this folder.</p>';
+          }
+        } catch(e) {
+          grid.innerHTML = '<p style="color:var(--red);font-size:13px;">Error loading photos from Drive.</p>';
+        }
+      }
+    }
+  }
+}
+
+// ============================================================
+// PHOTO SELECTION
+// ============================================================
+function selectPhoto(address, fileId, filename) {
+  // Update pending changes
+  pendingChanges[address] = { fileId, filename, timestamp: new Date().toISOString() };
+  localStorage.setItem('photoChanges', JSON.stringify(pendingChanges));
+
+  // Re-render just this grid
+  const allFolders = Object.assign({}, PHOTO_FOLDERS, liveFolders, additionalFolders);
+  const folder = allFolders[address];
+  const gridId = 'grid-' + address.replace(/[^a-z0-9]/gi,'_');
+  document.getElementById(gridId).innerHTML = renderPhotoGrid(address, folder);
+
+  // Update the cover thumb in header
+  const card = document.querySelector(`[data-address="${address}"]`);
+  if (card) {
+    const thumb = card.querySelector('.deal-cover-thumb');
+    if (thumb) {
+      thumb.src = thumbUrl(fileId, 'w200');
+      thumb.style.display = '';
+      thumb.className = 'deal-cover-thumb';
+    }
+    // Add pending tag if not already there
+    const addrEl = card.querySelector('.deal-address');
+    if (!addrEl.querySelector('.pending-tag')) {
+      addrEl.insertAdjacentHTML('beforeend', '<span class="pending-tag">Pending Change</span>');
+    }
+    // Add clear button to photo panel header if not there
+    const panelHeader = card.querySelector('.photo-panel-header');
+    if (!panelHeader.querySelector('.clear-pending-btn')) {
+      panelHeader.insertAdjacentHTML('beforeend', `<button class="clear-pending-btn" onclick="clearPending('${address}')" style="margin-left:auto;font-size:11px;color:var(--red);background:none;border:1px solid var(--red);border-radius:4px;padding:3px 10px;cursor:pointer;">Clear Pending</button>`);
+    }
+  }
+
+  updatePendingBar();
+  showToast(`${filename} selected as cover photo`);
+}
+
+function clearPending(address) {
+  delete pendingChanges[address];
+  localStorage.setItem('photoChanges', JSON.stringify(pendingChanges));
+  renderDealsWithPhotos();
+  updatePendingBar();
+  showToast('Selection cleared');
+}
+
+function updatePendingBar() {
+  // Legacy Cover Photo Manager queue UI (pendingBar/applyAllBtn/copyArea) was
+  // removed from the page; this is now a no-op guarded against null elements
+  // in case stale localStorage from an old session still has photoChanges set.
+  const bar = document.getElementById('pendingBar');
+  const badge = document.getElementById('pendingCount');
+  const btn = document.getElementById('applyAllBtn');
+  if (!bar || !badge || !btn) return;
+  const count = Object.keys(pendingChanges).length;
+  if (count > 0) {
+    bar.classList.add('visible');
+    btn.classList.add('visible');
+    badge.textContent = count + (count === 1 ? ' pending change' : ' pending changes');
+  } else {
+    bar.classList.remove('visible');
+    btn.classList.remove('visible');
+    const copyAreaEl = document.getElementById('copyArea');
+    if (copyAreaEl) copyAreaEl.style.display = 'none';
+  }
+}
+
+// ============================================================
+// LIGHTBOX
+// ============================================================
+function openLightbox(address, fileId, name, e) {
+  e.stopPropagation();
+  lightboxCurrent = { address, fileId, name };
+  document.getElementById('lightboxImg').src = thumbUrl(fileId, 'w1000');
+  document.getElementById('lightboxName').textContent = name;
+  document.getElementById('lightbox').classList.add('open');
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  lightboxCurrent = null;
+}
+
+function setFromLightbox() {
+  if (lightboxCurrent) {
+    selectPhoto(lightboxCurrent.address, lightboxCurrent.fileId, lightboxCurrent.name);
+    closeLightbox();
+  }
+}
+
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target === this) closeLightbox();
 });
 
+// ============================================================
+// AUTO-SUBMIT TO GOOGLE APPS SCRIPT
+// ============================================================
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbxATueK1LD5LFGL_KNCBXF6ijTeFyE5qcYsSFdcPucbsNQSD8SeDnBGT3O8ZBafqy2F7Q/exec';
+let PORTAL_ADMIN_KEY = (function () { try { return localStorage.getItem('portalAdminKey') || ''; } catch (e) { return ''; } })();
+const DEALS_GET_URL = GAS_URL;
+
+// ---- Admin gate: the key comes from logging in, it is never stored in this page ----
+function showAdminGate(msg) {
+  document.getElementById('adminGate').style.display = 'flex';
+  document.getElementById('agErr').textContent = msg || '';
+  setTimeout(function () { var e = document.getElementById('agEmail'); if (e) e.focus(); }, 50);
+}
+function adminKeyRejected() {
+  try { localStorage.removeItem('portalAdminKey'); } catch (e) {}
+  PORTAL_ADMIN_KEY = '';
+  showAdminGate('Please log in again.');
+}
+async function adminGateLogin() {
+  var email = document.getElementById('agEmail').value.trim(), pass = document.getElementById('agPass').value;
+  var btn = document.getElementById('agBtn'), err = document.getElementById('agErr');
+  err.textContent = '';
+  if (!email || !pass) { err.textContent = 'Enter your email and password.'; return; }
+  btn.disabled = true; btn.textContent = 'Logging in…';
+  try {
+    var res = await fetch(GAS_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ action: 'adminLogin', email: email, password: pass }) });
+    var data = await res.json();
+    if (data.success && data.key) { try { localStorage.setItem('portalAdminKey', data.key); } catch (e) {} location.reload(); return; }
+    err.textContent = data.error || 'Incorrect email or password.';
+  } catch (e) { err.textContent = 'Could not reach the server. Try again.'; }
+  btn.disabled = false; btn.textContent = 'Log In';
+}
+document.addEventListener('keydown', function (e) { if (e.key === 'Enter' && document.getElementById('adminGate').style.display === 'flex') adminGateLogin(); });
+if (!PORTAL_ADMIN_KEY) showAdminGate('');
+
+
+// Fetch live deal list from GAS to keep the folder-link dropdown current
+fetch(GAS_URL + '?action=getDeals&key=' + encodeURIComponent(PORTAL_ADMIN_KEY))
+  .then(r => r.json())
+  .then(data => {
+    if (data && data.success === false) { adminKeyRejected(); return; }
+    ALL_DEAL_ADDRESSES = (Array.isArray(data) ? data : (data.deals || [])).map(d => d.address).filter(Boolean);
+    populateAddFolderSelect();
+  })
+  .catch(() => {});
+
+async function applyChanges() {
+  if (!Object.keys(pendingChanges).length) return;
+
+  const changes = Object.entries(pendingChanges).map(([address, change]) => ({
+    address,
+    fileId: change.fileId,
+    filename: change.filename || ''
+  }));
+
+  const copyArea = document.getElementById('copyArea');
+  const titleEl = document.getElementById('copyAreaTitle');
+  const msgEl = document.getElementById('copyAreaMsg');
+
+  titleEl.textContent = 'Submitting changes…';
+  msgEl.textContent = `Sending ${changes.length} photo selection(s) to the queue…`;
+  copyArea.style.display = 'block';
+  copyArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  try {
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ changes })
+    });
+    const data = await res.json();
+    if (data.success) {
+      titleEl.textContent = '✅ Changes queued!';
+      msgEl.textContent = `${data.queued} photo change(s) added to the queue. The portal will update automatically within the hour.`;
+      showToast('Changes submitted — portal will update shortly!');
+    } else {
+      throw new Error(data.error || 'Unknown error');
+    }
+  } catch(err) {
+    titleEl.textContent = '⚠️ Submission failed';
+    msgEl.innerHTML = `Could not reach the queue server: ${err.message}<br><br>
+      <strong>Manual fallback:</strong> The changes are still saved locally. Here's what to apply:<br><br>` +
+      changes.map(c => `• "${c.address}": fileId="${c.fileId}"`).join('<br>');
+  }
+}
+
+// ============================================================
+// ADD FOLDER
+// ============================================================
+function populateAddFolderSelect() {
+  const sel = document.getElementById('addFolderDeal');
+  const allFolders = Object.assign({}, PHOTO_FOLDERS, liveFolders, additionalFolders);
+  sel.innerHTML = '<option value="">Select deal...</option>';
+  ALL_DEAL_ADDRESSES.forEach(addr => {
+    if (!allFolders[addr]) {
+      const opt = document.createElement('option');
+      opt.value = addr;
+      opt.textContent = shortAddr(addr) + ' · ' + addr.split(',').slice(1).join(',').trim();
+      sel.appendChild(opt);
+    }
+  });
+}
+
+function requestAddFolder() {
+  const deal = document.getElementById('addFolderDeal').value;
+  const url = document.getElementById('addFolderUrl').value.trim();
+  if (!deal || !url) { showToast('Please select a deal and enter a folder URL'); return; }
+
+  const match = url.match(/\/folders\/([a-zA-Z0-9_-]+)/);
+  if (!match) { showToast('Invalid Drive folder URL'); return; }
+  const folderId = match[1];
+
+  // Store in localStorage as a request
+  const folderRequests = JSON.parse(localStorage.getItem('folderRequests') || '{}');
+  folderRequests[deal] = { folderId, url, requestedAt: new Date().toISOString() };
+  localStorage.setItem('folderRequests', JSON.stringify(folderRequests));
+
+  // Generate request text
+  const requestText = `Add Drive folder to portal for deal:\n- Address: "${deal}"\n- Drive Folder ID: ${folderId}\n- Folder URL: ${url}\n\nPlease list the photos in this folder and add them to the admin page.`;
+  document.getElementById('copyText').value = requestText;
+  document.getElementById('copyArea').style.display = 'block';
+  document.getElementById('copyArea').scrollIntoView({ behavior: 'smooth' });
+  showToast('Folder request ready — copy to Claude chat');
+  document.getElementById('addFolderUrl').value = '';
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ============================================================
+// ADD DEAL FORM
+// ============================================================
+(function setDefaultDate() {
+  const d = new Date();
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  document.getElementById('df-date').value = `${yyyy}-${mm}-${dd}`;
+})();
+
+function parseAddressParts(fullAddress) {
+  // Try to extract city and state from "Street, City, State Zip"
+  const parts = fullAddress.split(',').map(s => s.trim());
+  if (parts.length >= 3) {
+    const city = parts[1];
+    const stateZip = parts[2].trim().split(' ');
+    const state = stateZip[0];
+    return { city, state };
+  }
+  return { city: '', state: '' };
+}
+
+async function submitDeal() {
+  const address = document.getElementById('df-address').value.trim();
+  if (!address) {
+    showFormStatus('Please enter a property address.', 'error');
+    return;
+  }
+
+  const btn = document.getElementById('submitDealBtn');
+  btn.disabled = true;
+  showFormStatus('Submitting…', '');
+
+  const { city, state } = parseAddressParts(address);
+  const driveRaw = document.getElementById('df-drive').value.trim();
+  const driveUrl = driveRaw || null;
+
+  const deal = {
+    address,
+    city,
+    state,
+    date: document.getElementById('df-date').value,
+    propertyType: document.getElementById('df-type').value,
+    source: document.getElementById('df-source').value.trim(),
+    beds: document.getElementById('df-beds').value ? parseFloat(document.getElementById('df-beds').value) : null,
+    baths: document.getElementById('df-baths').value ? parseFloat(document.getElementById('df-baths').value) : null,
+    sqft: document.getElementById('df-sqft').value ? parseFloat(document.getElementById('df-sqft').value) : null,
+    yearBuilt: document.getElementById('df-year').value ? parseInt(document.getElementById('df-year').value) : null,
+    askingPrice: document.getElementById('df-price').value ? parseFloat(document.getElementById('df-price').value) : null,
+    arv: document.getElementById('df-arv').value ? parseFloat(document.getElementById('df-arv').value) : null,
+    repairCost: document.getElementById('df-repairs').value ? parseFloat(document.getElementById('df-repairs').value) : null,
+    driveUrl,
+    zip: document.getElementById('df-zip').value.trim(),
+    status: 'new',
+    photo: '',
+  };
+
+  try {
+    const res = await fetch(GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ key: PORTAL_ADMIN_KEY, action: 'addDeal', deal })
+    });
+    const data = await res.json();
+    if (data.success) {
+      showFormStatus('✅ Deal added! Refresh the portal to see it live.', 'success');
+      showToast('Deal added to the portal queue!');
+      // Add to local list and refresh folder dropdown
+      if (!ALL_DEAL_ADDRESSES.includes(address)) {
+        ALL_DEAL_ADDRESSES.push(address);
+        populateAddFolderSelect();
+      }
+      // Clear the form
+      ['df-address','df-source','df-zip','df-beds','df-baths','df-sqft','df-year','df-price','df-arv','df-repairs','df-drive'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+      document.getElementById('df-type').value = 'Single Family';
+    } else {
+      throw new Error(data.error || 'Unknown error');
+    }
+  } catch(err) {
+    showFormStatus('⚠️ Submission failed: ' + err.message, 'error');
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function showFormStatus(msg, type) {
+  const el = document.getElementById('dealFormStatus');
+  el.textContent = msg;
+  el.className = 'deal-form-status' + (type ? ' ' + type : '');
+}
+
+// ============================================================
+// INIT
+// ============================================================
+try { renderDealsWithPhotos(); } catch(e) { console.warn('renderDealsWithPhotos failed:', e); }
+try { updatePendingBar(); } catch(e) { console.warn('updatePendingBar failed:', e); }
+
+// Load all deals for editing AND to populate Cover Photo Manager
+// Runs independently so any earlier error can't block this
+fetch(GAS_URL + '?action=getDeals&key=' + encodeURIComponent(PORTAL_ADMIN_KEY))
+  .then(r => r.json())
+  .then(data => {
+    if (data && data.success === false) { adminKeyRejected(); return; }
+    ALL_DEALS_DATA = Array.isArray(data) ? data : (data.deals || []);
+    // Normalize: GAS may return 'Notes' (capital N) — map to lowercase 'notes'
+    // so the edit form actually shows notes that are already live on the portal.
+    ALL_DEALS_DATA = ALL_DEALS_DATA.map(d => { if (!d.notes && d.Notes) d.notes = d.Notes; return d; });
+    renderEditDeals(ALL_DEALS_DATA);
+
+    // Build liveFolders from any deal that has a driveUrl but isn't already
+    // hardcoded in PHOTO_FOLDERS, then re-render the Cover Photo Manager
+    liveFolders = {};
+    ALL_DEALS_DATA.forEach(d => {
+      if (d.driveUrl && d.status !== 'archived' && !PHOTO_FOLDERS[d.address]) {
+        const fid = extractFolderId(d.driveUrl);
+        if (fid) liveFolders[d.address] = { folderId: fid, currentPhotoFile: null, photos: [] };
+      }
+    });
+    try { renderDealsWithPhotos(); } catch(e) { console.warn('renderDealsWithPhotos (post-fetch) failed:', e); }
+  })
+  .catch(err => {
+    console.error('Failed to load deals from GAS:', err);
+    document.getElementById('editDealList').innerHTML = '<p style="color:var(--muted)">Failed to load deals. Check your connection and refresh.</p>';
+  });
+
+// Auto-expand deal if URL has a hash (coming from portal's change-photo button)
+(function() {
+  const hash = decodeURIComponent(window.location.hash.slice(1));
+  if (!hash) return;
+  // Find the card matching the address
+  const cards = document.querySelectorAll('.deal-card');
+  cards.forEach(card => {
+    if (card.dataset.address === hash) {
+      // Expand if not already open
+      if (!card.classList.contains('open')) card.classList.add('open');
+      setTimeout(() => {
+        card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        card.style.outline = '2px solid var(--salmon)';
+        setTimeout(() => card.style.outline = '', 2000);
+      }, 200);
+    }
+  });
+})();
 </script>
-<script src="/site.js"></script>
 </body>
 </html>
